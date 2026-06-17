@@ -4,13 +4,13 @@
   "V1_sigma_v": 1.1905,
   "V2_sqrt_law_exponent": 0.5522,
   "V2_corr": 0.9809,
-  "V3_counterfactual_uniform_mult": 2.0918,
-  "V3_d_welfare_pctGMV": 23.216,
-  "V3_d_rider_pctGMV": 20.448,
-  "V3_d_driver_pctGMV": 1.804,
-  "V3_d_platform_pctGMV": 0.965,
-  "V3_d_ds_flexible": 981.06,
-  "V3_d_ds_constrained": -7.0,
-  "V3_d_earn_flex": 1.865,
-  "V3_d_earn_cons": 0.011
+  "V3_counterfactual_uniform_mult": 1.8,
+  "V3_d_welfare_pctGMV": 17.943,
+  "V3_d_rider_pctGMV": 11.978,
+  "V3_d_driver_pctGMV": 4.291,
+  "V3_d_platform_pctGMV": 1.674,
+  "V3_d_ds_flexible": 1390.63,
+  "V3_d_ds_constrained": 646.66,
+  "V3_d_earn_flex": 3.118,
+  "V3_d_earn_cons": 1.071
 }

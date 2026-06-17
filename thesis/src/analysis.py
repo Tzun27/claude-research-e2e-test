@@ -24,7 +24,7 @@ def main():
     emit("\n[T1] Welfare decomposition by pricing family (mean $):")
     t1 = df.groupby("price")[["rider_surplus", "ds_flexible", "ds_constrained",
                               "platform_profit", "total_welfare", "gmv",
-                              "service_rate", "mean_surge"]].mean().round(1)
+                              "service_rate", "served_latent_rate", "mean_surge"]].mean().round(3)
     emit(t1.to_string())
     t1.to_csv(os.path.join(RES, "t1_welfare_by_pricing.csv"))
 
@@ -62,17 +62,29 @@ def main():
     gmv_pick_welfare_regret = np.mean([reg_w.loc[s, gmv_oracle[s]] for s in reg_w.index])
     emit(f"  welfare-regret of deploying the GMV-optimal combo: {gmv_pick_welfare_regret:.3f}")
 
-    # 5. selection regret summary (RQ3)
-    emit("\n[T5] Selection regret (LOSO; lower=better):")
-    _, summary = sel.run_all(os.path.join(RES, "results.csv"))
+    # 5. selection regret + paired significance vs single-best-fixed (RQ3)
+    emit("\n[T5] Selection regret (LOSO; lower=better) + significance vs single-best-fixed:")
+    feats = sel.feature_frame(df)
+    rng = np.random.default_rng(0)
     rows = []
-    for kind, s in summary.items():
-        emit(f"  {kind:13s} oracle=0.000 random={s['random']:.3f} "
-             f"single_fixed={s['single_best_fixed']:.3f} ({s['best_fixed_combo']}) "
-             f"hand={s['hand_rule']:.3f} tree={s['selector_tree']:.3f} knn={s['selector_knn']:.3f}")
-        rows.append({"objective": kind, **{k: s[k] for k in
-                    ["random", "single_best_fixed", "hand_rule", "selector_tree",
-                     "selector_knn", "best_fixed_combo", "n_distinct_oracle"]}})
+    for kind in ["welfare", "gmv", "welfare_fair"]:
+        piv = sel.aggregate(df, kind)
+        oracle, regret = sel.oracle_and_regret(piv)
+        psr, bf = sel.per_scenario_regret(piv, regret, feats)
+        emit(f"  --- {kind} (single-best-fixed = {bf}; oracle distinct combos = {oracle.nunique()}) ---")
+        means = {k: float(v.mean()) for k, v in psr.items()}
+        emit("    mean regret: " + ", ".join(f"{k}={means[k]:.3f}" for k in
+             ["oracle", "random", "hand_rule", "single_best_fixed",
+              "selector_tree_persub", "selector_tree_joint", "selector_knn_joint"]))
+        fixed = psr["single_best_fixed"]
+        for strat in ["selector_tree_persub", "selector_tree_joint", "selector_knn_joint"]:
+            st = sel.paired_vs_fixed(psr[strat], fixed, rng)
+            sig = "SIG" if (st["ci_lo"] > 0 and st["wilcoxon_p"] < 0.05) else "ns"
+            emit(f"    {strat:22s} mean_gain={st['mean_gain']:+.4f} "
+                 f"95%CI[{st['ci_lo']:+.3f},{st['ci_hi']:+.3f}] p={st['wilcoxon_p']:.3f} "
+                 f"win/lose/tie={st['win']}/{st['lose']}/{st['tie']}  [{sig}]")
+            rows.append({"objective": kind, "strategy": strat, "mean_regret": means[strat],
+                         "fixed_regret": means["single_best_fixed"], **st})
     pd.DataFrame(rows).to_csv(os.path.join(RES, "t5_selection_regret.csv"), index=False)
 
     # 6. selector interpretability (welfare oracle)

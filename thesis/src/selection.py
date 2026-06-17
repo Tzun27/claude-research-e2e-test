@@ -15,6 +15,7 @@ from __future__ import annotations
 import os
 import numpy as np
 import pandas as pd
+from scipy.stats import wilcoxon
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.preprocessing import StandardScaler
@@ -122,21 +123,20 @@ def baseline_regrets(pivot, regret):
 
 
 def hand_rule(feats):
-    """A simple domain decision table: context -> combo (the human baseline)."""
+    """A simple domain decision table: context -> combo (the human baseline).
+    Pricing scales with scarcity: flat when slack, reactive when moderate, fluid
+    clearing when scarce (all three families are reachable)."""
     out = {}
     for s, row in feats.iterrows():
         dsr = row["demand_supply_ratio"]; conc = row["spatial_concentration"]
         peak = row["temporal_peakedness"]
-        # matching: value-based when demand is high/imbalanced, else optimal bipartite
         match = "M3" if (dsr > 1.0 or conc > 0.6) else "M2"
-        # pricing: surge when scarce/peaky, flat when slack
-        if dsr > 1.0 or peak > 2.8:
-            price = "P2"
-        elif dsr < 0.7:
-            price = "P1"
+        if dsr > 0.9:
+            price = "P3"                  # scarce: clear the market
+        elif dsr < 0.65 and peak < 2.0:
+            price = "P1"                  # slack & flat demand: no surge
         else:
-            price = "P2"
-        # rebalancing: guide to demand when concentrated, else none
+            price = "P2"                  # in between: mild reactive surge
         rebal = "R2" if conc > 0.5 else "R1"
         out[s] = f"{match}+{price}+{rebal}"
     return out
@@ -178,6 +178,37 @@ def selector_rules(df, kind="welfare"):
     clf = DecisionTreeClassifier(max_depth=3, min_samples_leaf=3, random_state=0).fit(X, yp)
     out["pricing_tree"] = export_text(clf, feature_names=cols, max_depth=3)
     return out
+
+
+def per_scenario_regret(pivot, regret, feats):
+    """Per-scenario regret arrays (indexed by scenario) for every strategy."""
+    scen = list(pivot.index)
+    bf = pivot.mean(axis=0).idxmax()
+    out = {
+        "oracle": np.zeros(len(scen)),
+        "random": regret.mean(axis=1).loc[scen].values,
+        "single_best_fixed": regret[bf].loc[scen].values,
+    }
+    hr, picks = hand_rule_regret(regret, feats)
+    out["hand_rule"] = np.array([regret.loc[s, picks[s]] for s in scen])
+    for model in ("tree", "knn"):
+        for ps, tag in ((True, "_persub"), (False, "_joint")):
+            _, _, pk = loso_selector_regret(pivot, regret, feats, model, per_subtask=ps)
+            out[f"selector_{model}{tag}"] = np.array([regret.loc[s, pk[s]] for s in scen])
+    return out, bf
+
+
+def paired_vs_fixed(strategy_regret, fixed_regret, rng=None):
+    """Paired comparison (fixed - strategy); positive => strategy better."""
+    rng = rng or np.random.default_rng(0)
+    d = fixed_regret - strategy_regret
+    boots = [rng.choice(d, len(d), replace=True).mean() for _ in range(10000)]
+    lo, hi = np.percentile(boots, [2.5, 97.5])
+    nz = d[np.abs(d) > 1e-9]
+    p = float(wilcoxon(nz).pvalue) if len(nz) > 0 else 1.0
+    return {"mean_gain": float(d.mean()), "ci_lo": float(lo), "ci_hi": float(hi),
+            "wilcoxon_p": p, "win": int((d > 1e-9).sum()),
+            "lose": int((d < -1e-9).sum()), "tie": int((np.abs(d) <= 1e-9).sum())}
 
 
 def run_all(results_csv=None):

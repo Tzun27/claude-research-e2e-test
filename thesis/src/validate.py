@@ -108,25 +108,36 @@ def _avg_pricing(scn, sigma_v, pricing_obj, seeds=12):
     return {k: float(np.mean(v)) for k, v in acc.items()}
 
 
+def welfare_optimal_uniform(scn, sigma_v, grid=None, seeds=6):
+    """Find the welfare-maximising UNIFORM multiplier (Castillo's counterfactual is
+    the optimal uniform price, ~1.174). Returns (m_star, metrics_at_m_star)."""
+    grid = grid if grid is not None else np.round(np.arange(0.8, 2.01, 0.1), 2)
+    best_m, best_w, best_met = None, -1e18, None
+    for m in grid:
+        met = _avg_pricing(scn, sigma_v, _ConstSurge(m), seeds=seeds)
+        if met["total_welfare"] > best_w:
+            best_m, best_w, best_met = float(m), met["total_welfare"], met
+    return best_m, best_met
+
+
 def castillo_incidence(sigma_v):
-    """V3: Castillo's comparison -- smart (fluid, elasticity-aware) surge vs a
-    REVENUE-MATCHED uniform multiplier (his optimal uniform = 1.174). This
-    isolates the ALLOCATION effect of surge from the price-level effect. In the
-    moderate-scarcity regime that matches Castillo's Houston setting, expect:
-    surge raises rider surplus & total welfare, slightly LOWERS driver surplus,
-    and hurts CONSTRAINED (low-mobility) drivers while flexible drivers gain.
+    """V3: Castillo's comparison -- smart (fluid) surge vs the WELFARE-OPTIMAL
+    UNIFORM multiplier (his counterfactual is the best flat price, ~1.174). This
+    isolates the value of spatial/temporal price DIFFERENTIATION over the best
+    achievable flat fare. Expect: surge raises rider surplus & total welfare, and
+    its driver-side gains accrue to FLEXIBLE drivers while CONSTRAINED drivers gain
+    less (and, in slacker regimes, are absolutely hurt).
     """
     from methods import FluidPricing
     scn = ScenarioConfig(name="houston_peak", grid_n=6, n_steps=180,
-                         demand_supply_ratio=0.95, fleet_size=120,
-                         spatial_concentration=0.65, temporal_peakedness=3.5,
+                         demand_supply_ratio=0.85, fleet_size=120,
+                         spatial_concentration=0.7, temporal_peakedness=3.0,
                          demand_elasticity=-0.55, flex_frac=0.5,
                          trip_length_mean=2.5, patience=4, dispatch_radius=4,
                          seed=0)
-    surge = _avg_pricing(scn, sigma_v, FluidPricing())
-    mu = surge["mean_surge"]                          # match the average price level
-    uniform = _avg_pricing(scn, sigma_v, _ConstSurge(mu))
-    return uniform, surge, mu
+    surge = _avg_pricing(scn, sigma_v, FluidPricing(), seeds=12)
+    m_star, uniform = welfare_optimal_uniform(scn, sigma_v, seeds=12)
+    return uniform, surge, m_star
 
 
 def regime_sweep(sigma_v, seeds=10):
@@ -144,10 +155,11 @@ def regime_sweep(sigma_v, seeds=10):
                                  trip_length_mean=2.5, patience=4, dispatch_radius=4)
             surge = _avg_pricing(scn, sigma_v, FluidPricing(), seeds=seeds)
             mu = surge["mean_surge"]
-            uni = _avg_pricing(scn, sigma_v, _ConstSurge(mu), seeds=seeds)
+            m_star, uni = welfare_optimal_uniform(scn, sigma_v, seeds=seeds)
             g = uni["gmv"]
             rows.append({
                 "dsr": dsr, "concentration": conc, "mean_surge": round(mu, 3),
+                "opt_uniform_mult": m_star,
                 "d_welfare_pct": round((surge["total_welfare"] - uni["total_welfare"]) / g * 100, 2),
                 "d_rider_pct": round((surge["rider_surplus"] - uni["rider_surplus"]) / g * 100, 2),
                 "d_driver_pct": round((surge["driver_surplus"] - uni["driver_surplus"]) / g * 100, 2),
@@ -187,7 +199,8 @@ if __name__ == "__main__":
 
     print("\n=== V3: Castillo incidence (surge vs REVENUE-MATCHED uniform) ===")
     uniform, surge, mu = castillo_incidence(sg)
-    print(f"  counterfactual = uniform multiplier {mu:.3f} (matches surge avg level)")
+    print(f"  counterfactual = WELFARE-OPTIMAL uniform multiplier {mu:.3f} "
+          f"(smart-surge mean = {surge['mean_surge']:.3f})")
     def pct(a, b):  # change as % of uniform gmv (mirrors Castillo '% of gross revenue')
         return (b - a) / uniform["gmv"] * 100
     print(f"  {'metric':26s} {'uniform':>10s} {'surge':>10s} {'Δ(%GMV)':>9s}")

@@ -86,22 +86,27 @@ def fig_incidence(df):
     fig.tight_layout(); fig.savefig(os.path.join(FIG, "fig_incidence.png")); plt.close(fig)
 
 
-def fig_regret(df, summary):
-    """Regret comparison across selection strategies, per objective (RQ3)."""
-    strategies = ["random", "single_best_fixed", "hand_rule", "selector_knn",
-                  "selector_tree", "oracle"]
-    labels = ["random", "single-best-fixed", "hand-rule", "selector (kNN)",
-              "selector (tree)", "oracle"]
+def fig_regret(df):
+    """Mean regret (+/- SEM across scenarios) per strategy & objective (RQ3)."""
+    feats = sel.feature_frame(df)
+    strategies = ["random", "hand_rule", "single_best_fixed",
+                  "selector_tree_persub", "selector_tree_joint", "oracle"]
+    labels = ["random", "hand-rule", "single-best-fixed", "selector\n(per-subtask)",
+              "selector\n(joint)", "oracle"]
     objs = ["welfare", "gmv", "welfare_fair"]
     x = np.arange(len(strategies)); w = 0.26
-    fig, ax = plt.subplots(figsize=(8.5, 4.5))
+    fig, ax = plt.subplots(figsize=(9, 4.6))
     colors = ["#4C72B0", "#DD8452", "#55A868"]
     for j, o in enumerate(objs):
-        vals = [summary[o][s] for s in strategies]
-        ax.bar(x + (j-1)*w, vals, w, label=o.replace("_", "-"), color=colors[j])
-    ax.set_xticks(x); ax.set_xticklabels(labels, rotation=20, ha="right")
+        piv = sel.aggregate(df, o); _, regret = sel.oracle_and_regret(piv)
+        psr, _ = sel.per_scenario_regret(piv, regret, feats)
+        means = [psr[s].mean() for s in strategies]
+        sems = [psr[s].std(ddof=1) / np.sqrt(len(psr[s])) for s in strategies]
+        ax.bar(x + (j-1)*w, means, w, yerr=sems, capsize=2, label=o.replace("_", "-"),
+               color=colors[j], error_kw={"lw": 0.8})
+    ax.set_xticks(x); ax.set_xticklabels(labels, fontsize=8)
     ax.set_ylabel("normalized regret (lower is better)")
-    ax.set_title("Context-to-method selection vs baselines")
+    ax.set_title("Context-to-method selection vs baselines (mean ± SEM over scenarios)")
     ax.legend(title="objective", fontsize=8)
     fig.tight_layout(); fig.savefig(os.path.join(FIG, "fig_regret.png")); plt.close(fig)
 
@@ -137,32 +142,35 @@ def fig_castillo_regime():
     ax.bar(x + w/2, s["d_ds_constrained"], w, label="Δ constrained driver surplus", color="#C44E52")
     ax.axhline(0, color="k", lw=0.8)
     ax.set_xticks(x); ax.set_xticklabels(s["label"], fontsize=7)
-    ax.set_ylabel("Δ driver surplus, surge − uniform ($)")
-    ax.set_title("Castillo incidence across market regimes:\nmobile drivers gain, constrained drivers are hurt")
+    ax.set_ylabel("Δ driver surplus, surge − welfare-optimal uniform ($)")
+    ax.set_title("Smart surge is regressive across drivers: flexible always gain more than\n"
+                 "constrained; constrained are absolutely hurt only in mild scarcity (dsr=0.8)")
     ax.legend(fontsize=8)
     fig.tight_layout(); fig.savefig(os.path.join(FIG, "fig_castillo_regime.png")); plt.close(fig)
 
 
 def fig_selection_box(df):
-    """Per-scenario regret distribution for each strategy (welfare objective)."""
-    piv = sel.aggregate(df, "welfare")
-    oracle, regret = sel.oracle_and_regret(piv)
+    """Per-scenario regret distribution (welfare) and the paired selector-vs-fixed
+    difference, showing the selector's mean edge is driven by a few scenarios."""
     feats = sel.feature_frame(df)
-    # per-scenario regrets
-    _, rnd_list, _ = (None, regret.mean(axis=1).values, None)
-    bf = piv.mean(0).idxmax()
-    bf_list = regret[bf].values
-    _, tree_list, _ = sel.loso_selector_regret(piv, regret, feats, "tree")
-    hr, hr_picks = sel.hand_rule_regret(regret, feats)
-    hr_list = [regret.loc[s, hr_picks[s]] for s in regret.index]
-    data = [regret.mean(axis=1).values, bf_list, hr_list, np.array(tree_list)]
-    labels = ["random", "single-fixed", "hand-rule", "selector (tree)"]
-    fig, ax = plt.subplots(figsize=(7, 4.3))
-    bp = ax.boxplot(data, tick_labels=labels, showmeans=True, patch_artist=True)
-    for patch, c in zip(bp["boxes"], ["#4C72B0", "#DD8452", "#937860", "#55A868"]):
+    piv = sel.aggregate(df, "welfare")
+    _, regret = sel.oracle_and_regret(piv)
+    psr, bf = sel.per_scenario_regret(piv, regret, feats)
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(11, 4.3))
+    order = ["random", "hand_rule", "single_best_fixed", "selector_tree_joint"]
+    labs = ["random", "hand-rule", "single-fixed", "selector\n(joint)"]
+    data = [psr[k] for k in order]
+    bp = ax1.boxplot(data, tick_labels=labs, showmeans=True, patch_artist=True)
+    for patch, c in zip(bp["boxes"], ["#4C72B0", "#937860", "#DD8452", "#55A868"]):
         patch.set_facecolor(c); patch.set_alpha(0.6)
-    ax.set_ylabel("per-scenario normalized regret (welfare)")
-    ax.set_title("Regret distribution across scenarios (LOSO)")
+    ax1.set_ylabel("per-scenario normalized regret (welfare)")
+    ax1.set_title("Regret distribution across scenarios (LOSO)")
+    # paired difference: fixed - selector (positive => selector better)
+    d = np.sort(psr["single_best_fixed"] - psr["selector_tree_joint"])
+    ax2.bar(np.arange(len(d)), d, color=np.where(d >= 0, "#55A868", "#C44E52"))
+    ax2.axhline(0, color="k", lw=0.8)
+    ax2.set_xlabel("scenario (sorted)"); ax2.set_ylabel("regret(fixed) − regret(selector)")
+    ax2.set_title("Paired gain of selector over single-fixed\n(>0: selector better; the edge is a few outliers)")
     fig.tight_layout(); fig.savefig(os.path.join(FIG, "fig_selection_box.png")); plt.close(fig)
 
 
@@ -213,11 +221,10 @@ def fig_validation():
 
 def main():
     df = load()
-    _, summary = sel.run_all()
     fig_welfare_decomposition(df)
     fig_gmv_vs_welfare(df)
     fig_incidence(df)
-    fig_regret(df, summary)
+    fig_regret(df)
     fig_oracle_map(df)
     fig_castillo_regime()
     fig_selection_box(df)

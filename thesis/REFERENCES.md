@@ -25,6 +25,12 @@ review are marked **[corpus]**.
 - Buchholz, N. (2022). *Spatial Equilibrium, Search Frictions, and Dynamic Efficiency in the Taxi Industry.* Review of Economic Studies 89(2):556–591.
 - Frechette, G. R., Lizzeri, A., & Salz, T. (2019). *Frictions in a Competitive, Regulated Market: Evidence from Taxis.* American Economic Review 109(8):2954–2992.
 
+## Algorithm selection / per-instance configuration
+
+- Rice, J. R. (1976). *The Algorithm Selection Problem.* Advances in Computers 15:65–118. — The formal problem of mapping instance features to the best algorithm.
+- Xu, L., Hutter, F., Hoos, H. H., & Leyton-Brown, K. (2008). *SATzilla: Portfolio-based Algorithm Selection for SAT.* Journal of Artificial Intelligence Research 32:565–606. — Empirical performance models select per-instance among a solver portfolio.
+- Bischl, B., Kerschke, P., Kotthoff, L., et al. (2016). *ASlib: A Benchmark Library for Algorithm Selection.* Artificial Intelligence 237:41–58.
+
 ## Learning / control for ride-hailing (corpus)
 
 - **[corpus]** Xu, Z., Li, Z., Guan, Q., et al. (2018). *Large-Scale Order Dispatch in On-Demand Ride-Hailing Platforms: A Learning and Planning Approach.* KDD 2018. — Offline value learning + online Hungarian matching (the M3 template).

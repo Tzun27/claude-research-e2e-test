@@ -71,6 +71,8 @@ class Market:
         self.gmv = 0.0
         self.platform_profit = 0.0
         self.n_requests = 0          # potential requests that accepted price
+        self.n_potential = 0         # all potential requests (latent demand)
+        self.n_rejected_price = 0    # potential requests that rejected the price
         self.n_completed = 0
         self.n_abandoned = 0
         self.wait_times = []         # minutes, completed trips
@@ -209,6 +211,8 @@ class Market:
         val = fb * np.exp(self.mu_v + self.sigma_v * rng.standard_normal(Ntot))
         accept = val >= price + VOT_RIDER * ew_zone[origins]
         idx = np.nonzero(accept)[0]
+        self.n_potential += Ntot
+        self.n_rejected_price += Ntot - len(idx)
         self.n_requests += len(idx)
         for j in idx:
             self.pending.append(Request(int(origins[j]), int(dz[j]), float(val[j]),
@@ -471,9 +475,14 @@ class Market:
             "total_welfare": total_welfare,
             "gmv": self.gmv,
             "n_requests": self.n_requests,
+            "n_potential": self.n_potential,
             "n_completed": self.n_completed,
             "n_abandoned": self.n_abandoned,
+            # acceptance-conditional completion rate (of riders who accepted the price)
             "service_rate": self.n_completed / denom,
+            # completion rate over ALL latent demand (incl. price-rejected riders)
+            "served_latent_rate": self.n_completed / max(self.n_potential, 1),
+            "accept_rate": self.n_requests / max(self.n_potential, 1),
             "mean_wait_min": float(np.mean(self.wait_times)) if self.wait_times else 0.0,
             "earn_rate_flex": earn_rate(flex),
             "earn_rate_cons": earn_rate(cons),

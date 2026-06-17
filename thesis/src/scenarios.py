@@ -83,7 +83,7 @@ def lhs_scenarios(n: int, seed: int = 42) -> list[ScenarioConfig]:
     return out
 
 
-def all_scenarios(n_lhs: int = 42, seed: int = 42) -> list[ScenarioConfig]:
+def all_scenarios(n_lhs: int = 60, seed: int = 42) -> list[ScenarioConfig]:
     return named_scenarios() + lhs_scenarios(n_lhs, seed)
 
 

@@ -20,7 +20,8 @@ METRIC_KEYS = [
     "service_rate", "mean_wait_min", "mean_surge", "driver_gini",
     "ds_flexible", "ds_constrained", "ds_flexible_per_capita",
     "ds_constrained_per_capita", "earn_rate_flex", "earn_rate_cons",
-    "n_requests", "n_completed", "n_abandoned", "n_flexible", "n_constrained",
+    "n_requests", "n_potential", "n_completed", "n_abandoned",
+    "served_latent_rate", "accept_rate", "n_flexible", "n_constrained",
 ]
 
 

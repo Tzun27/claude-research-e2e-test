@@ -21,7 +21,10 @@ def pretrain_value_table(scn: ScenarioConfig, n_episodes: int = 4) -> np.ndarray
     V = None
     sig = elas_to_sigma(scn.demand_elasticity)
     for e in range(n_episodes):
-        s = replace(scn, seed=scn.seed * 100 + e + 1)
+        # Pretraining seeds are kept DISJOINT from the evaluation seeds (0..7 in
+        # run_experiments) so the frozen value table is never fit on an episode
+        # that is later used to score the value-based controllers.
+        s = replace(scn, seed=scn.seed * 100 + 501 + e)
         m, p, r = make_methods(("M2", "P1", "R1"))
         mkt = Market(s, p, m, r, value_table=V, learn_value=True, sigma_v=sig)
         mkt.run()
