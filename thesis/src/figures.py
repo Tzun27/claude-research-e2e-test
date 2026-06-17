@@ -158,7 +158,7 @@ def fig_selection_box(df):
     data = [regret.mean(axis=1).values, bf_list, hr_list, np.array(tree_list)]
     labels = ["random", "single-fixed", "hand-rule", "selector (tree)"]
     fig, ax = plt.subplots(figsize=(7, 4.3))
-    bp = ax.boxplot(data, labels=labels, showmeans=True, patch_artist=True)
+    bp = ax.boxplot(data, tick_labels=labels, showmeans=True, patch_artist=True)
     for patch, c in zip(bp["boxes"], ["#4C72B0", "#DD8452", "#937860", "#55A868"]):
         patch.set_facecolor(c); patch.set_alpha(0.6)
     ax.set_ylabel("per-scenario normalized regret (welfare)")

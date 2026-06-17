@@ -1,0 +1,33 @@
+=== V1: demand elasticity at calibrated sigma_v ===
+  sigma_v=1.191 (from map) -> realized elasticity=-0.509 (target -0.55)
+
+=== V2: square-root law (mean pickup distance vs local idle density) ===
+  exponent a=0.552 (square-root law => ~0.5), |corr|=0.981, bins=11
+
+=== V3: Castillo incidence (surge vs REVENUE-MATCHED uniform) ===
+  counterfactual = uniform multiplier 2.092 (matches surge avg level)
+  metric                        uniform      surge   Δ(%GMV)
+  total_welfare                155268.6   167803.2    +23.22
+  rider_surplus                114941.9   125981.6    +20.45
+  driver_surplus                26829.1    27803.1     +1.80
+  platform_profit               13497.6    14018.4     +0.96
+  service_rate                    0.905      0.975
+  mean_wait_min                    2.86       1.31
+  -- driver incidence by type (Δ surge - uniform), Castillo: constrained hurt most --
+  ds_flexible                  12854.85   13835.92   +981.06
+  ds_constrained               13974.21   13967.21     -7.00
+  earn_rate_flex                  38.83      40.69     +1.86
+  earn_rate_cons                  39.08      39.09     +0.01
+
+=== V3b: Castillo incidence across market regimes (saving CSV) ===
+ dsr  concentration  mean_surge  d_welfare_pct  d_rider_pct  d_driver_pct  d_platform_pct  d_ds_flexible  d_ds_constrained  d_earn_flex  d_earn_cons
+0.80           0.60       1.936          21.07        20.81         -0.11            0.37          333.3            -384.6        0.901       -0.720
+0.80           0.75       1.933          21.90        21.11          0.27            0.51          696.4            -570.6        1.371       -1.135
+0.95           0.60       2.097          18.62        16.77          1.19            0.67          600.6              47.9        1.685        0.119
+0.95           0.75       2.077          23.95        20.82          2.11            1.02         1081.3              56.8        2.165        0.090
+1.10           0.60       2.221          22.89        20.32          1.72            0.85          943.1             104.3        1.668        0.203
+1.10           0.75       2.214          23.99        20.77          2.23            0.99         1139.9             212.5        2.316        0.431
+1.25           0.60       2.346          21.42        18.38          2.10            0.93          980.9             439.0        1.828        0.907
+1.25           0.75       2.326          19.72        16.98          1.88            0.86         1102.8             152.1        1.899        0.318
+
+saved results/validation.json and results/castillo_regime_sweep.csv

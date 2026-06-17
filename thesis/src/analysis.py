@@ -75,6 +75,16 @@ def main():
                      "selector_knn", "best_fixed_combo", "n_distinct_oracle"]}})
     pd.DataFrame(rows).to_csv(os.path.join(RES, "t5_selection_regret.csv"), index=False)
 
+    # 6. selector interpretability (welfare oracle)
+    emit("\n[T6] Selector interpretability (welfare oracle):")
+    rules = sel.selector_rules(df, "welfare")
+    emit(f"  oracle sub-task dist: {rules['oracle_subtask_dist']}")
+    for sub, imp in rules["importances"].items():
+        emit(f"  {sub} feature importance: {imp}")
+    emit("  pricing decision tree:")
+    for ln in rules["pricing_tree"].splitlines():
+        emit("    " + ln)
+
     with open(os.path.join(RES, "analysis_digest.txt"), "w") as f:
         f.write("\n".join(lines))
     emit("\nsaved tables + analysis_digest.txt to results/")

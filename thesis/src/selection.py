@@ -159,6 +159,27 @@ def oracle_divergence(df):
     return tab
 
 
+def selector_rules(df, kind="welfare"):
+    """Interpretability: per-subtask feature importances + the pricing decision
+    tree (text). Fit on all scenarios (not LOSO) for inspection."""
+    from sklearn.tree import DecisionTreeClassifier, export_text
+    feats = feature_frame(df)
+    piv = aggregate(df, kind)
+    oracle = piv.idxmax(axis=1)
+    X, cols = feats.values, list(feats.columns)
+    out = {"importances": {}, "oracle_subtask_dist": {}}
+    for pos, sub in [(0, "match"), (1, "price"), (2, "rebal")]:
+        y = oracle.str.split("+").str[pos].values
+        out["oracle_subtask_dist"][sub] = dict(pd.Series(y).value_counts())
+        clf = DecisionTreeClassifier(max_depth=4, min_samples_leaf=2, random_state=0).fit(X, y)
+        out["importances"][sub] = {c: round(float(v), 3)
+                                   for c, v in zip(cols, clf.feature_importances_) if v > 0.01}
+    yp = oracle.str.split("+").str[1].values
+    clf = DecisionTreeClassifier(max_depth=3, min_samples_leaf=3, random_state=0).fit(X, yp)
+    out["pricing_tree"] = export_text(clf, feature_names=cols, max_depth=3)
+    return out
+
+
 def run_all(results_csv=None):
     results_csv = results_csv or os.path.join(RESULTS_DIR, "results.csv")
     df = pd.read_csv(results_csv)

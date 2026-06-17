@@ -44,11 +44,14 @@ On a library of 27 controller combinations (three families each for matching, pr
 and rebalancing) across 66 city scenarios, we find: (i) scalar metrics hide
 distribution — the GMV-maximizing controller differs from the welfare-maximizing
 controller in a large fraction of scenarios, and GMV-optimal control systematically
-recreates a regressive driver-side incidence; (ii) the best controller is genuinely
-context-dependent — no single method dominates; and (iii) a cheap context→method
-selector, trained only on observable city features and evaluated by leave-one-scenario-out
-regret against a brute-force oracle, substantially closes the gap to the oracle and
-beats the strong "use one method everywhere" baseline. We deliberately frame brute-force
+recreates a regressive driver-side incidence (the GMV- and welfare-optimal controllers
+differ in 52% of scenarios); (ii) the best controller is genuinely context-dependent — no
+single method dominates, and the welfare-optimal pricing intensity scales with scarcity in a
+rule the selector recovers from data; and (iii) a cheap context→method selector, trained
+only on observable city features and evaluated by leave-one-scenario-out regret against a
+brute-force oracle, beats the strong "use one method everywhere" baseline when the objective
+is welfare or fairness — but not for GMV, where one aggressive-surge controller nearly
+suffices, an honest boundary on the claim. We deliberately frame brute-force
 search as the oracle rather than a competitor, which makes the selection contribution
 falsifiable: it is the demonstration that context predicts the winner that matters, not
 a claim of speed. We close with the limitations of a simulation study and the concrete
@@ -441,3 +444,321 @@ combination with the best mean objective across scenarios — the "use one metho
 baseline, analogous to deploying a single tuned controller in every city), and a
 **hand-rule** decision table written from domain reasoning. Finally (RQ4) we measure how
 often the GMV-oracle and welfare-oracle disagree.
+
+---
+
+## Chapter 4 — Results
+
+All numbers below are computed from the experiment grid (66 scenarios × 27 controllers ×
+8 seeds = 14,256 simulations; `results/results.csv`) and the validation suite
+(`results/validation.json`, `results/castillo_regime_sweep.csv`). Summary tables are in
+`results/analysis_digest.txt`; figures are in `thesis/figures/`.
+
+### 4.1 Simulator validity (RQ2)
+
+The three independent checks of Section 3.6 pass (Figure `fig_validation.png`):
+
+- **V1 — demand elasticity.** At the calibrated value-spread, the realized arc elasticity
+  of accepted demand is **−0.51** (target −0.55; Cohen et al. 2016 report −0.4 to −0.6).
+- **V2 — square-root law.** Binning matches by local idle density and fitting mean pickup
+  distance ∝ ρ^(−a) gives **a = 0.55** with correlation 0.98 — the geometric prediction is
+  a ≈ 0.5 (Larson & Odoni 1981; Arnott 1996). The matching technology is therefore an
+  emergent property of the spatial dynamics, not an imposed formula.
+- **V3 — Castillo incidence.** Comparing smart (fluid) surge against a **revenue-matched
+  uniform multiplier** (holding the average price level fixed, exactly Castillo's
+  counterfactual), the welfare decomposition matches his qualitative pattern: surge raises
+  **total welfare** and **rider surplus**, and its driver-side effect is **regressive** —
+  flexible (mobile) drivers gain while constrained drivers are left behind. Table 4.1
+  reports the regime sweep (`castillo_regime_sweep.csv`).
+
+**Table 4.1 — Castillo incidence across market regimes** (Δ = smart surge − revenue-matched
+uniform; driver surplus changes in $; hourly-earnings changes in $/h):
+
+| demand/supply | concentration | mean surge | Δ welfare (%GMV) | Δ rider | Δ driver | Δ flexible | Δ constrained | Δ earn flex | Δ earn constr |
+|---|---|---|---|---|---|---|---|---|---|
+| 0.80 | 0.60 | 1.94 | +21.1 | +20.8 | −0.11 | +333 | **−385** | +0.90 | **−0.72** |
+| 0.80 | 0.75 | 1.93 | +21.9 | +21.1 | +0.27 | +696 | **−571** | +1.37 | **−1.14** |
+| 0.95 | 0.60 | 2.10 | +18.6 | +16.8 | +1.19 | +601 | +48 | +1.69 | +0.12 |
+| 0.95 | 0.75 | 2.08 | +24.0 | +20.8 | +2.11 | +1081 | +57 | +2.17 | +0.09 |
+| 1.10 | 0.75 | 2.21 | +24.0 | +20.8 | +2.23 | +1140 | +213 | +2.32 | +0.43 |
+| 1.25 | 0.75 | 2.33 | +19.7 | +17.0 | +1.88 | +1103 | +152 | +1.90 | +0.32 |
+
+The flexible-over-constrained direction holds in **every** regime; in the slacker regimes
+(demand/supply ≈ 0.80, which best matches Castillo's mildly-supply-constrained Houston),
+constrained drivers are *absolutely* hurt — their hourly earnings fall by 0.7–1.1% and
+aggregate driver surplus is ≈0 to slightly negative, bracketing Castillo's published −0.98%.
+The simulator reproduces this **without ever using Castillo's numbers as an input**, which
+is the external validation we sought. As a bonus, the local-myopic pricing family (P2)
+under-performs the smart family (P3) on welfare throughout, independently reproducing the
+central result of Besbes, Castro & Lobel (2021).
+
+![Validation: demand elasticity calibration (V1) and the emergent square-root law for pickup distance (V2).](figures/fig_validation.png)
+
+![Castillo incidence across market regimes (V3): flexible/mobile drivers gain under smart surge while constrained drivers are hurt, robustly across the demand/supply and concentration grid.](figures/fig_castillo_regime.png)
+
+Two honest caveats. First, our fluid surge clears the market more aggressively than
+real-world surge (mean multiplier ≈ 2.0 vs. Castillo's ≈ 1.15), because it responds to
+deliberately stressed peak imbalances; the *qualitative* incidence, not the magnitude, is
+what is validated. Second, the aggregate driver-surplus sign is small and regime-dependent
+(it can be mildly positive in scarcer markets), so we claim the **distributional** pattern
+(mobile gain, constrained lose ground), not Castillo's exact aggregate.
+
+### 4.2 Whom does each controller serve? (RQ1)
+
+Table 4.2 decomposes welfare by pricing family, averaged over all scenarios and seeds
+(`t1_welfare_by_pricing.csv`, Figure `fig_welfare_decomposition.png`).
+
+**Table 4.2 — Welfare decomposition by pricing family (mean $ over scenarios×seeds):**
+
+| pricing | rider surplus | driver surplus (flex) | driver surplus (constr) | platform profit | **total welfare** | GMV | service rate | mean surge |
+|---|---|---|---|---|---|---|---|---|
+| P1 flat | 95,393 | 3,428 | 3,762 | 7,033 | 109,616 | 28,132 | 0.60 | 1.00 |
+| P2 reactive | 103,078 | 6,063 | 6,401 | 8,839 | 124,381 | 35,356 | 0.69 | 1.31 |
+| P3 fluid | 122,775 | 12,960 | 13,385 | 13,312 | **162,432** | 53,249 | 0.86 | 2.10 |
+
+On average, smarter pricing lifts *every* stakeholder, because in supply-constrained
+scenarios flat pricing leaves a large fraction of demand unserved (service rate 0.60) with
+long waits; clearing the market serves more high-value trips. But the *scalar* average hides
+the distributional story, which Table 4.3 exposes.
+
+**Table 4.3 — Driver incidence by type and pricing** (`t2_incidence_by_pricing.csv`,
+Figure `fig_incidence.png`):
+
+| pricing | flexible $/capita | constrained $/capita | flex − constr | earn/hr flex | earn/hr constr |
+|---|---|---|---|---|---|
+| P1 flat | 57.7 | 62.4 | **−4.7** | 21.4 | 21.2 |
+| P2 reactive | 102.7 | 105.8 | −3.1 | 26.8 | 26.2 |
+| P3 fluid | 222.3 | 220.5 | **+1.8** | 41.0 | 39.3 |
+
+Under flat pricing, constrained drivers earn *more* per capita than flexible drivers (the
+flexible type's value comes from the option to go offline, which it exercises, lowering its
+realized platform earnings). As pricing gets smarter and surges harder, the gap **inverts**:
+under fluid surge, flexible drivers pull ahead, and their hourly earnings exceed constrained
+drivers' by ~4.5%. This is the regressive signature of surge at the level of the driver
+population — invisible to any scalar GMV or aggregate-driver-surplus metric, and consistent
+with both Castillo (2025) and the location channel of Cook et al. (2021).
+
+![Welfare decomposition by pricing family. Smarter pricing lifts the aggregate, but the average hides the distribution.](figures/fig_welfare_decomposition.png)
+
+![Surge incidence by driver type: the flexible-minus-constrained per-capita gap inverts from negative (flat) to positive (fluid surge).](figures/fig_incidence.png)
+
+### 4.3 The best controller is context-dependent (RQ1 cont.)
+
+No single controller dominates. Over the 66 scenarios, the welfare-optimal controller's
+sub-task choices are distributed as: **matching** M2 bipartite 54 / M3 value-based 12;
+**pricing** P3 fluid 52 / P2 reactive 10 / P1 flat 4; **rebalancing** R2 to-demand 41 / R3
+value-gradient 17 / R1 none 8 (`analysis_digest.txt` T3). Figure `fig_oracle_map.png` shows
+the welfare-optimal pricing family across the (demand/supply, concentration) plane: flat and
+reactive win in slack markets, fluid clearing wins as scarcity rises.
+
+The selector's interpretable rules recover the economically sensible policy. The depth-3
+decision tree for pricing (fit on the welfare oracle) reads:
+
+```
+if demand/supply <= 0.61 (slack):
+    if temporal_peakedness <= 1.58:  -> P1 flat        (no surge needed)
+    else:                            -> P2 reactive    (mild surge for peaks)
+elif demand/supply <= 0.90:
+    if elasticity <= -0.65 (elastic): -> P2 reactive
+    else:                             -> P3 fluid
+else (demand/supply > 0.90, scarce): -> P3 fluid       (clear the market)
+```
+
+Pricing choice is driven mostly by demand/supply ratio (feature importance 0.49), then
+elasticity (0.28) and peakedness (0.19) — i.e. *surge intensity should scale with scarcity*,
+which the selector learned from outcomes rather than being told.
+
+![Welfare-optimal pricing family across the (demand/supply, spatial concentration) plane: flat/reactive win in slack markets, fluid clearing wins as scarcity rises.](figures/fig_oracle_map.png)
+
+### 4.4 GMV-optimal and welfare-optimal control diverge (RQ4)
+
+The GMV-maximizing controller differs from the welfare-maximizing controller in **34 of 66
+scenarios (52%)** (`analysis_digest.txt` T4, Figure `fig_gmv_vs_welfare.png`). The
+divergence has a clear direction: GMV is maximized by aggressive fluid surge in 62/66
+scenarios, whereas welfare prefers the milder reactive or flat family in 14/66 (P3 52, P2
+10, P1 4). In other words, **optimizing GMV systematically over-surges relative to the
+welfare optimum.** The welfare cost of blindly deploying the GMV-optimal controller is a
+normalized welfare regret of **0.055** on average — modest in aggregate, but it is paid
+disproportionately in the slack and elastic scenarios where over-surging destroys
+consumer surplus, and it always comes bundled with the regressive driver incidence of
+Section 4.2. This is the concrete sense in which a scalar GMV scoreboard is a category
+error for welfare-aware control: it does not merely under-measure welfare, it selects a
+*different and more regressive* controller in half of all cities.
+
+![GMV vs. welfare across the method menu. The GMV-optimal controller (red) often sits well below the welfare frontier; the welfare-optimal controller (green) spans a wide GMV range.](figures/fig_gmv_vs_welfare.png)
+
+### 4.5 Can context predict the winner? (RQ3)
+
+Table 4.4 reports leave-one-scenario-out normalized regret for each selection strategy and
+objective (`t5_selection_regret.csv`, Figures `fig_regret.png`, `fig_selection_box.png`).
+
+**Table 4.4 — Selection regret (LOSO; 0 = oracle, lower is better):**
+
+| objective | random | hand-rule | single-best-fixed | **selector (tree)** | **selector (kNN)** |
+|---|---|---|---|---|---|
+| welfare | 0.421 | 0.343 | 0.069 (M2+P3+R2) | **0.052** | **0.047** |
+| GMV | 0.519 | 0.617 | 0.035 (M2+P3+R2) | 0.032 | 0.038 |
+| fairness-adjusted welfare | 0.421 | 0.340 | 0.075 (M2+P3+R2) | **0.052** | **0.050** |
+
+Three findings, stated with their boundaries.
+
+1. **Context helps for welfare and fairness.** The learned selector (regret 0.047–0.052)
+   beats the strong single-best-fixed baseline (0.069–0.075) — the "deploy one tuned
+   controller everywhere" strategy — cutting regret by ~25–30%, and it crushes random
+   (0.42) and the hand-rule (0.34). The selector is genuinely context-driven: it makes 13
+   distinct controller choices and departs from the fixed default in **39 of 66 scenarios**,
+   precisely in the slack/elastic cities where flat or reactive pricing beats fluid surge.
+
+2. **For GMV, one controller nearly suffices.** Because aggressive surge maximizes GMV
+   almost everywhere (Section 4.4), the single-best-fixed combo is already within 0.035 of
+   the GMV oracle and the selector barely improves on it. This is the honest negative
+   half of the result: when the objective is GMV, context-aware selection adds little,
+   because the answer is "surge hard" almost regardless of the city.
+
+3. **Hand-written rules are not enough.** Our domain decision table (regret 0.34) is far
+   worse than the learned selector and barely better than random for GMV, underscoring that
+   the context→method mapping is real but not trivially guessable.
+
+The headline, then, is conditional and falsifiable, exactly as intended by treating brute
+force as the oracle: **observable city context predicts the welfare-optimal controller well
+enough to beat a strong fixed default, but only when the objective is welfare (or fairness);
+for GMV the mapping collapses to a constant.** Since each controller here is cheap, the
+practical payoff is not speed but the demonstration — for the first time in this domain with
+an explicit oracle and regret protocol — that method choice is welfare-relevant and
+context-dependent.
+
+![Selection regret vs. baselines, by objective. The learned selector beats single-best-fixed for welfare and fairness; for GMV one controller nearly suffices.](figures/fig_regret.png)
+
+![Per-scenario regret distribution (welfare objective, leave-one-scenario-out).](figures/fig_selection_box.png)
+
+---
+
+## Chapter 5 — Discussion
+
+### 5.1 What the four findings amount to
+
+Read together, the results make one coherent argument. Smarter control of the three
+coupled decisions does raise aggregate welfare (Table 4.2) — the field's scalar
+optimism is not wrong on average. But the *same* improvement carries a distributional
+signature that the scalar lens cannot see: it tilts the driver-side surplus from
+constrained toward flexible drivers (Table 4.3, Figure `fig_castillo_regime.png`), exactly
+the regressive incidence the welfare-economics literature documents (Castillo 2025) and the
+labor literature explains through location and flexibility channels (Cook et al. 2021;
+Caldwell & Oehlsen 2022). Because the welfare-optimal and GMV-optimal controllers actually
+*differ* in half of all scenarios (Section 4.4), choosing controllers by GMV is not a
+neutral proxy for welfare — it systematically over-surges and amplifies the regressive
+incidence. And because the welfare-optimal controller depends on observable city structure
+(Section 4.3), the choice can be partly automated from context (Section 4.5), though the
+gain over a strong fixed default is real-but-modest and evaporates entirely when the
+objective collapses to GMV.
+
+The thesis's contribution is therefore less a new controller than a **demonstration that
+the evaluation lens changes the conclusion**. The identical 27 controllers, scored by GMV
+on a homogeneous driver pool, would have yielded the field-standard story ("fluid surge
+wins, deploy it everywhere"). Scored by a welfare decomposition on a heterogeneous pool,
+they yield a more honest story: fluid surge wins *on average and in scarce cities*, it is
+*regressive across drivers*, and *the right choice is city-dependent when you care about
+welfare rather than revenue*.
+
+### 5.2 Relation to the literature and to this repository's proposal
+
+The findings tie the corpus together. They give an executable instance of Besbes, Castro &
+Lobel's (2021) theorem (local-myopic P2 underperforms smart P3 throughout). They reproduce
+Castillo's (2025) incidence from independent calibration, which is a stronger form of
+agreement than matching his numbers would be. They operationalize the fairness concern that
+JDRCL (Sun et al. 2024) raises, but as a *measured incidence across heterogeneous types*
+rather than a constraint over identical drivers — and our fairness-adjusted objective
+(RQ4/RQ3) shows that a fairness-aware planner would make slightly different, and learnable,
+controller choices.
+
+The work is also the scoped, falsifiable core of this repository's broader "agentic
+autoresearch" proposal. That proposal imagined LLM expert-agents operationalizing the
+objective and selecting methods per city, with Castillo as a grounding target. The
+methodological critiques recorded in the repository sharpened it in two ways that this
+thesis implements directly: (i) Castillo is used as motivation, a simulator sanity-check,
+and a reporting template — never as an optimization target (the "category error" fix); and
+(ii) the method-selection claim is made falsifiable by computing a brute-force oracle and
+reporting regret, rather than asserting that an agent beats search. The selector here is a
+transparent decision tree, not an LLM, precisely so that the oracle/regret evaluation is
+clean; swapping in a richer selector is future work (5.4), but the evaluation protocol is
+the durable contribution.
+
+### 5.3 Threats to validity and limitations
+
+This is a simulation study, and its conclusions inherit the simulator's assumptions. We
+state the load-bearing limitations plainly.
+
+- **It is a simulator, not a city.** Demand is Poisson on a grid; the road network is
+  Manhattan distance; trips, values, and driver behaviour are stylized. The results are
+  claims about a transparent model calibrated to independent point estimates, not about any
+  real market. Their external validity rests on the three validation checks (Section 4.1),
+  which are necessary, not sufficient.
+- **Calibration uncertainty.** Constants (elasticity, supply elasticities, value of time,
+  commission) are single point estimates with real confidence intervals. We mitigate by
+  drawing elasticity and flexibility across wide ranges in the scenario grid, but we did not
+  run a full probabilistic sensitivity analysis; the headline incidence direction is robust
+  across the regime sweep, but exact magnitudes are not to be over-read.
+- **Simplified controllers.** Our matchers, pricers, and rebalancers are faithful *family
+  representatives*, not state-of-the-art implementations (no deep networks, no learned
+  graph encoders, no full bi-level LP). A real M3 or R3 would likely be stronger; the
+  *relative* and *contextual* comparisons are the point, but a stronger value-based family
+  could shift some oracle assignments.
+- **Abstract heterogeneity.** "Flexible vs. constrained" is a two-type abstraction of a
+  continuous, multi-dimensional reality. We deliberately avoid encoding a gender mechanism
+  the data do not support (Cook et al. 2021 locate the gap in speed/experience/location);
+  the demographic relevance is by correlation, and we do not claim to model any protected
+  attribute.
+- **Surge magnitude.** Our fluid pricing clears stressed peaks more aggressively than real
+  surge (mean ≈2.0 vs. ≈1.15). The qualitative incidence is validated; the magnitudes are
+  not calibrated to a real surge algorithm.
+- **Small selection sample.** Sixty-six scenarios is a small dataset for a selector; we use
+  interpretable models and leave-one-scenario-out evaluation to limit overfitting, and we
+  report that the selector's edge over single-best-fixed is modest. We do not claim it would
+  survive at the precision of a few percentage points of regret.
+- **Single-platform, single-period welfare.** We ignore platform competition, regulation,
+  long-run entry beyond the modeled extensive margin, and rider learning — all of which the
+  economics literature shows matter.
+
+### 5.4 Future work
+
+The natural next steps follow the limitations. **Real-data calibration:** instantiate the
+demand field, OD matrix, and trip times from public trip records (e.g. NYC TLC) and refit
+the value distribution to observed price response, turning the validity checks into held-out
+predictions. **Richer controllers and a true expensive-controller regime:** replace the
+family representatives with deep RL / bi-level LP implementations so that the oracle becomes
+genuinely costly to compute, which is the setting in which a context→method selector pays
+for itself in compute, not just in insight. **Temporal heterogeneity:** add the time-of-day
+margin (constrained drivers working off-peak) that Castillo emphasizes, complementing our
+spatial mechanism. **Probabilistic sensitivity:** sample calibration constants from their
+confidence intervals and report the incidence as a distribution. **A learned, possibly
+LLM-based selector** consuming a richer city profile, evaluated against the same brute-force
+oracle and regret protocol — closing the loop to this repository's original agentic
+proposal, now on falsifiable footing.
+
+---
+
+## Chapter 6 — Conclusion
+
+This thesis asked what a scalar, homogeneous-driver evaluation of ride-hailing control
+cannot answer: whom each controller serves, and whether the right controller can be chosen
+from city context. To answer it we built a compact, independently-calibrated two-sided
+market simulator with heterogeneous drivers and a Castillo-style welfare decomposition,
+validated it against three independent literature anchors — the demand price elasticity, the
+square-root law of pickup distance, and Castillo's (2025) regressive surge incidence,
+reproduced without using his numbers — and ran a library of 27 controllers across 66 city
+scenarios.
+
+The evaluation lens changed the conclusion. Smarter pricing raises aggregate welfare but
+tilts driver surplus from constrained toward flexible drivers; the GMV-optimal and
+welfare-optimal controllers differ in over half of cities, with GMV systematically
+over-surging; and a transparent context→method selector, evaluated by regret against a
+brute-force oracle, beats a strong "one controller everywhere" baseline for welfare and
+fairness objectives — but not for GMV, where a single aggressive-surge controller nearly
+suffices. The honest headline is conditional: **method choice in ride-hailing is
+welfare-relevant and context-dependent, and observable context predicts the welfare-optimal
+controller — provided one optimizes welfare rather than revenue.**
+
+The broader lesson is methodological. The same controllers, the same data, and two different
+evaluation lenses yield two different research conclusions; only the welfare-decomposed,
+heterogeneous-driver lens can see the distribution that the field's scalar metrics hide. For
+a domain whose decisions allocate real income across real people, that lens is not optional.

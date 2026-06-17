@@ -1,0 +1,16 @@
+{
+  "V1_realized_elasticity": -0.509,
+  "V1_target_elasticity": -0.55,
+  "V1_sigma_v": 1.1905,
+  "V2_sqrt_law_exponent": 0.5522,
+  "V2_corr": 0.9809,
+  "V3_counterfactual_uniform_mult": 2.0918,
+  "V3_d_welfare_pctGMV": 23.216,
+  "V3_d_rider_pctGMV": 20.448,
+  "V3_d_driver_pctGMV": 1.804,
+  "V3_d_platform_pctGMV": 0.965,
+  "V3_d_ds_flexible": 981.06,
+  "V3_d_ds_constrained": -7.0,
+  "V3_d_earn_flex": 1.865,
+  "V3_d_earn_cons": 0.011
+}
