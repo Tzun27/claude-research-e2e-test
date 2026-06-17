@@ -30,14 +30,16 @@ from independent published estimates (demand price elasticity from Cohen et al. 
 heterogeneous driver labor-supply elasticities from Caldwell & Oehlsen 2022 and Chen
 et al. 2019; value of time from Goldszmidt et al. 2020). The simulator models two
 grounded sources of driver heterogeneity — spatial flexibility (the ability to
-reposition toward surge) and labor-supply elasticity — and produces a full
+reposition toward surge, the load-bearing mechanism in our runs) and labor-supply
+elasticity — and produces a full
 Castillo-style welfare decomposition (rider surplus, driver surplus by type, platform
 profit). We validate the simulator against three independent literature anchors: it
 reproduces the calibrated demand elasticity, the square-root law relating pickup
 distance to idle-vehicle density (Arnott 1996), and — critically — the *qualitative
 welfare incidence* of Castillo (2025): smart surge raises total welfare and rider
-surplus while its driver-side benefits accrue to mobile drivers and constrained
-drivers are left worse off. Notably, our simulator reproduces this pattern even though
+surplus while its driver-side benefits accrue disproportionately to mobile drivers,
+with constrained drivers gaining far less (and, in mildly-supply-constrained markets,
+absolutely worse off). Notably, our simulator reproduces this pattern even though
 Castillo's welfare numbers are never used to build it.
 
 On a library of 27 controller combinations (three families each for matching, pricing,
@@ -551,7 +553,11 @@ far more aggressively than real-world surge (mean multiplier ≈ 1.9–2.3 vs. C
 and our welfare *magnitudes* (+19–34% of GMV) are an order of magnitude larger than his
 (+2.15%), because our markets are more spatially concentrated and the fluid pricer differentiates
 prices strongly; we therefore validate only the **qualitative incidence direction**, never the
-magnitudes. (Relatedly, the local-myopic pricer P2 under-performs the smart P3 on welfare
+magnitudes. Crucially, that direction does *not* depend on hitting Castillo's multiplier: the
+flexible-over-constrained gap is monotone and same-signed across all eight regime rows (Table
+4.1), so the qualitative claim is robust to where in the dem/sup range the market sits, even
+though no regime reproduces his mild ≈1.15 surge. (Relatedly, the local-myopic pricer P2
+under-performs the smart P3 on welfare
 throughout — consistent with the *spirit* of Besbes, Castro & Lobel (2021), though as both are
 local rules this is not a test of their local-vs-global theorem; see §5.2.) Second, the
 aggregate driver-surplus sign is regime-dependent (it is negative only in the mildly-constrained
@@ -610,7 +616,7 @@ overstate it.
 
 ![Surge incidence by driver type: the flexible-minus-constrained per-capita gap inverts from negative (flat) to positive (fluid surge).](figures/fig_incidence.png)
 
-### 4.3 The best controller is context-dependent (RQ1 cont.)
+### 4.3 No single controller dominates: the optimum is context-dependent (setup for RQ3)
 
 No single controller dominates. Over the 66 scenarios, the welfare-optimal controller's
 sub-task choices are distributed as: **matching** M2 bipartite 49 / M3 value-based 17;

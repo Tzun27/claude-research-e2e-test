@@ -129,9 +129,12 @@ def castillo_incidence(sigma_v):
     less (and, in slacker regimes, are absolutely hurt).
     """
     from methods import FluidPricing
+    # Mildly-supply-constrained regime (the Castillo-Houston analogue, where surge
+    # affects relatively few trips); matches row 1 of the regime sweep so the
+    # single-point report and Table 4.1 are consistent.
     scn = ScenarioConfig(name="houston_peak", grid_n=6, n_steps=180,
-                         demand_supply_ratio=0.85, fleet_size=120,
-                         spatial_concentration=0.7, temporal_peakedness=3.0,
+                         demand_supply_ratio=0.8, fleet_size=120,
+                         spatial_concentration=0.6, temporal_peakedness=3.5,
                          demand_elasticity=-0.55, flex_frac=0.5,
                          trip_length_mean=2.5, patience=4, dispatch_radius=4,
                          seed=0)
