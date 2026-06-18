@@ -29,13 +29,15 @@ def load(pattern):
     return out
 
 
-def paired_delta_pctGR(res):
-    """Return dict component -> (mean %GR, sem %GR) for surge-uniform, paired by eval seed.
+def paired_delta_pctGR(res, baseline_key="uniform_summaries"):
+    """Return dict component -> (mean %GR, sem %GR) for surge-baseline, paired by eval seed.
 
+    baseline_key: 'uniform_summaries' (optimal uniform) or 'matched_uniform_summaries'
+    (uniform at the controller's own average multiplier -> the mean-preserving-spread test).
     surge_summaries may pool multiple train seeds; we average surge over train-seed replicas
-    per eval seed, then pair against uniform per eval seed.
+    per eval seed, then pair against the baseline per eval seed.
     """
-    uni = res["uniform_summaries"]; sur = res["surge_summaries"]
+    uni = res[baseline_key]; sur = res["surge_summaries"]
     eval_seeds = res["eval_seeds"]; nE = len(eval_seeds)
     GR = np.mean([u["gross_revenue"] for u in uni])
     # group surge by eval-seed index (pooled in order train-major: [seed-block per train seed])
@@ -76,6 +78,32 @@ def table_welfare_incidence(cells, title, fname):
         lines.append(f"| {obj} | {d['_uniform_mult']:.2f} | {cell('total_welfare',0)} | "
                      f"{cell('rider_surplus',1)} | {cell('driver_surplus',2)} | "
                      f"{cell('platform_profit',3)} | {signstr} |")
+    txt = "\n".join(lines) + "\n"
+    with open(os.path.join(TAB, fname), "w") as f:
+        f.write(txt)
+    print(txt)
+    return txt
+
+
+def table_mps(cells, fname):
+    """RQ1 (calibration-robust): surge vs uniform AT THE SAME AVERAGE multiplier
+    (Castillo's mean-preserving-spread comparison). Isolates the effect of price *variation*."""
+    lines = ["# RQ1: welfare incidence of price *variation* (mean-preserving spread)", "",
+             "Delta = surge - uniform-at-the-same-average-multiplier, % of GR (mean +/- s.e.m.).",
+             "This isolates the pure effect of spatio-temporal price *variation* (allocative",
+             "efficiency + matching), controlling for the price level. Castillo signs: +,+,-,-.", "",
+             "| objective | surge avg mult | dW | d rider | d driver | d platform | signs |",
+             "|" + "---|" * 7]
+    for name, res in cells.items():
+        if "matched_uniform_summaries" not in res:
+            continue
+        d = paired_delta_pctGR(res, "matched_uniform_summaries")
+        sg = fmt_signs(d)
+        signstr = " ".join(f"{c.split('_')[0]}:{m}" for c, m in zip(COMPONENTS, sg))
+        lines.append(f"| {res['objective']} | {res.get('surge_mean_mult',0):.2f} | "
+                     f"{d['total_welfare'][0]:+.2f}±{d['total_welfare'][1]:.2f} | "
+                     f"{d['rider_surplus'][0]:+.2f} | {d['driver_surplus'][0]:+.2f} | "
+                     f"{d['platform_profit'][0]:+.2f} | {signstr} |")
     txt = "\n".join(lines) + "\n"
     with open(os.path.join(TAB, fname), "w") as f:
         f.write(txt)
@@ -195,7 +223,8 @@ if __name__ == "__main__":
     if price:
         order = ["profit", "throughput", "welfare_weighted", "welfare"]
         price = {k: v for o in order for k, v in price.items() if v["objective"] == o}
-        table_welfare_incidence(price, "Welfare incidence of learned surge pricing (price-isolation)",
+        table_mps(price, "rq1_mean_preserving_spread.md")
+        table_welfare_incidence(price, "Welfare incidence vs OPTIMAL uniform (price level + variation)",
                                 "welfare_incidence_price.md")
         fig_welfare_incidence(price, "welfare_incidence_price.png")
         table_driver_incidence(price, "driver_incidence.md")

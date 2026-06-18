@@ -114,7 +114,14 @@ class DriverPool:
                 pick = self.rng.choice(len(reach), size=len(members), p=p)
                 choices = reach[pick]
                 self.loc[members] = choices
+                moved = choices != z
                 self.cost_total[members] += cfg.drive_cost_per_cell * geo.dist[z, choices]
+                # platform pays a relocation incentive to drivers who move to an
+                # incentivized zone (a costly transfer; addresses the free-lever issue).
+                if moved.any():
+                    pay = rebalance_bonus[choices[moved]]
+                    self.earn_total[members[moved]] += pay
+                    self.rebalance_paid_epoch += float(pay.sum())
 
     # ---- matching credits a trip to a driver ----
     def assign_trip(self, i: int, t: int, pickup_time: int, trip_time: int,
@@ -130,6 +137,7 @@ class DriverPool:
     def begin_epoch_accounting(self, t: int):
         self._z_earn = np.zeros(self.geo.Z)
         self._z_cnt = np.zeros(self.geo.Z)
+        self.rebalance_paid_epoch = 0.0   # platform repositioning incentives paid this epoch
         # count online time for all online drivers this epoch
         self.online_epochs += self.online.astype(np.int32)
 

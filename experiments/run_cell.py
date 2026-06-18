@@ -68,9 +68,20 @@ def main():
                   fair_weight=args.fair_weight, fix_dispatch=fix_dispatch)
 
     # --- uniform-pricing counterfactual (grid search) ---
-    dispatch_for_uniform = fix_dispatch if fix_dispatch is not None else 2
-    best_m, uinfo = uniform_search(mk, args.objective, seeds=eval_seeds, dispatch_radius=dispatch_for_uniform)
+    # price/fair: matching fixed at radius 2 for both arms (clean price isolation).
+    # threeway: the uniform baseline also optimizes the dispatch radius, so the delta
+    # isolates *price* flexibility on top of optimized matching (issue: avoid confound).
+    if fix_dispatch is not None:
+        dispatch_for_uniform = fix_dispatch
+        dispatch_grid = None
+    else:
+        dispatch_for_uniform = 2
+        dispatch_grid = [1, 2, 3, 4]
+    best_m, uinfo = uniform_search(mk, args.objective, seeds=eval_seeds,
+                                   dispatch_radius=dispatch_for_uniform, dispatch_grid=dispatch_grid,
+                                   alpha_pi=weights[0], alpha_R=weights[1], alpha_D=weights[2])
     result["uniform_mult"] = best_m
+    result["uniform_dispatch"] = uinfo.get("best_dispatch", dispatch_for_uniform)
     result["uniform_summaries"] = uinfo["best_summaries"]
     result["uniform_agg"] = aggregate(uinfo["best_summaries"])
     print(f"[{args.objective}/{args.condition}] uniform m*={best_m:.2f}  ({time.time()-t0:.0f}s)", flush=True)
@@ -98,6 +109,17 @@ def main():
     pooled = [s for seed_sums in surge_per_seed for s in seed_sums]
     result["surge_summaries"] = pooled
     result["surge_agg"] = aggregate(pooled)
+
+    # Mean-preserving-spread baseline (Castillo's definition of surge): a flat uniform price
+    # set to the learned controller's OWN trip-weighted average multiplier. The surge-vs-this
+    # comparison isolates the pure effect of price *variation* (allocative efficiency +
+    # matching), controlling for the price level -- calibration-robust, unlike surge-vs-optimal.
+    import numpy as _np
+    mbar = float(_np.mean([s["mult_weighted"] / max(1, s["n_matched"]) for s in pooled]))
+    result["surge_mean_mult"] = mbar
+    matched_uni = run_constant_seeds(mk, mbar, dispatch_for_uniform, eval_seeds)
+    result["matched_uniform_summaries"] = matched_uni
+    result["matched_uniform_agg"] = aggregate(matched_uni)
     result["surge_obj_per_train_seed"] = [objective_value(mean_summary(s), args.objective) for s in surge_per_seed]
     result["uniform_obj"] = objective_value(mean_summary(uinfo["best_summaries"]), args.objective)
     result["elapsed_s"] = time.time() - t0

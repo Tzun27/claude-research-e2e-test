@@ -13,20 +13,28 @@ from .evaluate import run_constant_seeds, mean_summary, objective_value
 
 
 def uniform_search(make_env, objective, seeds, mult_grid=None,
-                   alpha_pi=0.4, alpha_R=1.0, alpha_D=0.3, dispatch_radius=2):
-    """Grid-search the best constant multiplier for the objective. Returns (best_mult, info)."""
+                   alpha_pi=0.4, alpha_R=1.0, alpha_D=0.3, dispatch_radius=2,
+                   dispatch_grid=None):
+    """Grid-search the best constant multiplier (and, if dispatch_grid is given, the best
+    constant dispatch radius) for the objective. Returns (best_mult, info).
+
+    For the three-way condition, pass dispatch_grid so the uniform baseline also optimizes
+    matching -- otherwise the surge-vs-uniform delta would confound price and matching
+    flexibility (the controller learns its radius; the baseline must too)."""
     if mult_grid is None:
         mult_grid = np.round(np.arange(0.8, 4.01, 0.1), 2)
+    drs = dispatch_grid if dispatch_grid is not None else [dispatch_radius]
     best = None
     table = []
-    for m in mult_grid:
-        sums = run_constant_seeds(make_env, m, dispatch_radius, seeds)
-        ms = mean_summary(sums)
-        val = objective_value(ms, objective, alpha_pi, alpha_R, alpha_D)
-        table.append((float(m), val, ms))
-        if best is None or val > best[1]:
-            best = (float(m), val, sums)
-    return best[0], dict(best_value=best[1], best_summaries=best[2], table=table)
+    for dr in drs:
+        for m in mult_grid:
+            sums = run_constant_seeds(make_env, m, dr, seeds)
+            ms = mean_summary(sums)
+            val = objective_value(ms, objective, alpha_pi, alpha_R, alpha_D)
+            table.append((float(m), int(dr), val, ms))
+            if best is None or val > best[2]:
+                best = (float(m), int(dr), val, sums)
+    return best[0], dict(best_value=best[2], best_dispatch=best[1], best_summaries=best[3], table=table)
 
 
 class MyopicSurge:

@@ -197,6 +197,8 @@ class RideHailEnv:
 
         n_abandon = n_requests - len(matched_riders)
         ep_drive_cost = float(drv.cost_total.sum()) - cost0
+        # platform pays repositioning incentives (transfer to drivers; nets out of welfare)
+        ep_profit -= float(getattr(drv, 'rebalance_paid_epoch', 0.0))
 
         # 6) accumulate episode welfare
         self.W['platform_profit'] += ep_profit

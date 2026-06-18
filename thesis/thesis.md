@@ -1,6 +1,8 @@
-# Who Benefits from *Learned* Surge Pricing? The Welfare Incidence of Deep Reinforcement Learning Control under Driver Heterogeneity
+# Who Benefits from *Learned* Surge Pricing? The Welfare Incidence of Policy-Search Pricing Control under Driver Heterogeneity
 
 *A Master's thesis in Computer Science.*
+
+> **A note on terminology.** The controller in this thesis is a compact policy optimized by **Augmented Random Search (ARS)**, a derivative-free policy-search method, after a per-step deep-RL method (PPO) failed for a diagnosed reason (§4.5). We therefore use "learned control" and "policy-search control" rather than "deep reinforcement learning." The substantive question — whether a *learned* pricing controller reproduces a structural welfare target, and how that depends on its objective — is unchanged by the choice of optimizer.
 
 ---
 
@@ -22,16 +24,16 @@ These two literatures have not met. The DRL controllers that increasingly set pr
 
 ### 1.2 Research questions
 
-- **RQ1 (alignment).** Does a DRL controller that jointly sets prices, matching, and rebalancing reproduce the *sign structure* of Castillo's four-way welfare decomposition — total ↑, rider ↑, driver ↓, platform ↓ — and its rough proportions (rider gains far exceeding driver/platform losses)?
-- **RQ2 (objective-dependence).** Is the welfare incidence a property of surge pricing itself, or of the *objective the controller maximizes*? We compare profit-, throughput-, and welfare-oriented controllers and ask which reproduce the Castillo structure and which distort it.
+- **RQ1 (alignment, decomposed).** Does learned spatio-temporal surge reproduce Castillo's four-way incidence — total ↑, rider ↑, driver ↓, platform ↓? Following Castillo's own logic, we decompose the effect of surge into two channels and test each: (a) a **price-variation effect** — surge vs. a flat uniform price *at the same average multiplier* (a mean-preserving spread), which isolates allocative efficiency and matching gains; and (b) a **price-level effect** — the gap between the platform-optimal uniform price and the surge average. Castillo's headline arises because the variation effect lifts everyone slightly while the level effect (optimal uniform $>$ surge average) transfers surplus from drivers and platform to riders. The mean-preserving-spread comparison is calibration-robust; the level effect depends on the platform's objective, which is exactly what RQ2 turns on.
+- **RQ2 (objective-dependence).** This is the central question. Is the welfare incidence a property of surge pricing itself, or of the *objective the controller maximizes*? We compare profit-, throughput-, welfare-, and welfare-weighted controllers and ask which reproduce the Castillo structure and which distort it — answering directly whether a learned controller "matches, exceeds, or quietly distorts" the structural model's incidence. Because the same surge *mechanism* yields different incidence under different objectives, the distortion is a property of the objective, not of surge.
 - **RQ3 (heterogeneous incidence).** Does the driver-side loss fall most heavily on the most-engaged (long-hours, low-reservation-wage) drivers, as Castillo finds empirically, and what is the mechanism in a model with heterogeneous drivers?
 - **RQ4 (fairness frontier).** If a driver-earnings fairness penalty is imposed on the controller (the field's emerging "fairness as a hard constraint" consensus), what is the efficiency–equity trade-off, and at what cost can the driver loss be neutralized?
 
 ### 1.3 Contributions
 
-1. **A calibrated spatial ride-hailing simulator** with elastic discrete-choice demand, a *heterogeneous, strategically-responding* driver population (drivers differ in reservation wage, repositioning responsiveness, and engagement), endogenous matching frictions (the wild-goose chase), and an exact four-way welfare decomposition that satisfies an internal consistency identity to machine precision. To our knowledge this is the first ride-hailing RL environment that models drivers as a heterogeneous population whose surge responses differ by type and that reports rider/driver/platform/total welfare rather than a single platform metric.
-2. **The first test of a learned three-way controller against a published structural welfare target.** We measure whether DRL surge pricing reproduces the Castillo (2025) incidence structure on a Houston-calibrated proxy.
-3. **An objective-dependence result (RQ2):** the welfare incidence of learned surge is shown to be determined by the controller's objective, answering directly the open question of whether DRL "matches, exceeds, or quietly distorts" the structural model's incidence.
+1. **A calibrated spatial ride-hailing simulator** with elastic discrete-choice demand, a *heterogeneous, strategically-responding* driver population (drivers differ in reservation wage, repositioning responsiveness, and engagement), endogenous matching frictions (the wild-goose chase), and a four-way welfare decomposition (rider/driver/platform/total). The accounting is closed — components sum to total welfare with no bookkeeping leakage (a consistency check confirms this to machine precision; we are careful, per §5.0, not to overstate this as validating the welfare *model*, only its bookkeeping). To our knowledge this is the first ride-hailing learning environment that models drivers as a heterogeneous population whose surge responses differ by type and that reports rider/driver/platform/total welfare rather than a single platform metric.
+2. **The first test of a learned pricing controller against a published structural welfare target.** We measure whether learned surge pricing reproduces the Castillo (2025) incidence structure on a Houston-calibrated proxy, isolating price flexibility exactly as Castillo does.
+3. **An objective-dependence result (RQ2) — the central contribution:** the welfare incidence of learned surge is shown to be determined by the controller's objective, answering directly the open question of whether a learned controller "matches, exceeds, or quietly distorts" the structural model's incidence.
 4. **A driver-heterogeneity incidence analysis (RQ3)** reproducing the timing/exposure mechanism behind Castillo's "long-hours drivers hurt most" finding, and **a fairness-frontier characterization (RQ4).**
 
 ### 1.4 Scope and honest limitations
@@ -158,7 +160,15 @@ All controllers are trained with ARS (two independent training seeds each) and e
 
 ### 5.0 Simulator validation
 
-> *[Consistency identity to 1e-16; elasticity 0.31; abandonment-at-peaks; WGC sweep; ARS reaches/beats the uniform optimum. TODO numbers.]*
+Four checks establish that the simulator behaves as an economic market and that the controller is a fair instrument.
+
+**Welfare accounting has no leakage.** Across pricing regimes (multipliers $0.9$–$2.5$) and seeds, the components sum to total welfare and equal the net-real-surplus form to a maximum relative error of $5\times10^{-16}$. This is a *bookkeeping* guarantee — prices and commissions cancel as transfers by construction, so the check confirms no accumulator leaks, not that the underlying definitions of value, wait cost, or opportunity cost are themselves "correct." Its value is that any measured redistribution across parties is real and not an artifact of mis-summed accounts.
+
+**Demand is elastic and inelastic in the right range.** Requests fall monotonically with price (e.g., $7{,}700\to6{,}800\to5{,}300$ as the multiplier rises $1.0\to1.5\to2.5$), and the measured short-run price elasticity at the operating point is $0.31$, close to Castillo's estimated $0.268$, with baseline acceptance $\approx0.77$.
+
+**The wild-goose chase is a real force.** Abandonment concentrates almost entirely at demand peaks (correlation between per-epoch abandonment and demand $\approx0.99$; $\sim\!207$ abandonments per peak epoch versus $\sim\!2$ per trough epoch). A dispatch-radius sweep confirms the intensive-margin chase: widening the radius lengthens mean pickups and, beyond radius $\approx2$, *lowers* welfare because drivers are tied up serving distant riders. The congestion-delay calibration makes low prices costly, which is why the platform-optimal uniform price is interior (§4.4).
+
+**Objectives genuinely differ, and the controller is a fair instrument.** The grid-searched optimal uniform multiplier rises monotonically with the platform's emphasis on its own revenue: throughput $1.2$, welfare-weighted $1.2$, welfare $2.0$, profit $3.4$. For the profit objective the ARS controller recovers the profit-maximizing price level (learned mean surge $\approx3.0$; achieved objective within $\sim0.1\%$ of the grid-searched uniform optimum), confirming the compact policy is expressive enough to find the objective-specific optimum rather than being an artificially weak baseline.
 
 ### 5.1 RQ1 — Does learned surge reproduce the Castillo incidence structure?
 
