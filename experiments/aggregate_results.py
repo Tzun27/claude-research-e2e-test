@@ -134,6 +134,27 @@ def fig_welfare_incidence(cells, fname):
     print(f"saved {fname}")
 
 
+def table_rq2_levels(cells, fname):
+    """RQ2 (central): welfare SHARES achieved by each objective's learned surge policy,
+    as % of that policy's gross revenue. Shows the objective determines the incidence."""
+    lines = ["# RQ2: welfare incidence by platform objective (learned surge)", "",
+             "Each row: the learned surge controller for that objective. Surplus shares are",
+             "% of the controller's own gross revenue (mean over seeds). The objective, not",
+             "surge, determines who benefits.", "",
+             "| objective | surge avg mult | rider %GR | driver %GR | platform %GR | total %GR |",
+             "|" + "---|" * 6]
+    for name, res in cells.items():
+        s = res["surge_agg"]; GR = s["gross_revenue"]["mean"]
+        lines.append(f"| {res['objective']} | {res.get('surge_mean_mult',0):.2f} | "
+                     f"{100*s['rider_surplus']['mean']/GR:.0f} | {100*s['driver_surplus']['mean']/GR:.0f} | "
+                     f"{100*s['platform_profit']['mean']/GR:.0f} | {100*s['total_welfare']['mean']/GR:.0f} |")
+    txt = "\n".join(lines) + "\n"
+    with open(os.path.join(TAB, fname), "w") as f:
+        f.write(txt)
+    print(txt)
+    return txt
+
+
 def table_threeway(price_cells, tw_cells, fname):
     """Compare price-only vs three-way control welfare incidence for shared objectives."""
     lines = ["# Three-way control vs price-only (Gap A0)", "",
@@ -224,6 +245,7 @@ if __name__ == "__main__":
         order = ["profit", "throughput", "welfare_weighted", "welfare"]
         price = {k: v for o in order for k, v in price.items() if v["objective"] == o}
         table_mps(price, "rq1_mean_preserving_spread.md")
+        table_rq2_levels(price, "rq2_incidence_by_objective.md")
         table_welfare_incidence(price, "Welfare incidence vs OPTIMAL uniform (price level + variation)",
                                 "welfare_incidence_price.md")
         fig_welfare_incidence(price, "welfare_incidence_price.png")

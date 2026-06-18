@@ -1,8 +1,9 @@
 """Run one experiment cell: (objective x condition x config-variant).
 
-A "cell" computes the optimized uniform-pricing counterfactual and trains N PPO surge
-controllers, then evaluates both on held-out market seeds and saves the full four-way
-welfare decomposition (with per-driver-type breakdown) to a JSON result file.
+A "cell" computes the optimized uniform-pricing counterfactual (and a matched-average
+uniform for the mean-preserving-spread comparison) and trains N ARS surge controllers, then
+evaluates all on held-out market seeds and saves the full four-way welfare decomposition
+(with per-driver-type breakdown) to a JSON result file.
 
 Conditions:
   price    : dispatch fixed, rebalance off -> isolates the welfare incidence of PRICE flexibility
