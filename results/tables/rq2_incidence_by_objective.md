@@ -6,5 +6,7 @@ welfare very differently depending on the objective.
 
 | objective | surge avg mult | rider %W | driver %W | platform %W | total welfare (idx) |
 |---|---|---|---|---|---|
-| profit | 3.43 | 11 | 62 | 26 | 100 |
-| throughput | 1.04 | 77 | 14 | 10 | 100 |
+| profit | 3.43 | 11 | 62 | 26 | 93 |
+| throughput | 1.04 | 77 | 14 | 10 | 93 |
+| welfare_weighted | 0.93 | 80 | 11 | 9 | 90 |
+| welfare | 2.07 | 47 | 36 | 17 | 100 |
