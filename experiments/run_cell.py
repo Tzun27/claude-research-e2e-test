@@ -20,7 +20,7 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "src"))
 from ridehail import SimConfig, RideHailEnv
 from ridehail.ars import ARSConfig, train_ars
 from ridehail.baselines import uniform_search, MyopicSurge
-from ridehail.evaluate import run_policy_seeds, aggregate, mean_summary, objective_value
+from ridehail.evaluate import run_policy_seeds, run_constant_seeds, aggregate, mean_summary, objective_value
 
 
 def parse_seeds(s):
