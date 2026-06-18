@@ -87,35 +87,34 @@ class DriverPool:
         """Idle, online, free drivers move one cell toward higher expected earnings.
 
         rebalance_bonus[z] is the platform's repositioning incentive signal (>=0) added
-        to the perceived attractiveness of moving toward zone z.
+        to the perceived attractiveness of moving toward zone z. Vectorized by grouping
+        idle drivers on (zone, type): drivers in the same zone share the earnings
+        landscape and drivers of the same type share the logit temperature beta.
         """
         cfg, geo = self.cfg, self.geo
         idle = self.available_mask(t)
         idx = np.where(idle)[0]
         if idx.size == 0:
-            return np.zeros(geo.Z)
-        reposition_cells = np.zeros(geo.Z)  # track moved cells per dest zone for cost accounting
-        for i in idx:
-            z = self.loc[i]
-            # reachable in one epoch: neighbors within move_speed_cells (incl. stay)
-            reach = geo.neighbors_within(z, cfg.move_speed_cells)
-            # attractiveness: expected earnings at dest - travel cost + platform bonus
-            travel = geo.dist[z, reach].astype(float)
+            return
+        zones = self.loc[idx]
+        for z in np.unique(zones):
+            reach = geo.reach[z]
+            rd = geo.reach_dist[z]
             attract = (self.belief_rate[reach]
-                       - cfg.reposition_cost_weight * cfg.drive_cost_per_cell * travel
+                       - cfg.reposition_cost_weight * cfg.drive_cost_per_cell * rd
                        + rebalance_bonus[reach])
-            b = self.beta[i]
-            logits = b * attract
-            logits -= logits.max()
-            p = np.exp(logits); p /= p.sum()
-            choice = reach[self.rng.choice(len(reach), p=p)]
-            if choice != z:
-                self.loc[i] = choice
-                # driver bears fuel cost of repositioning
-                d = geo.dist[z, choice]
-                self.cost_total[i] += cfg.drive_cost_per_cell * d
-                reposition_cells[choice] += d
-        return reposition_cells
+            in_z = idx[zones == z]
+            tz = self.type_id[in_z]
+            for k in np.unique(tz):
+                beta_k = cfg.driver_types[k][3]
+                logits = beta_k * attract
+                logits -= logits.max()
+                p = np.exp(logits); p /= p.sum()
+                members = in_z[tz == k]
+                pick = self.rng.choice(len(reach), size=len(members), p=p)
+                choices = reach[pick]
+                self.loc[members] = choices
+                self.cost_total[members] += cfg.drive_cost_per_cell * geo.dist[z, choices]
 
     # ---- matching credits a trip to a driver ----
     def assign_trip(self, i: int, t: int, pickup_time: int, trip_time: int,
@@ -152,6 +151,17 @@ class DriverPool:
         self.belief_rate[mask] = (1 - lr) * self.belief_rate[mask] + lr * realized[mask]
         # gentle decay of belief toward 0 in zones with no observation (forgetting)
         self.belief_rate[~mask] *= (1 - 0.05)
+
+    def type_net_per_capita(self):
+        """Running per-capita net surplus by type (for the fairness reward). Returns (n_types,)."""
+        n_types = len(self.type_names)
+        out = np.zeros(n_types)
+        net = self.earn_total - self.cost_total - self.rho * self.online_epochs
+        for k in range(n_types):
+            m = self.type_id == k
+            nk = int(m.sum())
+            out[k] = net[m].sum() / max(1, nk)
+        return out
 
     # ---- surplus accounting ----
     def driver_surplus(self):

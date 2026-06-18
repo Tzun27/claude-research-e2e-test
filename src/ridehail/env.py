@@ -25,13 +25,21 @@ from .matching import batch_match, expected_pickup_per_zone
 class RideHailEnv:
     def __init__(self, cfg: SimConfig, objective: str = "welfare",
                  alpha_pi: float = 0.4, alpha_R: float = 1.0, alpha_D: float = 0.3,
-                 reward_scale: float = 0.01):
+                 reward_scale: float = 0.01, fix_dispatch_radius: int | None = None,
+                 fair_weight: float = 0.0):
         self.cfg = cfg
         self.geo = Geometry(cfg)
         self.Z = self.geo.Z
         self.objective = objective
         self.alpha_pi, self.alpha_R, self.alpha_D = alpha_pi, alpha_R, alpha_D
         self.reward_scale = reward_scale
+        # If set, the dispatch (matching) lever is held FIXED at this radius and the
+        # controller only learns pricing (+rebalancing if enabled). Used to isolate the
+        # welfare incidence of price flexibility (Castillo's exact comparison).
+        self.fix_dispatch_radius = fix_dispatch_radius
+        # Fairness penalty weight (RQ4): penalizes across-type driver-earnings dispersion
+        # (max-min, JDRCL-style). 0 => fairness-agnostic.
+        self.fair_weight = fair_weight
         self.lam = demand_profile(cfg)               # (T, Z)
         self.od = od_destination_weights(cfg)         # (T, Z, Z)
         self._fare1 = cfg.fare_base + cfg.fare_per_cell * self.geo.dist.astype(float)  # (Z,Z) fare@mult1
@@ -80,8 +88,11 @@ class RideHailEnv:
         a_reb = raw[self.Z + 1:]
         sig = lambda x: 1.0 / (1.0 + np.exp(-x))
         surge = cfg.surge_min + (cfg.surge_max - cfg.surge_min) * sig(a_surge)
-        dr = cfg.dispatch_radius_min + (cfg.dispatch_radius_max - cfg.dispatch_radius_min) * sig(a_disp)
-        dispatch_radius = int(np.clip(round(dr), cfg.dispatch_radius_min, cfg.dispatch_radius_max))
+        if self.fix_dispatch_radius is not None:
+            dispatch_radius = int(self.fix_dispatch_radius)
+        else:
+            dr = cfg.dispatch_radius_min + (cfg.dispatch_radius_max - cfg.dispatch_radius_min) * sig(a_disp)
+            dispatch_radius = int(np.clip(round(dr), cfg.dispatch_radius_min, cfg.dispatch_radius_max))
         rebalance = sig(a_reb) * (0.5 * np.mean(self.drivers.rho))  # bonus scaled to earnings units
         return surge, dispatch_radius, rebalance
 
@@ -121,6 +132,7 @@ class RideHailEnv:
             origins.append(np.full(k, z)); dests.append(dz)
             f1 = self._fare1[z, dz]                       # fare at multiplier 1
             m = np.exp(self.rng.normal(cfg.wtp_log_mu, cfg.wtp_log_sigma, size=k))  # WTP/fare ratio
+            m = np.minimum(m, cfg.wtp_ratio_cap)          # truncate fat tail
             v = f1 * m
             vals.append(v); fares1.append(f1)
         if origins:
@@ -197,9 +209,13 @@ class RideHailEnv:
         # 7) reward for the configured objective (per-epoch)
         ep_opp = float((drv.rho * drv.online.astype(float)).sum())  # opportunity cost this epoch
         ep_driver_net = ep_driver_earn - ep_drive_cost - ep_opp     # driver surplus increment
+        # fairness: running across-type dispersion of per-capita net surplus (max-min)
+        tpc = drv.type_net_per_capita()
+        fair_disp = float(tpc.max() - tpc.min())
         reward_components = dict(profit=ep_profit, throughput=float(len(matches)),
                                  rider=ep_rider, driver_earn=ep_driver_earn,
-                                 driver_net=ep_driver_net, opp=ep_opp, drive_cost=ep_drive_cost)
+                                 driver_net=ep_driver_net, opp=ep_opp, drive_cost=ep_drive_cost,
+                                 fair_disp=fair_disp)
         reward = self._reward(reward_components)
 
         self.t += 1
@@ -216,18 +232,22 @@ class RideHailEnv:
     def _reward(self, c):
         s = self.reward_scale
         if self.objective == "profit":
-            return s * c['profit']
-        if self.objective == "throughput":
-            return s * c['throughput']
-        if self.objective == "welfare":
+            base = s * c['profit']
+        elif self.objective == "throughput":
+            base = s * c['throughput']
+        elif self.objective == "welfare":
             # true marginal welfare = rider surplus + platform profit + driver net
             #  = (v - vow*wait) - drive_cost - opp_cost  (transfers cancel)
-            return s * (c['rider'] + c['profit'] + c['driver_net'])
-        if self.objective == "welfare_weighted":
+            base = s * (c['rider'] + c['profit'] + c['driver_net'])
+        elif self.objective == "welfare_weighted":
             # Castillo-style platform: alpha_pi*profit + alpha_R*RS + alpha_D*DS
-            return s * (self.alpha_pi * c['profit'] + self.alpha_R * c['rider']
+            base = s * (self.alpha_pi * c['profit'] + self.alpha_R * c['rider']
                         + self.alpha_D * c['driver_net'])
-        raise ValueError(self.objective)
+        else:
+            raise ValueError(self.objective)
+        if self.fair_weight > 0.0:
+            base -= self.fair_weight * c['fair_disp']   # penalize across-type earnings gap
+        return base
 
     def _finalize_welfare(self):
         ds_total, by_type = self.drivers.driver_surplus()

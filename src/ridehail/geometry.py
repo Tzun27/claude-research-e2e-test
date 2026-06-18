@@ -25,6 +25,11 @@ class Geometry:
         diff = np.abs(coords[:, None, :] - coords[None, :, :]).sum(-1)
         self.dist = diff.astype(np.int32)  # (Z, Z)
         self.center = (self.G // 2) * self.G + (self.G // 2)  # CBD zone index
+        # Precompute, for each zone, the zones reachable in one epoch (incl. stay) and
+        # their travel distances (used in the hot repositioning path).
+        r = cfg.move_speed_cells
+        self.reach = [np.where(self.dist[z] <= r)[0] for z in range(self.Z)]
+        self.reach_dist = [self.dist[z, self.reach[z]].astype(float) for z in range(self.Z)]
 
     def travel_time(self, z_from: int, z_to: int) -> int:
         # ceil(distance / speed); speed is cells/epoch.

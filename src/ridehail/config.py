@@ -45,6 +45,9 @@ class SimConfig:
     # point ~0.27 (Castillo 2025: 0.268, inelastic) with high baseline acceptance.
     wtp_log_mu: float = 1.0       # median WTP/fare ratio = exp(1.0) ~ 2.7x
     wtp_log_sigma: float = 1.4
+    wtp_ratio_cap: float = 4.0    # truncate the WTP/fare tail so rider surplus stays a
+                                  # moderate multiple of revenue (keeps the four welfare
+                                  # components comparable in scale, as in Castillo 2025).
     value_of_wait_per_epoch: float = 1.40   # rider disutility per epoch waited ($/epoch).
                                             # C25 value of time ~$2.25/min; riders value time highly.
 
@@ -114,3 +117,7 @@ class PPOConfig:
 
 # Platform objective treatments (the RQ2 core).
 PLATFORM_OBJECTIVES = ("profit", "throughput", "welfare", "welfare_weighted")
+
+# Per-objective reward scales, chosen so episode returns are O(50-100) for stable PPO
+# (the raw objective magnitudes differ by orders of magnitude across objectives).
+REWARD_SCALES = dict(profit=0.005, throughput=0.01, welfare=0.0005, welfare_weighted=0.0005)
