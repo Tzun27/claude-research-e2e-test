@@ -1,0 +1,6 @@
+max relative consistency gap: 3.5e-16
+demand price-elasticity (flooded, pure price response): 0.251
+acceptance rate at mult=1 (flooded): 0.766
+operating point (fleet=400, mult=1): match_rate=0.578, acceptance=0.692, mean_wait=0.89 epochs
+requests vs mult [1.0,1.5,2.5]: [7717, 6783, 5302]
+abandonment-demand corr: 0.962; peak vs trough abandonment: 177 vs 0.0
