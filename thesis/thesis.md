@@ -101,7 +101,7 @@ where $\kappa$ is the rider value of waiting time and $r_\theta$ the driver's ty
 
 $$W = \sum_{\text{served}}(v - \kappa w) \;-\; \sum_{\text{drivers}}\text{drive cost} \;-\; \sum_{\text{drivers}} r_\theta\, \tau_{\text{online}},$$
 
-an identity the simulator verifies to machine precision (Section 5.1). Following Castillo we report welfare components as percentages of **gross revenue** $\sum_{\text{served}} p$.
+an identity the simulator verifies to machine precision (Section 5.0). Following Castillo we report welfare components as percentages of **gross revenue** $\sum_{\text{served}} p$.
 
 ### 3.3 The four platform objectives
 
@@ -109,7 +109,7 @@ The controller is trained to maximize one of four per-episode objectives, which 
 - **Profit:** $\sum \gamma p$ (platform commission).
 - **Throughput:** number of completed trips (a proxy for the order-response / completion-rate objectives that deployed systems optimize).
 - **Welfare:** total welfare $W$ (a social planner).
-- **Welfare-weighted:** $\alpha_\pi\,\text{PP} + \alpha_R\,\text{RS} + \alpha_D\,\text{DS}$, the analog of Castillo's platform, which maximizes profit plus weighted rider and driver surplus ($\alpha_R=1$, with $\alpha_\pi+\alpha_D<0.7$).
+- **Welfare-weighted:** $\alpha_\pi\,\text{PP} + \alpha_R\,\text{RS} + \alpha_D\,\text{DS}$, the analog of Castillo's platform, which maximizes profit plus weighted rider and driver surplus. We use $\alpha_\pi=0.4,\ \alpha_R=1,\ \alpha_D=0.3$ — heavily rider-weighted, with $\alpha_\pi+\alpha_D$ at the upper end of Castillo's identified range ($<0.7$).
 
 ### 3.4 The uniform-pricing counterfactual
 
