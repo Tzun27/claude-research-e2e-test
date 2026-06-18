@@ -182,11 +182,16 @@ The **price-level channel** — moving the average price from the platform's opt
 
 ### 5.2 RQ2 — Objective-dependence of the welfare incidence (central result)
 
-This is the load-bearing result. Table `rq2_incidence_by_objective.md` reports the welfare *shares* each objective's learned surge controller delivers (as % of its own gross revenue):
+This is the load-bearing result. Table `rq2_incidence_by_objective.md` reports how each objective's learned surge controller *splits* welfare among the parties (share of total welfare), with total welfare indexed to the most-efficient objective:
 
-[TABLE: rq2 — per objective: surge avg multiplier; rider %GR; driver %GR; platform %GR; total %GR.]
+| objective | surge avg mult | rider %W | driver %W | platform %W | total welfare (idx) |
+|---|---|---|---|---|---|
+| profit | 3.43 | 11 | 62 | 26 | 100 |
+| throughput | 1.04 | 77 | 14 | 10 | 100 |
+| welfare | [Wm] | [WrW] | [WdW] | [WpW] | [WidxW] |
+| welfare-weighted | [WWm] | [WWr] | [WWd] | [WWp] | [WWidx] |
 
-The same surge *mechanism*, optimized for different objectives, produces opposite incidence. A **profit** controller prices near the willingness-to-pay ceiling (mean multiplier $\approx 3.4$) and compresses rider surplus to [PR]% of gross revenue, capturing the rest as driver and platform surplus — it *distorts* the Castillo structure toward extraction. A **welfare-weighted** controller (Castillo's analog) prices near base (mean multiplier $\approx$ [WWm]) and delivers rider surplus of [WWR]% — reproducing the rider-favoring incidence. **Throughput** and **welfare** sit between [INTERP]. The cross-objective spread in rider share — from [PR]% (profit) to [WWR]% (welfare-weighted) — is the quantitative statement that *the incidence is a property of the objective, not of surge.* A platform optimizing a throughput/GMV metric, as deployed systems do, lands at [INTERP] — a distributional outcome its own metric cannot reveal.
+The same surge *mechanism*, optimized for different objectives, produces opposite incidence on the same market. A **profit** controller prices near the willingness-to-pay ceiling (mean multiplier $3.43$) and compresses riders to just **11%** of total welfare, capturing the rest as driver (62%) and platform (26%) surplus — it *distorts* the Castillo structure into extraction. A **throughput** controller prices near base ($1.04$) and flips the split, delivering **77%** of welfare to riders. Strikingly, the two achieve essentially the *same* total welfare (indices within rounding): the objective is almost **purely distributional** — it barely changes the size of the pie but radically changes who eats it. The welfare-weighted (Castillo-analog) and welfare (planner) controllers land between these poles [INTERP after their cells]. The cross-objective swing in the rider's welfare share — **from 11% to 77%** — is the quantitative statement of the thesis: *the incidence is a property of the objective, not of surge.* A platform optimizing a throughput/GMV-style metric, as deployed systems do, sits near the rider-favoring pole; one optimizing profit sits at the extractive pole — and neither metric, on its own, reveals the distribution it implies.
 
 ### 5.3 RQ3 — Heterogeneous incidence across driver types
 

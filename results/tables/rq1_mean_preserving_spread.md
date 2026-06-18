@@ -7,3 +7,4 @@ efficiency + matching), controlling for the price level. Castillo signs: +,+,-,-
 | objective | surge avg mult | dW | d rider | d driver | d platform | signs |
 |---|---|---|---|---|---|---|
 | profit | 3.43 | +1.44±0.32 | -0.57 | +1.53 | +0.48 | total:OK rider:x driver:x platform:x |
+| throughput | 1.04 | +1.37±0.82 | +0.73 | +0.39 | +0.25 | total:OK rider:OK driver:x platform:x |
