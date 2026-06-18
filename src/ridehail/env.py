@@ -122,7 +122,11 @@ class RideHailEnv:
         # 3) generate potential riders and their request decisions
         lam_t = self.lam[t]
         n_pot = self.rng.poisson(lam_t)                 # (Z,)
-        exp_pickup = expected_pickup_per_zone(geo, supply, cfg.abandon_radius)
+        # congestion (matching-function) delay per zone: rises with local demand/supply ratio.
+        congestion = n_pot / (supply + 1.0)
+        cong_delay = np.minimum(cfg.congestion_wait_cap,
+                                cfg.congestion_wait_coef * np.maximum(0.0, congestion - 1.0))
+        exp_pickup = expected_pickup_per_zone(geo, supply, cfg.abandon_radius) + cong_delay
         origins, dests, vals, fares1 = [], [], [], []
         for z in range(self.Z):
             k = int(n_pot[z])
@@ -161,13 +165,14 @@ class RideHailEnv:
         for (ridx, did, pud) in matches:
             o = r_origin[ridx]; d = r_dest[ridx]
             trip_d = int(geo.dist[o, d]); pickup_d = int(pud)
+            extra = int(round(cong_delay[o]))            # congestion delay (WGC): ties up driver too
             p = float(r_price[ridx]); v = float(r_val[ridx])
             driver_pay = (1 - cfg.commission) * p
-            drive_dist = pickup_d + trip_d
-            dur = max(1, pickup_d + trip_d)
-            drv.assign_trip(did, t, pickup_d, trip_d, d, driver_pay, drive_dist)
-            # welfare pieces
-            wait = pickup_d
+            drive_dist = pickup_d + trip_d               # fuel is on physical distance only
+            dur = max(1, pickup_d + extra + trip_d)
+            drv.assign_trip(did, t, pickup_d + extra, trip_d, d, driver_pay, drive_dist)
+            # welfare pieces: rider waits pickup + congestion delay
+            wait = pickup_d + extra
             ep_rider += v - p - cfg.value_of_wait_per_epoch * wait
             ep_profit += cfg.commission * p
             ep_driver_earn += driver_pay
@@ -260,9 +265,10 @@ class RideHailEnv:
 
     def welfare_summary(self):
         W = self.W
-        # consistency check: W == sum(v - vow*pickup) - drive_cost - opp_cost
+        # consistency check: W == sum(v - vow*wait) - drive_cost - opp_cost
+        # (wait = pickup + congestion delay; the full rider time cost)
         vow = self.cfg.value_of_wait_per_epoch
-        w_resource = (W['total_value'] - vow * W['total_pickup']
+        w_resource = (W['total_value'] - vow * W['total_wait']
                       - W['total_drive_cost'] - W['total_opp_cost'])
         out = dict(W)
         out['W_resource_check'] = float(w_resource)

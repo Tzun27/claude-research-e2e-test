@@ -59,10 +59,19 @@ class SimConfig:
 
     # ----- Surge / control bounds -----
     surge_min: float = 0.8        # Z23 multiplier action set lower bound.
-    surge_max: float = 3.0        # allow genuine surge (C25 multipliers can exceed 2-3 at peaks).
+    surge_max: float = 4.0        # = WTP ratio cap; beyond this demand vanishes, so profit-max
+                                  # finds an interior optimum rather than binding on the cap.
     dispatch_radius_min: int = 1  # matching lever: min max-pickup radius (cells).
     dispatch_radius_max: int = 4  # max max-pickup radius. C25 abandons beyond ~10km (~a few cells).
     abandon_radius: int = 5       # hard cap: no driver within this radius -> rider abandons.
+    # Congestion (matching-function) friction: when local demand exceeds available supply,
+    # effective pickup time lengthens for everyone (riders wait longer; drivers are tied up
+    # longer -> wild-goose chase). This is the reduced form of Castillo's pickup-time
+    # distribution G(.) depending on driver availability; it makes low prices costly.
+    congestion_wait_coef: float = 0.8   # calibrated: welfare-weighted (Castillo-platform)
+                                        # optimal uniform multiplier ~1.2 (Castillo: 1.17),
+                                        # with a clean spread of optima across objectives.
+    congestion_wait_cap: float = 5.0
 
     # ----- Supply: heterogeneous drivers -----
     n_drivers: int = 400          # fleet pool size (online subset varies via entry/exit).

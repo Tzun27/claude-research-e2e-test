@@ -190,6 +190,10 @@ All controllers are trained with ARS (two independent training seeds each) and e
 
 ## Chapter 7 — Conclusion and future work
 
+> *[Summary of findings against RQ1–RQ4. Headline: the welfare incidence of learned surge is a property of the controller's objective, not of surge pricing per se; this reframes the deployed-systems practice of optimizing platform-centric metrics as an implicit distributional choice. Future work: richer pickup-time (intensive-margin) frictions; multi-platform competition; co-learning strategic drivers; transfer of the welfare-decomposition evaluation to a real-data simulator; LLM-as-reward-designer for the welfare-weighted objective. TODO finalize after results.]*
+
+This thesis took the question "who benefits from surge pricing?" — answered for a fixed proprietary algorithm by structural econometrics — and asked it of *learned* controllers, the kind increasingly deployed in practice. The contribution is not a new control algorithm but a new *evaluation*: measuring the four-way welfare incidence of a learned three-way controller against a published structural target, on a calibrated proxy market with a heterogeneous, strategically-responding driver population. *[Final sentence(s) summarizing the empirical answer once results are in.]*
+
 ---
 
 ## References

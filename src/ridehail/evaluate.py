@@ -6,7 +6,7 @@ import numpy as np
 
 WELFARE_KEYS = ["total_welfare", "rider_surplus", "driver_surplus", "platform_profit",
                 "gross_revenue", "n_requests", "n_matched", "n_abandon",
-                "total_pickup", "total_drive_cost", "total_opp_cost", "surge_trips"]
+                "total_pickup", "total_wait", "total_drive_cost", "total_opp_cost", "surge_trips"]
 
 
 def fair_dispersion(s):

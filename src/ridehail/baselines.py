@@ -16,7 +16,7 @@ def uniform_search(make_env, objective, seeds, mult_grid=None,
                    alpha_pi=0.4, alpha_R=1.0, alpha_D=0.3, dispatch_radius=2):
     """Grid-search the best constant multiplier for the objective. Returns (best_mult, info)."""
     if mult_grid is None:
-        mult_grid = np.round(np.arange(0.8, 3.01, 0.1), 2)
+        mult_grid = np.round(np.arange(0.8, 4.01, 0.1), 2)
     best = None
     table = []
     for m in mult_grid:

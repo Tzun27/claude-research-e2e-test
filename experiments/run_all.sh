@@ -1,7 +1,7 @@
 #!/bin/bash
 # Full experiment matrix. ARS parallelizes internally (4 workers), so cells run sequentially.
 # Override ITERS / SEEDS / EVAL via environment. Results -> results/data/*.json.
-set -e
+# No `set -e`: cells are independent, so one failure should not abort the batch.
 cd "$(dirname "$0")/.."
 export PYTHONPATH=src
 DATA=results/data
