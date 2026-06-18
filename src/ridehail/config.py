@@ -40,10 +40,11 @@ class SimConfig:
     peak_width: float = 0.09      # std of each Gaussian peak (fraction of T).
     cbd_pull: float = 0.65        # fraction of peak demand directed toward/away from CBD (OD imbalance).
 
-    # Rider willingness-to-pay: v ~ LogNormal(mu, sigma). Calibrated so short-run
-    # price elasticity at the operating point ~0.2-0.4 (C25: 0.268, inelastic).
-    wtp_log_mu: float = 2.85      # ~ exp(2.85)=$17.3 median WTP vs ~$7-9 typical fare.
-    wtp_log_sigma: float = 0.45
+    # Rider willingness-to-pay: v = fare_at_mult1 * m, with m ~ LogNormal(mu, sigma) the
+    # WTP-to-base-fare ratio. Calibrated so the short-run price elasticity at the operating
+    # point ~0.27 (Castillo 2025: 0.268, inelastic) with high baseline acceptance.
+    wtp_log_mu: float = 1.0       # median WTP/fare ratio = exp(1.0) ~ 2.7x
+    wtp_log_sigma: float = 1.4
     value_of_wait_per_epoch: float = 1.40   # rider disutility per epoch waited ($/epoch).
                                             # C25 value of time ~$2.25/min; riders value time highly.
 
@@ -61,7 +62,7 @@ class SimConfig:
     abandon_radius: int = 5       # hard cap: no driver within this radius -> rider abandons.
 
     # ----- Supply: heterogeneous drivers -----
-    n_drivers: int = 300          # fleet pool size (online subset varies via entry/exit).
+    n_drivers: int = 400          # fleet pool size (online subset varies via entry/exit).
                                   # Z23 sweeps 1000-2000 on Manhattan; scaled to 25-zone grid.
     # Driver types: (name, share, reservation_wage_per_epoch, reposition_beta, share_of_pool)
     # reservation_wage = opportunity cost per epoch ONLINE ($). Low => full-time/long-hours.
