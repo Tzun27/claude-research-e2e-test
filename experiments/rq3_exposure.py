@@ -10,11 +10,27 @@ off-peak). This is a price-level reduction concentrated off-peak. We then decomp
 driver surplus change by type. Prediction: full-time drivers (online through the off-peak
 periods whose price falls) bear the largest per-capita loss; peak-concentrated casual
 drivers are insulated -- the timing/exposure channel, not elasticity.
+
+This script also (a) reports the proper paired t-test (not just a mean/s.e.m. ratio),
+(b) reports ALL THREE pairwise type contrasts so the reader sees the monotone trend rather
+than a single hand-picked contrast, and (c) DECOMPOSES the by-type Delta-DS into its
+earnings / opportunity-cost / drive-cost parts, to check whether the by-type ordering is an
+economic (earnings) effect or a mechanical artifact of charging the reservation wage on
+online time (a reviewer's concern: full-time drivers have the most online epochs).
 """
 import sys, os, json
 import numpy as np
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "src"))
 from ridehail import SimConfig, RideHailEnv
+
+try:
+    from scipy.stats import t as student_t
+    def two_sided_p(tstat, df):
+        return float(student_t.sf(abs(tstat), df) * 2)
+except Exception:                                   # graceful fallback (normal approx)
+    from math import erf, sqrt
+    def two_sided_p(tstat, df):
+        return float(2 * (1 - 0.5 * (1 + erf(abs(tstat) / sqrt(2)))))
 
 
 def peak_mask(env):
@@ -40,43 +56,76 @@ def run(cfg, mode, m_high, seeds, dispatch=2):
     return out
 
 
-def by_type_percap(summaries):
-    """Return per-type per-capita surplus: {type: [per-seed values]}."""
-    bt = {}
-    for t in summaries[0]["driver_by_type"]:
-        bt[t] = np.array([s["driver_by_type"][t]["surplus"] / max(1, s["driver_by_type"][t]["n_drivers"])
-                          for s in summaries])
+def by_type_components(summaries):
+    """Return {type: {field: per-seed per-capita array}} for surplus and its components."""
+    types = list(summaries[0]["driver_by_type"].keys())
+    fields = ["surplus", "earnings", "drive_cost", "opp_cost", "online_epochs"]
+    bt = {t: {} for t in types}
+    for t in types:
+        for f in fields:
+            bt[t][f] = np.array([s["driver_by_type"][t][f] / max(1, s["driver_by_type"][t]["n_drivers"])
+                                 for s in summaries])
     return bt
+
+
+def paired(delta):
+    """mean, s.e.m., t-stat, two-sided p (paired t-test) for a per-seed delta array."""
+    n = len(delta); m = float(delta.mean()); se = float(delta.std(ddof=1) / np.sqrt(n))
+    tstat = m / se if se > 0 else 0.0
+    return dict(mean=m, sem=se, t=tstat, df=n - 1, p=two_sided_p(tstat, n - 1))
 
 
 def main():
     cfg = SimConfig(rebalance_enabled=False)
-    seeds = range(100, 116)
+    seeds = list(range(100, 116))
     m_high = 2.0
-    seeds = list(seeds)
+    n = len(seeds)
     uni = run(cfg, "uniform", m_high, seeds)
     sur = run(cfg, "surge", m_high, seeds)
-    bu, bs = by_type_percap(uni), by_type_percap(sur)   # {type: per-seed array}
-    n = len(seeds)
+    bu, bs = by_type_components(uni), by_type_components(sur)
+    types = list(bu.keys())
+
     gr = np.mean([u["gross_revenue"] for u in uni])
     avg_mult = float(np.mean([s["mult_weighted"] / max(1, s["n_matched"]) for s in sur]))
     rider_pct = float(np.mean([(s["rider_surplus"] - u["rider_surplus"]) / u["gross_revenue"] * 100
                                for u, s in zip(uni, sur)]))
     print(f"RQ3 targeted: uniform m={m_high} vs peak-targeting surge (base off-peak); seeds={n}")
     print(f"surge avg mult (trip-weighted) = {avg_mult:.2f} (< {m_high}); rider Δ = {rider_pct:+.2f}% of GR")
-    print(f"{'type':10s} {'Δ $/drv':>9s} {'sem':>6s} {'Δ %':>7s}")
+
+    # ---- per-type Δ surplus (the headline), with paired test ----
+    print(f"\n{'type':10s} {'Δ surplus':>10s} {'sem':>6s} {'p(t)':>7s}   "
+          f"[decomp: {'Δearn':>7s} {'Δoppcost':>8s} {'Δdrivecost':>10s} {'Δonline_ep':>10s}]")
     res = {"avg_mult": avg_mult, "rider_pct_GR": rider_pct, "n_seeds": n, "by_type": {}}
-    for t in bu:
-        d = bs[t] - bu[t]                       # per-seed paired delta
-        mean_d = float(d.mean()); sem_d = float(d.std(ddof=1) / np.sqrt(n))
-        res["by_type"][t] = dict(uniform=float(bu[t].mean()), surge=float(bs[t].mean()),
-                                 delta=mean_d, delta_sem=sem_d, pct=100 * mean_d / float(bu[t].mean()))
-        print(f"{t:10s} {mean_d:9.2f} {sem_d:6.2f} {100*mean_d/float(bu[t].mean()):6.1f}%")
-    # pairwise significance of the full-time vs casual ordering
-    fc = (bs["fulltime"] - bu["fulltime"]) - (bs["casual"] - bu["casual"])
-    print(f"full-time vs casual loss difference: {fc.mean():.2f} +/- {fc.std(ddof=1)/np.sqrt(n):.2f} "
-          f"(={fc.mean()/(fc.std(ddof=1)/np.sqrt(n)):.2f} s.e.m.)")
-    res["fulltime_minus_casual"] = dict(mean=float(fc.mean()), sem=float(fc.std(ddof=1) / np.sqrt(n)))
+    dS = {}
+    for t in types:
+        d_surp = bs[t]["surplus"] - bu[t]["surplus"]
+        d_earn = bs[t]["earnings"] - bu[t]["earnings"]
+        d_opp = bs[t]["opp_cost"] - bu[t]["opp_cost"]
+        d_dc = bs[t]["drive_cost"] - bu[t]["drive_cost"]
+        d_on = bs[t]["online_epochs"] - bu[t]["online_epochs"]
+        dS[t] = d_surp
+        st = paired(d_surp)
+        res["by_type"][t] = dict(uniform=float(bu[t]["surplus"].mean()), surge=float(bs[t]["surplus"].mean()),
+                                 delta=st["mean"], delta_sem=st["sem"], p=st["p"],
+                                 pct=100 * st["mean"] / float(bu[t]["surplus"].mean()),
+                                 d_earnings=float(d_earn.mean()), d_opp_cost=float(d_opp.mean()),
+                                 d_drive_cost=float(d_dc.mean()), d_online_epochs=float(d_on.mean()))
+        print(f"{t:10s} {st['mean']:10.2f} {st['sem']:6.2f} {st['p']:7.3f}   "
+              f"[{d_earn.mean():7.2f} {d_opp.mean():8.2f} {d_dc.mean():10.2f} {d_on.mean():10.2f}]")
+
+    # ---- ALL THREE pairwise contrasts (so the trend, not one hand-picked gap, is visible) ----
+    print("\npairwise differential losses (paired t-test):")
+    res["contrasts"] = {}
+    order = ["fulltime", "parttime", "casual"]
+    pairs = [("fulltime", "parttime"), ("parttime", "casual"), ("fulltime", "casual")]
+    for a, b in pairs:
+        c = paired(dS[a] - dS[b])
+        res["contrasts"][f"{a}_minus_{b}"] = c
+        print(f"  {a:9s} - {b:9s}: {c['mean']:+.2f} ± {c['sem']:.2f}  t({c['df']})={c['t']:.2f}  p={c['p']:.3f}")
+    monotone = all(dS[order[i]].mean() <= dS[order[i + 1]].mean() for i in range(len(order) - 1))
+    res["monotone_ft_to_casual_loss"] = bool(monotone)
+    print(f"  monotone (full-time loses >= part-time >= casual)? {monotone}")
+
     os.makedirs(os.path.join(os.path.dirname(__file__), "..", "results", "data"), exist_ok=True)
     with open(os.path.join(os.path.dirname(__file__), "..", "results", "data", "rq3_exposure.json"), "w") as f:
         json.dump(res, f, indent=2)

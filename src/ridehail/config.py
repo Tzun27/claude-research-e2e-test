@@ -68,9 +68,14 @@ class SimConfig:
     # effective pickup time lengthens for everyone (riders wait longer; drivers are tied up
     # longer -> wild-goose chase). This is the reduced form of Castillo's pickup-time
     # distribution G(.) depending on driver availability; it makes low prices costly.
-    congestion_wait_coef: float = 0.8   # calibrated: welfare-weighted (Castillo-platform)
-                                        # optimal uniform multiplier ~1.2 (Castillo: 1.17),
-                                        # with a clean spread of optima across objectives.
+    congestion_wait_coef: float = 0.8   # gives the matching technology a genuine wild-goose
+                                        # chase so low prices are costly (long waits, drivers
+                                        # tied up) -- the qualitative mechanism Castillo invokes.
+                                        # NOT tuned to Castillo's price level: the resulting
+                                        # welfare-weighted optimum lands near the base fare
+                                        # (~0.9), below his 1.17. We own this divergence rather
+                                        # than engineer it away; RQ1 is therefore routed through
+                                        # the calibration-robust price-variation channel (§3.4).
     congestion_wait_cap: float = 5.0
 
     # ----- Supply: heterogeneous drivers -----
