@@ -89,10 +89,10 @@ def main():
         sums = run_policy_seeds(mk, policy, eval_seeds)
         surge_per_seed.append(sums)
         thetas.append(state["theta"].tolist())
-    result["surge_thetas"] = thetas
-    result["Z"] = base_cfg.n_zones()
         print(f"[{args.objective}/{args.condition}] trained seed {ts}  "
               f"obj={objective_value(mean_summary(sums), args.objective):.1f}  ({time.time()-t0:.0f}s)", flush=True)
+    result["surge_thetas"] = thetas
+    result["Z"] = base_cfg.n_zones()
 
     # pool eval summaries across train seeds for the aggregate
     pooled = [s for seed_sums in surge_per_seed for s in seed_sums]
