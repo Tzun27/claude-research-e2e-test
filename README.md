@@ -1,6 +1,6 @@
 # Who Benefits from *Learned* Surge Pricing?
 
-Master's thesis project: **the welfare incidence of deep-RL ride-hailing control under driver heterogeneity.**
+Master's thesis project: **the welfare incidence of learned ride-hailing control under driver heterogeneity.**
 
 This repository began as a curated deep-research corpus on machine learning for ride-hailing (matching, pricing, rebalancing). From the corpus's gap analysis it develops one gap into a thesis: testing whether a *learned* controller that sets prices/matching/rebalancing reproduces the four-way welfare-incidence structure that Castillo (2025, *Econometrica*) measured for surge pricing — total welfare ↑, rider surplus ↑, driver surplus ↓, platform profit ↓ — and whether that incidence depends on the controller's objective.
 
