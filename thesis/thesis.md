@@ -194,7 +194,15 @@ Four checks establish that the simulator behaves as an economic market and that 
 
 ## Chapter 6 — Discussion
 
-> *[§6.1 Interpretation — incidence is a property of the objective; the deployed-systems blind spot; the variation-vs-level decomposition of Castillo's effect. §6.2 Alignment and divergences from Castillo. TODO after results.]*
+### 6.1 Interpretation: incidence is a property of the objective
+
+The organizing finding is that *who benefits from surge is determined by what the controller is told to maximize, not by surge pricing itself.* The same learned surge *mechanism* — raise the multiplier where and when demand outruns supply — produces a rider-favoring redistribution under a welfare- or rider-weighted objective and a platform-favoring extraction under a profit objective. This is best seen through a decomposition of surge's effect into two channels: a **price-variation effect** (surge versus a flat price at the same average), which improves total welfare and helps riders most through allocative efficiency, and is essentially objective-independent; and a **price-level effect** (the gap between the platform-optimal flat price and the surge average), whose sign and size are set entirely by the objective. Castillo's headline incidence — riders up, drivers and platform down — is the sum of a small positive variation effect and a downward level shift that arises *because his platform prices above the surge average*. A profit-maximizing controller prices at the willingness-to-pay ceiling, so its level effect runs the other way.
+
+This has a direct implication for practice. Deployed ride-hailing RL is evaluated on platform-centric metrics — gross merchandise value, completion rate, driver income. Our results show that a controller maximizing such a metric can post excellent numbers on it while moving welfare between riders, drivers, and the platform in a direction the metric cannot see. The distributional consequence of the objective is real, large [*FILL: magnitude*], and currently unmeasured in the deployment literature. Choosing the objective is therefore an implicit distributional policy choice, and our four-way decomposition makes it explicit.
+
+### 6.2 Alignment with and divergence from Castillo
+
+[*FILL after results: where the learned controller's incidence aligns with Castillo's signs/proportions and where it diverges.*] Two points hold independent of the exact numbers. First, the *mechanism* by which the variation effect helps riders — surge screens scarce capacity toward higher-value riders and curbs the peak crunch — is the same allocative-efficiency channel Castillo identifies, and drivers do not share in it for the same reason (meter-based pay). Second, our market generates the supply–demand imbalance primarily on the extensive margin (peak abandonment) plus a reduced-form congestion delay, whereas Castillo's stated main channel is intensive-margin pickup time; the alignment we claim is at the level of welfare *incidence*, not the micro-mechanics of matching (see §6.3).
 
 ### 6.3 Threats to validity
 
