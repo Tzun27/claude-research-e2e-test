@@ -1,9 +1,6 @@
-proposal_refinement/
-repo/
-.claude/
-
-# extracted PDF text (not for commit)
-_pdf_text/
 __pycache__/
 *.pyc
-thesis/**/__pycache__/
+.ipynb_checkpoints/
+*.egg-info/
+.pytest_cache/
+results/data/*.pkl
