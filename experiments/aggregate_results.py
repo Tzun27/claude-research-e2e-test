@@ -135,19 +135,24 @@ def fig_welfare_incidence(cells, fname):
 
 
 def table_rq2_levels(cells, fname):
-    """RQ2 (central): welfare SHARES achieved by each objective's learned surge policy,
-    as % of that policy's gross revenue. Shows the objective determines the incidence."""
+    """RQ2 (central): how each objective's learned surge SPLITS welfare among the parties.
+
+    Reports the DISTRIBUTION (rider/driver/platform as % of total welfare) -- comparable
+    across objectives, unlike % of gross revenue (whose denominator moves with the price
+    level) -- plus the absolute total welfare (normalized to the max across objectives) so
+    efficiency is visible too."""
+    Wmax = max(res["surge_agg"]["total_welfare"]["mean"] for res in cells.values())
     lines = ["# RQ2: welfare incidence by platform objective (learned surge)", "",
-             "Each row: the learned surge controller for that objective. Surplus shares are",
-             "% of the controller's own gross revenue (mean over seeds). The objective, not",
-             "surge, determines who benefits.", "",
-             "| objective | surge avg mult | rider %GR | driver %GR | platform %GR | total %GR |",
+             "Shares are % of TOTAL WELFARE (the distribution among parties); total welfare is",
+             "indexed to the max-welfare objective (=100). The same surge mechanism splits",
+             "welfare very differently depending on the objective.", "",
+             "| objective | surge avg mult | rider %W | driver %W | platform %W | total welfare (idx) |",
              "|" + "---|" * 6]
     for name, res in cells.items():
-        s = res["surge_agg"]; GR = s["gross_revenue"]["mean"]
+        s = res["surge_agg"]; W = s["total_welfare"]["mean"]
         lines.append(f"| {res['objective']} | {res.get('surge_mean_mult',0):.2f} | "
-                     f"{100*s['rider_surplus']['mean']/GR:.0f} | {100*s['driver_surplus']['mean']/GR:.0f} | "
-                     f"{100*s['platform_profit']['mean']/GR:.0f} | {100*s['total_welfare']['mean']/GR:.0f} |")
+                     f"{100*s['rider_surplus']['mean']/W:.0f} | {100*s['driver_surplus']['mean']/W:.0f} | "
+                     f"{100*s['platform_profit']['mean']/W:.0f} | {100*W/Wmax:.0f} |")
     txt = "\n".join(lines) + "\n"
     with open(os.path.join(TAB, fname), "w") as f:
         f.write(txt)
