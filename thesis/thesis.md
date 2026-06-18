@@ -194,7 +194,23 @@ Four checks establish that the simulator behaves as an economic market and that 
 
 ## Chapter 6 — Discussion
 
-> *[Interpretation: incidence is a property of the objective, not of surge; the deployed-systems blind spot; alignment and divergences from Castillo and their mechanisms; threats to validity (sim-to-real, single calibration, driver-model assumptions, ARS vs global optimum); what would change the conclusions. TODO.]*
+> *[§6.1 Interpretation — incidence is a property of the objective; the deployed-systems blind spot; the variation-vs-level decomposition of Castillo's effect. §6.2 Alignment and divergences from Castillo. TODO after results.]*
+
+### 6.3 Threats to validity
+
+We are deliberate about what this study does and does not establish.
+
+**Sim-to-real.** All results are on a calibrated proxy, not a real platform. The simulator abstracts a city to a $5\times5$ grid, demand to a bimodal commute, and the driver population to three behavioral types. The *direction* and *mechanism* of the findings are the contribution; the *magnitudes* should not be read as predictions for any real market. We never claim to replicate Castillo's Houston numbers — the underlying data are proprietary — only to test whether learned control reproduces the *structure* he documents.
+
+**The designed-in signs.** For the welfare-weighted (Castillo-analog) objective, the broad sign pattern (rider-favoring) is partly a consequence of the objective's weights, which place weight 1.0 on rider surplus. This is faithful to Castillo, who likewise backs out the platform's weights, but it means RQ1's value is not in the signs per se. The genuinely informative results are (i) the *cross-objective contrast* (RQ2) — the same surge mechanism produces opposite incidence under a profit objective — and (ii) the *decomposition* of the effect into a calibration-robust price-variation channel and an objective-dependent price-level channel.
+
+**Single calibration and the channel abstraction.** One free parameter (the congestion-delay coefficient) is tuned so the proxy exhibits the qualitative mechanism that generates Castillo's result (a moderate platform-optimal price, sustained by a wild-goose-chase penalty on low prices). The sensitivity sweep (§5.5) tests whether the qualitative incidence survives across fleet sizes, demand elasticities, and the surge cap; the conclusions should be read as holding *within* the regime where those qualitative features hold. A substantive divergence from Castillo is worth naming plainly: his stated "main driver" is an *intensive-margin* pickup-time chase, whereas in our calibration the supply–demand imbalance manifests largely on the *extensive margin* (peak abandonment) plus a reduced-form congestion delay. Our welfare gains therefore flow partly through a different physical channel than his; the structural *alignment* we test is at the level of incidence signs and proportions, not the micro-mechanics of matching.
+
+**The optimizer and policy class.** The controller is a compact, location-invariant policy optimized by ARS, not a deep network. This is a deliberate, justified choice (PPO failed for a diagnosed reason, §4.5), but it is a weaker function class, so a *failure* to reproduce a structure could in principle reflect controller capacity rather than the market. We mitigate this by verifying that the controller recovers each objective's grid-searched uniform optimum (so it is not an artificially weak baseline) and report this as a capacity check. ARS finds a good policy, not a certified global optimum; reported policies are the best over the training seeds.
+
+**Driver model.** Drivers follow a fixed behavioral rule (earnings-following relocation, reservation-wage participation) rather than co-learning. This matches Castillo's "platform optimizes, drivers respond in equilibrium" structure and keeps the environment stationary, but it omits driver-side strategic learning and any rider-side learning. The heterogeneity that drives RQ3 is a *timing/exposure* construction; we attribute the by-type incidence to it but do not claim it is the only possible mechanism.
+
+**Statistics.** Core cells use three training seeds and sixteen evaluation seeds; confidence intervals are over evaluation seeds. Three training seeds is modest; where we claim an objective "distorts" versus "reproduces," we report the per-train-seed objective values so the reader can see the spread.
 
 ---
 
