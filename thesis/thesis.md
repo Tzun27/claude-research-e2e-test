@@ -176,23 +176,31 @@ Four checks establish that the simulator behaves as an economic market and that 
 
 ### 5.1 RQ1 — Does learned surge reproduce the Castillo incidence structure?
 
-> *[Welfare-incidence table + figure for the welfare-weighted (Castillo-analog) controller; sign and proportion comparison. TODO.]*
+We test the two channels of §3.4 (Table `rq1_mean_preserving_spread.md`, Figure `welfare_incidence_price.png`). The **price-variation channel** — the welfare-weighted controller's learned surge versus a flat price at the *same* average multiplier — yields, as a percentage of gross revenue: total welfare [W1], rider surplus [R1], driver surplus [D1], platform profit [P1]. [INTERP: state whether this matches Castillo's "surge dominates at every average, helping riders most while helping drivers/platform slightly" — the allocative-efficiency structure.] This channel is calibration-robust and does not depend on the platform's objective.
 
-### 5.2 RQ2 — Objective-dependence of the welfare incidence
+The **price-level channel** — moving the average price from the platform's optimum to the surge average — is where Castillo's driver/platform losses live. [INTERP: report, for the welfare-weighted objective, the surge average versus the optimal uniform $m^\*\approx0.9$, and what this implies for the level channel's sign; relate to the proportions Castillo finds (rider gain $\approx 3.6\times$ the driver loss).] The headline test of *proportions* — does the rider gain exceed the driver and platform losses, as in Castillo? — is [INTERP].
 
-> *[The four-objective table/figure: which objectives reproduce vs distort the structure. TODO.]*
+### 5.2 RQ2 — Objective-dependence of the welfare incidence (central result)
+
+This is the load-bearing result. Table `rq2_incidence_by_objective.md` reports the welfare *shares* each objective's learned surge controller delivers (as % of its own gross revenue):
+
+[TABLE: rq2 — per objective: surge avg multiplier; rider %GR; driver %GR; platform %GR; total %GR.]
+
+The same surge *mechanism*, optimized for different objectives, produces opposite incidence. A **profit** controller prices near the willingness-to-pay ceiling (mean multiplier $\approx 3.4$) and compresses rider surplus to [PR]% of gross revenue, capturing the rest as driver and platform surplus — it *distorts* the Castillo structure toward extraction. A **welfare-weighted** controller (Castillo's analog) prices near base (mean multiplier $\approx$ [WWm]) and delivers rider surplus of [WWR]% — reproducing the rider-favoring incidence. **Throughput** and **welfare** sit between [INTERP]. The cross-objective spread in rider share — from [PR]% (profit) to [WWR]% (welfare-weighted) — is the quantitative statement that *the incidence is a property of the objective, not of surge.* A platform optimizing a throughput/GMV metric, as deployed systems do, lands at [INTERP] — a distributional outcome its own metric cannot reveal.
 
 ### 5.3 RQ3 — Heterogeneous incidence across driver types
 
-> *[By-type per-capita surplus change; do full-time/long-hours drivers lose most; the timing/exposure mechanism. TODO.]*
+Table `driver_incidence.md` decomposes the driver-side effect by type (per-capita surplus change, surge − uniform). [INTERP: state whether full-time (low-reservation-wage, long-hours) drivers experience the largest per-capita loss/gain change relative to part-time and casual drivers, and by how much.] The mechanism is timing/exposure: full-time drivers are online across low-surge off-peak periods, so their average earnings track the whole day, while casual drivers concentrate at peaks; [INTERP: relate to whether surge therefore shifts surplus toward peak-concentrated drivers and away from the always-on full-timers, reproducing Castillo's "long-hours drivers hurt most" via the same when-they-work channel rather than an elasticity channel]. A policy-inspection diagnostic (Figure `policy_price_welfare_weighted.png`) confirms the controller learns a genuine peak/off-peak surge spread [INTERP], without which this channel would be inert.
 
 ### 5.4 RQ4 — The efficiency–equity frontier
 
-> *[Fairness-weight sweep: driver-equity vs total welfare; cost of neutralizing the driver loss. TODO.]*
+Imposing a driver-earnings fairness penalty (max-min across types) and sweeping its weight traces an efficiency–equity frontier (Figure `fairness_frontier.png`). [INTERP: as the weight rises, the across-type earnings dispersion falls from [G0] to [G1] while total welfare falls from [W0] to [W1]; the driver-side loss can be neutralized at a welfare cost of [COST]% of gross revenue.] This operationalizes the corpus's "fairness as a constraint" consensus and quantifies its price in this market.
 
 ### 5.5 Three-way control (Gap A0) and scope conditions
 
-> *[Three-way vs price-only incidence; sensitivity across market regimes (fleet size, elasticity): when the structure holds/breaks. TODO.]*
+**Three-way control.** Allowing the controller to set matching (dispatch radius) and rebalancing in addition to price — against a uniform baseline that also optimizes the radius (so the comparison still isolates price flexibility) — gives the incidence in Table `threeway_vs_price.md`. [INTERP: state whether adding the two levers preserves the price-only incidence structure or shifts it, for the welfare-weighted and profit objectives; note that with the costed rebalancing transfer the welfare accounting still closes.]
+
+**Scope conditions.** The sensitivity sweep (Table `sensitivity.md`) re-runs the welfare-weighted price experiment under a tighter fleet (300 drivers) and a more dispersed willingness-to-pay (more elastic demand). [INTERP: state across which regimes the qualitative incidence (sign pattern of the decomposition) is preserved and where it weakens, identifying the boundary of the regime in which the conclusions hold.] Together with the objective sweep, this delimits *when* the Castillo-type structure emerges in a learned market: [INTERP one-sentence boundary statement].
 
 ---
 
