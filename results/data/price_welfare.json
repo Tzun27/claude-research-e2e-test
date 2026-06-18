@@ -1,0 +1,4717 @@
+{
+  "objective": "welfare",
+  "condition": "price",
+  "cfg_over": {},
+  "train_seeds": [
+    0,
+    1,
+    2
+  ],
+  "eval_seeds": [
+    100,
+    101,
+    102,
+    103,
+    104,
+    105,
+    106,
+    107,
+    108,
+    109,
+    110,
+    111,
+    112,
+    113,
+    114,
+    115
+  ],
+  "iters": 50,
+  "fair_weight": 0.0,
+  "fix_dispatch": 2,
+  "uniform_mult": 2.0,
+  "uniform_dispatch": 2,
+  "uniform_summaries": [
+    {
+      "rider_surplus": 45602.36942226195,
+      "driver_surplus": 31368.380000000005,
+      "platform_profit": 15418.800000000003,
+      "gross_revenue": 61675.20000000001,
+      "n_requests": 6039,
+      "n_matched": 4164,
+      "n_abandon": 1875,
+      "total_wait": 4123.0,
+      "total_pickup": 505.0,
+      "total_drive_cost": 5177.700000000001,
+      "total_value": 113049.769422262,
+      "total_opp_cost": 9710.32,
+      "surge_trips": 4164,
+      "fares_sum": 61675.20000000001,
+      "mult_weighted": 8328.0,
+      "driver_by_type": {
+        "fulltime": {
+          "surplus": 11001.779999999999,
+          "earnings": 13512.6,
+          "drive_cost": 1521.0000000000002,
+          "opp_cost": 989.8199999999999,
+          "online_epochs": 5499,
+          "trips": 1238,
+          "n_drivers": 116
+        },
+        "parttime": {
+          "surplus": 15583.300000000003,
+          "earnings": 23364.3,
+          "drive_cost": 2615.4000000000005,
+          "opp_cost": 5165.6,
+          "online_epochs": 9392,
+          "trips": 2103,
+          "n_drivers": 202
+        },
+        "casual": {
+          "surplus": 4783.300000000001,
+          "earnings": 9379.499999999998,
+          "drive_cost": 1041.3000000000002,
+          "opp_cost": 3554.9,
+          "online_epochs": 3742,
+          "trips": 823,
+          "n_drivers": 82
+        }
+      },
+      "total_welfare": 92389.54942226196,
+      "W_resource_check": 92389.549422262,
+      "W_components_sum": 92389.54942226196,
+      "consistency_gap": 4.3655745685100555e-11
+    },
+    {
+      "rider_surplus": 46503.30089956434,
+      "driver_surplus": 32019.93,
+      "platform_profit": 15472.199999999999,
+      "gross_revenue": 61888.799999999996,
+      "n_requests": 6056,
+      "n_matched": 4214,
+      "n_abandon": 1842,
+      "total_wait": 3831.0,
+      "total_pickup": 428.0,
+      "total_drive_cost": 5203.800000000001,
+      "total_value": 113755.5008995643,
+      "total_opp_cost": 9192.87,
+      "surge_trips": 4214,
+      "fares_sum": 61888.799999999996,
+      "mult_weighted": 8428.0,
+      "driver_by_type": {
+        "fulltime": {
+          "surplus": 13368.779999999999,
+          "earnings": 16396.800000000003,
+          "drive_cost": 1842.0000000000002,
+          "opp_cost": 1186.02,
+          "online_epochs": 6589,
+          "trips": 1480,
+          "n_drivers": 139
+        },
+        "parttime": {
+          "surplus": 14212.600000000002,
+          "earnings": 21292.5,
+          "drive_cost": 2389.5000000000005,
+          "opp_cost": 4690.4,
+          "online_epochs": 8528,
+          "trips": 1937,
+          "n_drivers": 184
+        },
+        "casual": {
+          "surplus": 4438.550000000002,
+          "earnings": 8727.3,
+          "drive_cost": 972.2999999999998,
+          "opp_cost": 3316.4499999999994,
+          "online_epochs": 3491,
+          "trips": 797,
+          "n_drivers": 77
+        }
+      },
+      "total_welfare": 93995.43089956434,
+      "W_resource_check": 93995.43089956431,
+      "W_components_sum": 93995.43089956434,
+      "consistency_gap": 2.9103830456733704e-11
+    },
+    {
+      "rider_surplus": 46469.17607795697,
+      "driver_surplus": 32042.490000000005,
+      "platform_profit": 15541.1,
+      "gross_revenue": 62164.4,
+      "n_requests": 6103,
+      "n_matched": 4189,
+      "n_abandon": 1914,
+      "total_wait": 4142.0,
+      "total_pickup": 514.0,
+      "total_drive_cost": 5178.0,
+      "total_value": 114432.37607795697,
+      "total_opp_cost": 9402.810000000001,
+      "surge_trips": 4189,
+      "fares_sum": 62164.4,
+      "mult_weighted": 8378.0,
+      "driver_by_type": {
+        "fulltime": {
+          "surplus": 12785.94,
+          "earnings": 15646.2,
+          "drive_cost": 1734.0000000000002,
+          "opp_cost": 1126.2600000000002,
+          "online_epochs": 6257,
+          "trips": 1398,
+          "n_drivers": 132
+        },
+        "parttime": {
+          "surplus": 14730.55,
+          "earnings": 21969.300000000003,
+          "drive_cost": 2441.1000000000004,
+          "opp_cost": 4797.650000000001,
+          "online_epochs": 8723,
+          "trips": 1985,
+          "n_drivers": 188
+        },
+        "casual": {
+          "surplus": 4526.000000000001,
+          "earnings": 9007.800000000001,
+          "drive_cost": 1002.9000000000001,
+          "opp_cost": 3478.8999999999996,
+          "online_epochs": 3662,
+          "trips": 806,
+          "n_drivers": 80
+        }
+      },
+      "total_welfare": 94052.76607795697,
+      "W_resource_check": 94052.76607795697,
+      "W_components_sum": 94052.76607795697,
+      "consistency_gap": 0.0
+    },
+    {
+      "rider_surplus": 46085.10241190652,
+      "driver_surplus": 31883.090000000004,
+      "platform_profit": 15344.500000000004,
+      "gross_revenue": 61378.000000000015,
+      "n_requests": 5983,
+      "n_matched": 4139,
+      "n_abandon": 1844,
+      "total_wait": 4005.0,
+      "total_pickup": 495.0,
+      "total_drive_cost": 5163.900000000001,
+      "total_value": 113070.10241190653,
+      "total_opp_cost": 8986.510000000002,
+      "surge_trips": 4139,
+      "fares_sum": 61378.000000000015,
+      "mult_weighted": 8278.0,
+      "driver_by_type": {
+        "fulltime": {
+          "surplus": 13774.44,
+          "earnings": 16952.4,
+          "drive_cost": 1923.0000000000002,
+          "opp_cost": 1254.96,
+          "online_epochs": 6972,
+          "trips": 1548,
+          "n_drivers": 147
+        },
+        "parttime": {
+          "surplus": 14094.5,
+          "earnings": 20973.300000000003,
+          "drive_cost": 2319.3,
+          "opp_cost": 4559.5,
+          "online_epochs": 8290,
+          "trips": 1881,
+          "n_drivers": 179
+        },
+        "casual": {
+          "surplus": 4014.1500000000005,
+          "earnings": 8107.8,
+          "drive_cost": 921.6000000000001,
+          "opp_cost": 3172.0499999999997,
+          "online_epochs": 3339,
+          "trips": 710,
+          "n_drivers": 74
+        }
+      },
+      "total_welfare": 93312.69241190652,
+      "W_resource_check": 93312.69241190652,
+      "W_components_sum": 93312.69241190652,
+      "consistency_gap": 0.0
+    },
+    {
+      "rider_surplus": 45207.80335435111,
+      "driver_surplus": 30597.350000000002,
+      "platform_profit": 15004.000000000002,
+      "gross_revenue": 60016.00000000001,
+      "n_requests": 6000,
+      "n_matched": 4024,
+      "n_abandon": 1976,
+      "total_wait": 3974.0,
+      "total_pickup": 422.0,
+      "total_drive_cost": 5078.1,
+      "total_value": 110787.40335435112,
+      "total_opp_cost": 9336.55,
+      "surge_trips": 4024,
+      "fares_sum": 60016.00000000001,
+      "mult_weighted": 8048.0,
+      "driver_by_type": {
+        "fulltime": {
+          "surplus": 12418.5,
+          "earnings": 15254.7,
+          "drive_cost": 1720.2000000000003,
+          "opp_cost": 1116.0,
+          "online_epochs": 6200,
+          "trips": 1335,
+          "n_drivers": 131
+        },
+        "parttime": {
+          "surplus": 13860.1,
+          "earnings": 20987.399999999998,
+          "drive_cost": 2367.6000000000004,
+          "opp_cost": 4759.700000000001,
+          "online_epochs": 8654,
+          "trips": 1906,
+          "n_drivers": 188
+        },
+        "casual": {
+          "surplus": 4318.75,
+          "earnings": 8769.9,
+          "drive_cost": 990.3000000000002,
+          "opp_cost": 3460.8499999999995,
+          "online_epochs": 3643,
+          "trips": 783,
+          "n_drivers": 81
+        }
+      },
+      "total_welfare": 90809.15335435112,
+      "W_resource_check": 90809.1533543511,
+      "W_components_sum": 90809.15335435112,
+      "consistency_gap": 1.4551915228366852e-11
+    },
+    {
+      "rider_surplus": 47791.78792339783,
+      "driver_surplus": 32255.98,
+      "platform_profit": 15549.300000000003,
+      "gross_revenue": 62197.20000000001,
+      "n_requests": 6059,
+      "n_matched": 4171,
+      "n_abandon": 1888,
+      "total_wait": 3771.0,
+      "total_pickup": 445.0,
+      "total_drive_cost": 5214.300000000001,
+      "total_value": 115268.3879233978,
+      "total_opp_cost": 9177.619999999999,
+      "surge_trips": 4171,
+      "fares_sum": 62197.20000000001,
+      "mult_weighted": 8342.0,
+      "driver_by_type": {
+        "fulltime": {
+          "surplus": 13557.780000000002,
+          "earnings": 16602.6,
+          "drive_cost": 1855.2000000000003,
+          "opp_cost": 1189.62,
+          "online_epochs": 6609,
+          "trips": 1482,
+          "n_drivers": 140
+        },
+        "parttime": {
+          "surplus": 14244.55,
+          "earnings": 21326.700000000004,
+          "drive_cost": 2380.2,
+          "opp_cost": 4701.950000000001,
+          "online_epochs": 8549,
+          "trips": 1919,
+          "n_drivers": 184
+        },
+        "casual": {
+          "surplus": 4453.650000000001,
+          "earnings": 8718.6,
+          "drive_cost": 978.9,
+          "opp_cost": 3286.0499999999997,
+          "online_epochs": 3459,
+          "trips": 770,
+          "n_drivers": 76
+        }
+      },
+      "total_welfare": 95597.06792339783,
+      "W_resource_check": 95597.0679233978,
+      "W_components_sum": 95597.06792339783,
+      "consistency_gap": 2.9103830456733704e-11
+    },
+    {
+      "rider_surplus": 46016.02022937076,
+      "driver_surplus": 31403.4,
+      "platform_profit": 15282.199999999999,
+      "gross_revenue": 61128.799999999996,
+      "n_requests": 6113,
+      "n_matched": 4122,
+      "n_abandon": 1991,
+      "total_wait": 4053.0,
+      "total_pickup": 521.0,
+      "total_drive_cost": 5155.200000000001,
+      "total_value": 112819.02022937081,
+      "total_opp_cost": 9288.0,
+      "surge_trips": 4122,
+      "fares_sum": 61128.799999999996,
+      "mult_weighted": 8244.0,
+      "driver_by_type": {
+        "fulltime": {
+          "surplus": 13311.900000000001,
+          "earnings": 16349.1,
+          "drive_cost": 1840.2000000000003,
+          "opp_cost": 1197.0,
+          "online_epochs": 6650,
+          "trips": 1471,
+          "n_drivers": 140
+        },
+        "parttime": {
+          "surplus": 13471.1,
+          "earnings": 20267.4,
+          "drive_cost": 2283.0000000000005,
+          "opp_cost": 4513.3,
+          "online_epochs": 8206,
+          "trips": 1826,
+          "n_drivers": 177
+        },
+        "casual": {
+          "surplus": 4620.4000000000015,
+          "earnings": 9230.1,
+          "drive_cost": 1032.0,
+          "opp_cost": 3577.7,
+          "online_epochs": 3766,
+          "trips": 825,
+          "n_drivers": 83
+        }
+      },
+      "total_welfare": 92701.62022937076,
+      "W_resource_check": 92701.62022937082,
+      "W_components_sum": 92701.62022937076,
+      "consistency_gap": 5.820766091346741e-11
+    },
+    {
+      "rider_surplus": 45830.58989827219,
+      "driver_surplus": 31520.470000000005,
+      "platform_profit": 15266.800000000001,
+      "gross_revenue": 61067.200000000004,
+      "n_requests": 6070,
+      "n_matched": 4092,
+      "n_abandon": 1978,
+      "total_wait": 3876.0,
+      "total_pickup": 429.0,
+      "total_drive_cost": 5160.6,
+      "total_value": 112324.1898982722,
+      "total_opp_cost": 9119.329999999998,
+      "surge_trips": 4092,
+      "fares_sum": 61067.200000000004,
+      "mult_weighted": 8184.0,
+      "driver_by_type": {
+        "fulltime": {
+          "surplus": 14301.420000000002,
+          "earnings": 17595.0,
+          "drive_cost": 2007.3000000000002,
+          "opp_cost": 1286.28,
+          "online_epochs": 7146,
+          "trips": 1566,
+          "n_drivers": 151
+        },
+        "parttime": {
+          "surplus": 12347.2,
+          "earnings": 18537.600000000002,
+          "drive_cost": 2070.9000000000005,
+          "opp_cost": 4119.5,
+          "online_epochs": 7490,
+          "trips": 1656,
+          "n_drivers": 162
+        },
+        "casual": {
+          "surplus": 4871.850000000002,
+          "earnings": 9667.800000000003,
+          "drive_cost": 1082.4,
+          "opp_cost": 3713.5499999999993,
+          "online_epochs": 3909,
+          "trips": 870,
+          "n_drivers": 87
+        }
+      },
+      "total_welfare": 92617.8598982722,
+      "W_resource_check": 92617.8598982722,
+      "W_components_sum": 92617.8598982722,
+      "consistency_gap": 0.0
+    },
+    {
+      "rider_surplus": 45511.701497173424,
+      "driver_surplus": 30968.79,
+      "platform_profit": 15194.4,
+      "gross_revenue": 60777.6,
+      "n_requests": 5921,
+      "n_matched": 4048,
+      "n_abandon": 1873,
+      "total_wait": 4138.0,
+      "total_pickup": 502.0,
+      "total_drive_cost": 5135.700000000001,
+      "total_value": 112082.50149717345,
+      "total_opp_cost": 9478.71,
+      "surge_trips": 4048,
+      "fares_sum": 60777.6,
+      "mult_weighted": 8096.0,
+      "driver_by_type": {
+        "fulltime": {
+          "surplus": 12109.140000000001,
+          "earnings": 14878.800000000003,
+          "drive_cost": 1679.4,
+          "opp_cost": 1090.26,
+          "online_epochs": 6057,
+          "trips": 1324,
+          "n_drivers": 128
+        },
+        "parttime": {
+          "surplus": 14349.150000000001,
+          "earnings": 21654.0,
+          "drive_cost": 2439.0000000000005,
+          "opp_cost": 4865.85,
+          "online_epochs": 8847,
+          "trips": 1924,
+          "n_drivers": 190
+        },
+        "casual": {
+          "surplus": 4510.5,
+          "earnings": 9050.400000000001,
+          "drive_cost": 1017.3000000000002,
+          "opp_cost": 3522.5999999999995,
+          "online_epochs": 3708,
+          "trips": 800,
+          "n_drivers": 82
+        }
+      },
+      "total_welfare": 91674.89149717342,
+      "W_resource_check": 91674.89149717346,
+      "W_components_sum": 91674.89149717342,
+      "consistency_gap": 4.3655745685100555e-11
+    },
+    {
+      "rider_surplus": 46782.69209558856,
+      "driver_surplus": 32432.590000000004,
+      "platform_profit": 15535.7,
+      "gross_revenue": 62142.8,
+      "n_requests": 6063,
+      "n_matched": 4179,
+      "n_abandon": 1884,
+      "total_wait": 4052.0,
+      "total_pickup": 506.0,
+      "total_drive_cost": 5216.1,
+      "total_value": 114598.29209558855,
+      "total_opp_cost": 8958.41,
+      "surge_trips": 4179,
+      "fares_sum": 62142.8,
+      "mult_weighted": 8358.0,
+      "driver_by_type": {
+        "fulltime": {
+          "surplus": 13892.640000000001,
+          "earnings": 17062.8,
+          "drive_cost": 1931.4,
+          "opp_cost": 1238.76,
+          "online_epochs": 6882,
+          "trips": 1524,
+          "n_drivers": 145
+        },
+        "parttime": {
+          "surplus": 14494.6,
+          "earnings": 21633.0,
+          "drive_cost": 2408.4,
+          "opp_cost": 4730.0,
+          "online_epochs": 8600,
+          "trips": 1946,
+          "n_drivers": 185
+        },
+        "casual": {
+          "surplus": 4045.350000000001,
+          "earnings": 7911.300000000001,
+          "drive_cost": 876.3000000000002,
+          "opp_cost": 2989.649999999999,
+          "online_epochs": 3147,
+          "trips": 709,
+          "n_drivers": 70
+        }
+      },
+      "total_welfare": 94750.98209558857,
+      "W_resource_check": 94750.98209558854,
+      "W_components_sum": 94750.98209558857,
+      "consistency_gap": 2.9103830456733704e-11
+    },
+    {
+      "rider_surplus": 46337.54293802788,
+      "driver_surplus": 31859.280000000006,
+      "platform_profit": 15384.800000000008,
+      "gross_revenue": 61539.20000000003,
+      "n_requests": 6002,
+      "n_matched": 4120,
+      "n_abandon": 1882,
+      "total_wait": 4074.0,
+      "total_pickup": 512.0,
+      "total_drive_cost": 5136.9000000000015,
+      "total_value": 113580.34293802787,
+      "total_opp_cost": 9158.22,
+      "surge_trips": 4120,
+      "fares_sum": 61539.20000000003,
+      "mult_weighted": 8240.0,
+      "driver_by_type": {
+        "fulltime": {
+          "surplus": 14245.080000000002,
+          "earnings": 17471.4,
+          "drive_cost": 1948.5000000000005,
+          "opp_cost": 1277.8200000000002,
+          "online_epochs": 7099,
+          "trips": 1554,
+          "n_drivers": 150
+        },
+        "parttime": {
+          "surplus": 12426.55,
+          "earnings": 18612.300000000003,
+          "drive_cost": 2077.8,
+          "opp_cost": 4107.950000000001,
+          "online_epochs": 7469,
+          "trips": 1679,
+          "n_drivers": 162
+        },
+        "casual": {
+          "surplus": 5187.6500000000015,
+          "earnings": 10070.7,
+          "drive_cost": 1110.6,
+          "opp_cost": 3772.45,
+          "online_epochs": 3971,
+          "trips": 887,
+          "n_drivers": 88
+        }
+      },
+      "total_welfare": 93581.62293802788,
+      "W_resource_check": 93581.62293802787,
+      "W_components_sum": 93581.62293802788,
+      "consistency_gap": 1.4551915228366852e-11
+    },
+    {
+      "rider_surplus": 45355.34301342435,
+      "driver_surplus": 31329.620000000003,
+      "platform_profit": 15073.000000000007,
+      "gross_revenue": 60292.00000000003,
+      "n_requests": 6011,
+      "n_matched": 4078,
+      "n_abandon": 1933,
+      "total_wait": 4057.0,
+      "total_pickup": 523.0,
+      "total_drive_cost": 5114.1,
+      "total_value": 111327.14301342433,
+      "total_opp_cost": 8775.279999999999,
+      "surge_trips": 4078,
+      "fares_sum": 60292.00000000003,
+      "mult_weighted": 8156.0,
+      "driver_by_type": {
+        "fulltime": {
+          "surplus": 13978.620000000003,
+          "earnings": 17229.9,
+          "drive_cost": 1965.9000000000005,
+          "opp_cost": 1285.38,
+          "online_epochs": 7141,
+          "trips": 1535,
+          "n_drivers": 151
+        },
+        "parttime": {
+          "surplus": 13612.550000000001,
+          "earnings": 20640.0,
+          "drive_cost": 2327.7000000000003,
+          "opp_cost": 4699.75,
+          "online_epochs": 8545,
+          "trips": 1880,
+          "n_drivers": 184
+        },
+        "casual": {
+          "surplus": 3738.4500000000007,
+          "earnings": 7349.100000000001,
+          "drive_cost": 820.5000000000001,
+          "opp_cost": 2790.1499999999996,
+          "online_epochs": 2937,
+          "trips": 663,
+          "n_drivers": 65
+        }
+      },
+      "total_welfare": 91757.96301342436,
+      "W_resource_check": 91757.96301342432,
+      "W_components_sum": 91757.96301342436,
+      "consistency_gap": 4.3655745685100555e-11
+    },
+    {
+      "rider_surplus": 45622.8946815667,
+      "driver_surplus": 31442.7,
+      "platform_profit": 15308.300000000001,
+      "gross_revenue": 61233.200000000004,
+      "n_requests": 6022,
+      "n_matched": 4149,
+      "n_abandon": 1873,
+      "total_wait": 4250.0,
+      "total_pickup": 574.0,
+      "total_drive_cost": 5158.800000000001,
+      "total_value": 112806.09468156674,
+      "total_opp_cost": 9323.399999999998,
+      "surge_trips": 4149,
+      "fares_sum": 61233.200000000004,
+      "mult_weighted": 8298.0,
+      "driver_by_type": {
+        "fulltime": {
+          "surplus": 12620.7,
+          "earnings": 15512.100000000002,
+          "drive_cost": 1750.2,
+          "opp_cost": 1141.2,
+          "online_epochs": 6340,
+          "trips": 1405,
+          "n_drivers": 134
+        },
+        "parttime": {
+          "surplus": 14354.000000000002,
+          "earnings": 21606.300000000003,
+          "drive_cost": 2425.5000000000005,
+          "opp_cost": 4826.799999999999,
+          "online_epochs": 8776,
+          "trips": 1939,
+          "n_drivers": 189
+        },
+        "casual": {
+          "surplus": 4468.000000000001,
+          "earnings": 8806.500000000002,
+          "drive_cost": 983.1000000000003,
+          "opp_cost": 3355.399999999999,
+          "online_epochs": 3532,
+          "trips": 805,
+          "n_drivers": 77
+        }
+      },
+      "total_welfare": 92373.8946815667,
+      "W_resource_check": 92373.89468156674,
+      "W_components_sum": 92373.8946815667,
+      "consistency_gap": 4.3655745685100555e-11
+    },
+    {
+      "rider_surplus": 47047.45585391301,
+      "driver_surplus": 31790.190000000002,
+      "platform_profit": 15476.7,
+      "gross_revenue": 61906.8,
+      "n_requests": 6045,
+      "n_matched": 4161,
+      "n_abandon": 1884,
+      "total_wait": 3936.0,
+      "total_pickup": 456.0,
+      "total_drive_cost": 5193.600000000001,
+      "total_value": 114464.65585391299,
+      "total_opp_cost": 9446.310000000001,
+      "surge_trips": 4161,
+      "fares_sum": 61906.8,
+      "mult_weighted": 8322.0,
+      "driver_by_type": {
+        "fulltime": {
+          "surplus": 12519.54,
+          "earnings": 15353.400000000001,
+          "drive_cost": 1719.3000000000002,
+          "opp_cost": 1114.56,
+          "online_epochs": 6192,
+          "trips": 1358,
+          "n_drivers": 131
+        },
+        "parttime": {
+          "surplus": 14292.5,
+          "earnings": 21399.300000000003,
+          "drive_cost": 2395.5000000000005,
+          "opp_cost": 4711.300000000001,
+          "online_epochs": 8566,
+          "trips": 1941,
+          "n_drivers": 185
+        },
+        "casual": {
+          "surplus": 4978.15,
+          "earnings": 9677.4,
+          "drive_cost": 1078.8000000000002,
+          "opp_cost": 3620.45,
+          "online_epochs": 3811,
+          "trips": 862,
+          "n_drivers": 84
+        }
+      },
+      "total_welfare": 94314.34585391301,
+      "W_resource_check": 94314.345853913,
+      "W_components_sum": 94314.34585391301,
+      "consistency_gap": 1.4551915228366852e-11
+    },
+    {
+      "rider_surplus": 46392.140920844315,
+      "driver_surplus": 31681.32,
+      "platform_profit": 15385.899999999996,
+      "gross_revenue": 61543.599999999984,
+      "n_requests": 6055,
+      "n_matched": 4173,
+      "n_abandon": 1882,
+      "total_wait": 4096.0,
+      "total_pickup": 502.0,
+      "total_drive_cost": 5140.200000000001,
+      "total_value": 113670.14092084432,
+      "total_opp_cost": 9336.18,
+      "surge_trips": 4173,
+      "fares_sum": 61543.599999999984,
+      "mult_weighted": 8346.0,
+      "driver_by_type": {
+        "fulltime": {
+          "surplus": 13295.82,
+          "earnings": 16269.900000000003,
+          "drive_cost": 1810.2000000000003,
+          "opp_cost": 1163.88,
+          "online_epochs": 6466,
+          "trips": 1463,
+          "n_drivers": 137
+        },
+        "parttime": {
+          "surplus": 13781.8,
+          "earnings": 20618.100000000002,
+          "drive_cost": 2291.1000000000004,
+          "opp_cost": 4545.200000000001,
+          "online_epochs": 8264,
+          "trips": 1873,
+          "n_drivers": 178
+        },
+        "casual": {
+          "surplus": 4603.700000000001,
+          "earnings": 9269.7,
+          "drive_cost": 1038.9,
+          "opp_cost": 3627.0999999999995,
+          "online_epochs": 3818,
+          "trips": 837,
+          "n_drivers": 85
+        }
+      },
+      "total_welfare": 93459.36092084431,
+      "W_resource_check": 93459.36092084434,
+      "W_components_sum": 93459.36092084431,
+      "consistency_gap": 2.9103830456733704e-11
+    },
+    {
+      "rider_surplus": 46342.85275087558,
+      "driver_surplus": 32169.07,
+      "platform_profit": 15469.900000000005,
+      "gross_revenue": 61879.60000000002,
+      "n_requests": 6059,
+      "n_matched": 4141,
+      "n_abandon": 1918,
+      "total_wait": 3989.0,
+      "total_pickup": 492.0,
+      "total_drive_cost": 5178.900000000001,
+      "total_value": 113807.05275087559,
+      "total_opp_cost": 9061.73,
+      "surge_trips": 4141,
+      "fares_sum": 61879.60000000002,
+      "mult_weighted": 8282.0,
+      "driver_by_type": {
+        "fulltime": {
+          "surplus": 13867.02,
+          "earnings": 17017.5,
+          "drive_cost": 1913.7000000000003,
+          "opp_cost": 1236.78,
+          "online_epochs": 6871,
+          "trips": 1499,
+          "n_drivers": 145
+        },
+        "parttime": {
+          "surplus": 14068.650000000001,
+          "earnings": 20954.4,
+          "drive_cost": 2313.6000000000004,
+          "opp_cost": 4572.15,
+          "online_epochs": 8313,
+          "trips": 1896,
+          "n_drivers": 179
+        },
+        "casual": {
+          "surplus": 4233.400000000001,
+          "earnings": 8437.8,
+          "drive_cost": 951.6000000000003,
+          "opp_cost": 3252.8,
+          "online_epochs": 3424,
+          "trips": 746,
+          "n_drivers": 76
+        }
+      },
+      "total_welfare": 93981.8227508756,
+      "W_resource_check": 93981.8227508756,
+      "W_components_sum": 93981.8227508756,
+      "consistency_gap": 0.0
+    }
+  ],
+  "uniform_agg": {
+    "total_welfare": {
+      "mean": 93210.68899803098,
+      "std": 1255.290496889921,
+      "sem": 313.8226242224803
+    },
+    "rider_surplus": {
+      "mean": 46181.173373030964,
+      "std": 676.8505818607777,
+      "sem": 169.2126454651944
+    },
+    "driver_surplus": {
+      "mean": 31672.790625,
+      "std": 484.7732740360006,
+      "sem": 121.19331850900015
+    },
+    "platform_profit": {
+      "mean": 15356.725000000002,
+      "std": 162.59155164603882,
+      "sem": 40.647887911509706
+    },
+    "gross_revenue": {
+      "mean": 61426.90000000001,
+      "std": 650.3662065841553,
+      "sem": 162.59155164603882
+    },
+    "n_requests": {
+      "mean": 6037.5625,
+      "std": 47.24400314678397,
+      "sem": 11.811000786695992
+    },
+    "n_matched": {
+      "mean": 4135.25,
+      "std": 52.26789964532087,
+      "sem": 13.066974911330217
+    },
+    "n_abandon": {
+      "mean": 1902.3125,
+      "std": 45.86315696358752,
+      "sem": 11.46578924089688
+    },
+    "total_pickup": {
+      "mean": 489.125,
+      "std": 41.89013408110952,
+      "sem": 10.47253352027738
+    },
+    "total_wait": {
+      "mean": 4022.9375,
+      "std": 124.67796851622717,
+      "sem": 31.169492129056792
+    },
+    "total_drive_cost": {
+      "mean": 5162.868750000001,
+      "std": 36.856961689754165,
+      "sem": 9.214240422438541
+    },
+    "total_opp_cost": {
+      "mean": 9234.515625,
+      "std": 229.96547245093853,
+      "sem": 57.491368112734634
+    },
+    "surge_trips": {
+      "mean": 4135.25,
+      "std": 52.26789964532087,
+      "sem": 13.066974911330217
+    },
+    "driver_by_type": {
+      "fulltime": {
+        "surplus": {
+          "mean": 13190.568750000002,
+          "sem": 223.10252274809125
+        },
+        "earnings": {
+          "mean": 16194.075,
+          "sem": 275.2824129416915
+        },
+        "opp_cost": {
+          "mean": 1180.9125,
+          "sem": 20.607713028135855
+        },
+        "online_epochs": {
+          "mean": 6560.625,
+          "sem": 114.48729460075472
+        },
+        "trips": {
+          "mean": 1448.75,
+          "sem": 24.042063832652417
+        },
+        "n_drivers": {
+          "mean": 138.5625,
+          "sem": 2.4151755457247135
+        }
+      },
+      "parttime": {
+        "surplus": {
+          "mean": 13995.23125,
+          "sem": 198.3343211744483
+        },
+        "earnings": {
+          "mean": 20989.74375,
+          "sem": 293.36506466186876
+        },
+        "opp_cost": {
+          "mean": 4647.9125,
+          "sem": 64.98687952515236
+        },
+        "online_epochs": {
+          "mean": 8450.75,
+          "sem": 118.15796277300429
+        },
+        "trips": {
+          "mean": 1893.1875,
+          "sem": 26.67008604379321
+        },
+        "n_drivers": {
+          "mean": 182.25,
+          "sem": 2.477397828367499
+        }
+      },
+      "casual": {
+        "surplus": {
+          "mean": 4486.990625000001,
+          "sem": 93.02643555941845
+        },
+        "earnings": {
+          "mean": 8886.35625,
+          "sem": 175.4002648631481
+        },
+        "opp_cost": {
+          "mean": 3405.6906249999993,
+          "sem": 66.24149728750571
+        },
+        "online_epochs": {
+          "mean": 3584.9375,
+          "sem": 69.72789188158495
+        },
+        "trips": {
+          "mean": 793.3125,
+          "sem": 15.471134075539949
+        },
+        "n_drivers": {
+          "mean": 79.1875,
+          "sem": 1.5443951081248606
+        }
+      }
+    },
+    "n_seeds": 16
+  },
+  "myopic_agg": {
+    "total_welfare": {
+      "mean": 81954.60083593466,
+      "std": 1869.2456042701397,
+      "sem": 467.3114010675349
+    },
+    "rider_surplus": {
+      "mean": 68090.88394971067,
+      "std": 1493.8525449931703,
+      "sem": 373.4631362482926
+    },
+    "driver_surplus": {
+      "mean": 7084.576102167989,
+      "std": 307.66184716738707,
+      "sem": 76.91546179184677
+    },
+    "platform_profit": {
+      "mean": 6779.140784055995,
+      "std": 104.97972953303099,
+      "sem": 26.244932383257748
+    },
+    "gross_revenue": {
+      "mean": 27116.56313622398,
+      "std": 419.91891813212396,
+      "sem": 104.97972953303099
+    },
+    "n_requests": {
+      "mean": 8051.1875,
+      "std": 59.4118043826309,
+      "sem": 14.852951095657724
+    },
+    "n_matched": {
+      "mean": 4375.0,
+      "std": 77.25714637926168,
+      "sem": 19.31428659481542
+    },
+    "n_abandon": {
+      "mean": 3676.1875,
+      "std": 94.39153828601376,
+      "sem": 23.59788457150344
+    },
+    "total_pickup": {
+      "mean": 486.4375,
+      "std": 45.22826365596333,
+      "sem": 11.307065913990833
+    },
+    "total_wait": {
+      "mean": 4056.4375,
+      "std": 179.06198880089914,
+      "sem": 44.765497200224786
+    },
+    "total_drive_cost": {
+      "mean": 4991.906250000001,
+      "std": 72.17010894407747,
+      "sem": 18.042527236019367
+    },
+    "total_opp_cost": {
+      "mean": 8260.94,
+      "std": 163.32589396663386,
+      "sem": 40.831473491658464
+    },
+    "surge_trips": {
+      "mean": 389.1875,
+      "std": 14.4185933202006,
+      "sem": 3.60464833005015
+    },
+    "driver_by_type": {
+      "fulltime": {
+        "surplus": {
+          "mean": 4576.834192974478,
+          "sem": 83.34662122207355
+        },
+        "earnings": {
+          "mean": 7627.774192974479,
+          "sem": 137.78501755799581
+        },
+        "opp_cost": {
+          "mean": 1173.0149999999999,
+          "sem": 20.34281728276592
+        },
+        "online_epochs": {
+          "mean": 6516.75,
+          "sem": 113.0156515709218
+        },
+        "trips": {
+          "mean": 1635.75,
+          "sem": 29.253276169801335
+        },
+        "n_drivers": {
+          "mean": 138.5625,
+          "sem": 2.4151755457247135
+        }
+      },
+      "parttime": {
+        "surplus": {
+          "mean": 2709.3801555496657,
+          "sem": 47.87468063316013
+        },
+        "earnings": {
+          "mean": 9403.411405549667,
+          "sem": 138.25937391208936
+        },
+        "opp_cost": {
+          "mean": 4396.21875,
+          "sem": 61.31490504542245
+        },
+        "online_epochs": {
+          "mean": 7993.125,
+          "sem": 111.48164553713166
+        },
+        "trips": {
+          "mean": 2027.5625,
+          "sem": 28.898524868638766
+        },
+        "n_drivers": {
+          "mean": 182.25,
+          "sem": 2.477397828367499
+        }
+      },
+      "casual": {
+        "surplus": {
+          "mean": -201.63824635615566,
+          "sem": 15.639376793442649
+        },
+        "earnings": {
+          "mean": 3306.236753643844,
+          "sem": 69.10604710697335
+        },
+        "opp_cost": {
+          "mean": 2691.70625,
+          "sem": 55.82054241700961
+        },
+        "online_epochs": {
+          "mean": 2833.375,
+          "sem": 58.75846570211535
+        },
+        "trips": {
+          "mean": 711.6875,
+          "sem": 14.59957726271552
+        },
+        "n_drivers": {
+          "mean": 79.1875,
+          "sem": 1.5443951081248606
+        }
+      }
+    },
+    "n_seeds": 16
+  },
+  "surge_thetas": [
+    [
+      -0.763734229684478,
+      0.6860318563084066,
+      -0.18935305806222416,
+      0.015237695575998333,
+      -0.7233437634530445,
+      0.7397519078479211,
+      -0.26450919541320533,
+      -0.15625582629490473,
+      -0.2929065690045475,
+      -0.03079666102404396,
+      -0.342075592152367,
+      0.44848918659435455,
+      0.329938389992036,
+      0.2940420747493699,
+      0.08987441623135456,
+      -0.10691592487488533,
+      -0.11671245487404594,
+      -0.23816659953228983,
+      -0.32209218461923994,
+      -0.13550206433285322,
+      -0.044960856620779754,
+      0.4490145529883977,
+      -0.19384683900010355
+    ],
+    [
+      -0.9275372529400847,
+      1.2323322455405887,
+      -0.24465664378050847,
+      0.4095584854195113,
+      -0.43734150957562684,
+      0.0795263533883427,
+      -0.19060942480626028,
+      0.292544363340452,
+      0.39118251891883427,
+      -0.0978762992481342,
+      0.3478317578978413,
+      -0.2896936744519676,
+      -0.09307350030304495,
+      0.02221207132084519,
+      0.17262842988093047,
+      0.06036891432746443,
+      0.13279096456183692,
+      0.0013065121304669525,
+      -0.41537009096250455,
+      0.27846501347388103,
+      0.09699679254499541,
+      -0.4764656081920031,
+      0.22387050477678117
+    ],
+    [
+      -0.9165165472910409,
+      1.8187456644440632,
+      -0.23550918987471708,
+      -0.17573244453362022,
+      -0.5960510947216784,
+      0.10068167762703827,
+      -0.041430425084154884,
+      0.08009012835552037,
+      0.44933536306707517,
+      -0.10456682501168366,
+      0.14359051670481657,
+      0.5254370575041212,
+      0.5134431909495345,
+      -0.2662220592118483,
+      0.01196486510670832,
+      0.2893997733284885,
+      0.11167625526104033,
+      -0.2704980504999302,
+      -0.20803062796143,
+      -0.23102762002921445,
+      0.39362272318245234,
+      0.09270646508049865,
+      -0.5835650553776219
+    ]
+  ],
+  "Z": 25,
+  "surge_summaries": [
+    {
+      "rider_surplus": 46305.30061058273,
+      "driver_surplus": 32197.776401148527,
+      "platform_profit": 15656.21546704951,
+      "gross_revenue": 62624.86186819804,
+      "n_requests": 5881,
+      "n_matched": 4239,
+      "n_abandon": 1642,
+      "total_wait": 3993.0,
+      "total_pickup": 468.0,
+      "total_drive_cost": 5171.1,
+      "total_value": 114520.36247878076,
+      "total_opp_cost": 9599.769999999999,
+      "surge_trips": 4239,
+      "fares_sum": 62624.86186819804,
+      "mult_weighted": 8440.08521996846,
+      "driver_by_type": {
+        "fulltime": {
+          "surplus": 11391.002538555404,
+          "earnings": 13928.822538555405,
+          "drive_cost": 1549.8000000000004,
+          "opp_cost": 988.0199999999999,
+          "online_epochs": 5489,
+          "trips": 1268,
+          "n_drivers": 116
+        },
+        "parttime": {
+          "surplus": 15932.206601463342,
+          "earnings": 23660.906601463343,
+          "drive_cost": 2608.2000000000003,
+          "opp_cost": 5120.5,
+          "online_epochs": 9310,
+          "trips": 2124,
+          "n_drivers": 202
+        },
+        "casual": {
+          "surplus": 4874.567261129778,
+          "earnings": 9378.917261129778,
+          "drive_cost": 1013.0999999999999,
+          "opp_cost": 3491.2500000000005,
+          "online_epochs": 3675,
+          "trips": 847,
+          "n_drivers": 82
+        }
+      },
+      "total_welfare": 94159.29247878076,
+      "W_resource_check": 94159.29247878076,
+      "W_components_sum": 94159.29247878076,
+      "consistency_gap": 0.0
+    },
+    {
+      "rider_surplus": 47788.89547284915,
+      "driver_surplus": 32657.879074008968,
+      "platform_profit": 15679.803024669656,
+      "gross_revenue": 62719.212098678625,
+      "n_requests": 5848,
+      "n_matched": 4303,
+      "n_abandon": 1545,
+      "total_wait": 3980.0,
+      "total_pickup": 508.0,
+      "total_drive_cost": 5256.3,
+      "total_value": 116080.10757152777,
+      "total_opp_cost": 9125.23,
+      "surge_trips": 4303,
+      "fares_sum": 62719.212098678625,
+      "mult_weighted": 8422.229644190902,
+      "driver_by_type": {
+        "fulltime": {
+          "surplus": 13392.093199614985,
+          "earnings": 16423.473199614982,
+          "drive_cost": 1851.3000000000002,
+          "opp_cost": 1180.0800000000002,
+          "online_epochs": 6556,
+          "trips": 1497,
+          "n_drivers": 139
+        },
+        "parttime": {
+          "surplus": 14601.453955766352,
+          "earnings": 21677.253955766355,
+          "drive_cost": 2412.9000000000005,
+          "opp_cost": 4662.900000000001,
+          "online_epochs": 8478,
+          "trips": 1995,
+          "n_drivers": 184
+        },
+        "casual": {
+          "surplus": 4664.3319186276285,
+          "earnings": 8938.68191862763,
+          "drive_cost": 992.1000000000001,
+          "opp_cost": 3282.2500000000005,
+          "online_epochs": 3455,
+          "trips": 811,
+          "n_drivers": 77
+        }
+      },
+      "total_welfare": 96126.57757152779,
+      "W_resource_check": 96126.57757152777,
+      "W_components_sum": 96126.57757152779,
+      "consistency_gap": 1.4551915228366852e-11
+    },
+    {
+      "rider_surplus": 46092.10757738406,
+      "driver_surplus": 31921.34974166289,
+      "platform_profit": 15489.33324722096,
+      "gross_revenue": 61957.33298888384,
+      "n_requests": 5867,
+      "n_matched": 4236,
+      "n_abandon": 1631,
+      "total_wait": 3968.0,
+      "total_pickup": 475.0,
+      "total_drive_cost": 5217.0,
+      "total_value": 113604.64056626795,
+      "total_opp_cost": 9329.65,
+      "surge_trips": 4231,
+      "fares_sum": 61957.33298888384,
+      "mult_weighted": 8357.53185471415,
+      "driver_by_type": {
+        "fulltime": {
+          "surplus": 12552.03846807887,
+          "earnings": 15438.938468078872,
+          "drive_cost": 1761.9,
+          "opp_cost": 1125.0,
+          "online_epochs": 6250,
+          "trips": 1408,
+          "n_drivers": 132
+        },
+        "parttime": {
+          "surplus": 14645.084207585605,
+          "earnings": 21866.334207585605,
+          "drive_cost": 2442.3,
+          "opp_cost": 4778.950000000001,
+          "online_epochs": 8689,
+          "trips": 2004,
+          "n_drivers": 188
+        },
+        "casual": {
+          "surplus": 4724.227065998412,
+          "earnings": 9162.727065998413,
+          "drive_cost": 1012.8000000000002,
+          "opp_cost": 3425.7,
+          "online_epochs": 3606,
+          "trips": 824,
+          "n_drivers": 80
+        }
+      },
+      "total_welfare": 93502.79056626791,
+      "W_resource_check": 93502.79056626796,
+      "W_components_sum": 93502.79056626791,
+      "consistency_gap": 4.3655745685100555e-11
+    },
+    {
+      "rider_surplus": 47853.49296437867,
+      "driver_surplus": 32069.295987197023,
+      "platform_profit": 15406.755329065676,
+      "gross_revenue": 61627.021316262704,
+      "n_requests": 5864,
+      "n_matched": 4256,
+      "n_abandon": 1608,
+      "total_wait": 3744.0,
+      "total_pickup": 438.0,
+      "total_drive_cost": 5243.700000000001,
+      "total_value": 114722.11428064138,
+      "total_opp_cost": 8907.27,
+      "surge_trips": 4256,
+      "fares_sum": 61627.021316262704,
+      "mult_weighted": 8290.344873111175,
+      "driver_by_type": {
+        "fulltime": {
+          "surplus": 13950.031656620638,
+          "earnings": 17167.651656620637,
+          "drive_cost": 1963.2000000000003,
+          "opp_cost": 1254.42,
+          "online_epochs": 6969,
+          "trips": 1593,
+          "n_drivers": 147
+        },
+        "parttime": {
+          "surplus": 13827.505956860909,
+          "earnings": 20706.655956860912,
+          "drive_cost": 2349.9,
+          "opp_cost": 4529.25,
+          "online_epochs": 8235,
+          "trips": 1901,
+          "n_drivers": 179
+        },
+        "casual": {
+          "surplus": 4291.75837371548,
+          "earnings": 8345.95837371548,
+          "drive_cost": 930.6,
+          "opp_cost": 3123.6000000000004,
+          "online_epochs": 3288,
+          "trips": 762,
+          "n_drivers": 74
+        }
+      },
+      "total_welfare": 95329.54428064138,
+      "W_resource_check": 95329.54428064138,
+      "W_components_sum": 95329.54428064138,
+      "consistency_gap": 0.0
+    },
+    {
+      "rider_surplus": 43976.81468783662,
+      "driver_surplus": 31398.743254399596,
+      "platform_profit": 15246.67775146653,
+      "gross_revenue": 60986.71100586612,
+      "n_requests": 5750,
+      "n_matched": 4078,
+      "n_abandon": 1672,
+      "total_wait": 4208.0,
+      "total_pickup": 438.0,
+      "total_drive_cost": 5070.9000000000015,
+      "total_value": 110854.72569370276,
+      "total_opp_cost": 9270.39,
+      "surge_trips": 4078,
+      "fares_sum": 60986.71100586612,
+      "mult_weighted": 8129.857176480396,
+      "driver_by_type": {
+        "fulltime": {
+          "surplus": 12415.084633317621,
+          "earnings": 15250.92463331762,
+          "drive_cost": 1715.7000000000003,
+          "opp_cost": 1120.1399999999999,
+          "online_epochs": 6223,
+          "trips": 1378,
+          "n_drivers": 131
+        },
+        "parttime": {
+          "surplus": 14281.427717689445,
+          "earnings": 21374.027717689445,
+          "drive_cost": 2353.8,
+          "opp_cost": 4738.800000000001,
+          "online_epochs": 8616,
+          "trips": 1902,
+          "n_drivers": 188
+        },
+        "casual": {
+          "surplus": 4702.230903392532,
+          "earnings": 9115.08090339253,
+          "drive_cost": 1001.4000000000001,
+          "opp_cost": 3411.45,
+          "online_epochs": 3591,
+          "trips": 798,
+          "n_drivers": 81
+        }
+      },
+      "total_welfare": 90622.23569370275,
+      "W_resource_check": 90622.23569370275,
+      "W_components_sum": 90622.23569370275,
+      "consistency_gap": 0.0
+    },
+    {
+      "rider_surplus": 46404.75589881373,
+      "driver_surplus": 32033.303356780474,
+      "platform_profit": 15412.781118926825,
+      "gross_revenue": 61651.1244757073,
+      "n_requests": 5930,
+      "n_matched": 4214,
+      "n_abandon": 1716,
+      "total_wait": 4289.0,
+      "total_pickup": 518.0,
+      "total_drive_cost": 5129.1,
+      "total_value": 114060.48037452105,
+      "total_opp_cost": 9075.939999999999,
+      "surge_trips": 4214,
+      "fares_sum": 61651.1244757073,
+      "mult_weighted": 8321.551686969895,
+      "driver_by_type": {
+        "fulltime": {
+          "surplus": 13268.715013825167,
+          "earnings": 16294.155013825166,
+          "drive_cost": 1836.0,
+          "opp_cost": 1189.44,
+          "online_epochs": 6608,
+          "trips": 1496,
+          "n_drivers": 140
+        },
+        "parttime": {
+          "surplus": 14455.863545675109,
+          "earnings": 21538.213545675113,
+          "drive_cost": 2379.3,
+          "opp_cost": 4703.05,
+          "online_epochs": 8551,
+          "trips": 1964,
+          "n_drivers": 184
+        },
+        "casual": {
+          "surplus": 4308.724797280198,
+          "earnings": 8405.974797280198,
+          "drive_cost": 913.8,
+          "opp_cost": 3183.45,
+          "online_epochs": 3351,
+          "trips": 754,
+          "n_drivers": 76
+        }
+      },
+      "total_welfare": 93850.84037452104,
+      "W_resource_check": 93850.84037452104,
+      "W_components_sum": 93850.84037452104,
+      "consistency_gap": 0.0
+    },
+    {
+      "rider_surplus": 47619.151765621784,
+      "driver_surplus": 32278.807896353166,
+      "platform_profit": 15573.072632117724,
+      "gross_revenue": 62292.2905284709,
+      "n_requests": 5845,
+      "n_matched": 4236,
+      "n_abandon": 1609,
+      "total_wait": 3906.0,
+      "total_pickup": 429.0,
+      "total_drive_cost": 5226.0,
+      "total_value": 115379.8422940927,
+      "total_opp_cost": 9214.41,
+      "surge_trips": 4236,
+      "fares_sum": 62292.2905284709,
+      "mult_weighted": 8353.07588748112,
+      "driver_by_type": {
+        "fulltime": {
+          "surplus": 13548.934636172486,
+          "earnings": 16612.894636172485,
+          "drive_cost": 1872.0000000000002,
+          "opp_cost": 1191.96,
+          "online_epochs": 6622,
+          "trips": 1517,
+          "n_drivers": 140
+        },
+        "parttime": {
+          "surplus": 13773.249363770901,
+          "earnings": 20549.999363770905,
+          "drive_cost": 2295.9000000000005,
+          "opp_cost": 4480.85,
+          "online_epochs": 8147,
+          "trips": 1845,
+          "n_drivers": 177
+        },
+        "casual": {
+          "surplus": 4956.62389640978,
+          "earnings": 9556.32389640978,
+          "drive_cost": 1058.1000000000004,
+          "opp_cost": 3541.5999999999995,
+          "online_epochs": 3728,
+          "trips": 874,
+          "n_drivers": 83
+        }
+      },
+      "total_welfare": 95471.03229409267,
+      "W_resource_check": 95471.0322940927,
+      "W_components_sum": 95471.03229409267,
+      "consistency_gap": 2.9103830456733704e-11
+    },
+    {
+      "rider_surplus": 46386.46191802666,
+      "driver_surplus": 32040.32342401206,
+      "platform_profit": 15435.36780800402,
+      "gross_revenue": 61741.47123201608,
+      "n_requests": 5893,
+      "n_matched": 4224,
+      "n_abandon": 1669,
+      "total_wait": 4064.0,
+      "total_pickup": 478.0,
+      "total_drive_cost": 5168.700000000001,
+      "total_value": 113817.53315004271,
+      "total_opp_cost": 9097.079999999998,
+      "surge_trips": 4224,
+      "fares_sum": 61741.47123201608,
+      "mult_weighted": 8352.151035420706,
+      "driver_by_type": {
+        "fulltime": {
+          "surplus": 14607.357780534163,
+          "earnings": 17890.737780534164,
+          "drive_cost": 2001.6000000000004,
+          "opp_cost": 1281.7800000000002,
+          "online_epochs": 7121,
+          "trips": 1656,
+          "n_drivers": 151
+        },
+        "parttime": {
+          "surplus": 12415.77713729896,
+          "earnings": 18596.177137298957,
+          "drive_cost": 2079.6000000000004,
+          "opp_cost": 4100.800000000001,
+          "online_epochs": 7456,
+          "trips": 1692,
+          "n_drivers": 162
+        },
+        "casual": {
+          "surplus": 5017.188506178936,
+          "earnings": 9819.188506178934,
+          "drive_cost": 1087.5,
+          "opp_cost": 3714.5,
+          "online_epochs": 3910,
+          "trips": 876,
+          "n_drivers": 87
+        }
+      },
+      "total_welfare": 93862.15315004275,
+      "W_resource_check": 93862.15315004271,
+      "W_components_sum": 93862.15315004275,
+      "consistency_gap": 4.3655745685100555e-11
+    },
+    {
+      "rider_surplus": 46311.150206513084,
+      "driver_surplus": 32262.246623712745,
+      "platform_profit": 15605.33554123758,
+      "gross_revenue": 62421.34216495032,
+      "n_requests": 5849,
+      "n_matched": 4197,
+      "n_abandon": 1652,
+      "total_wait": 4046.0,
+      "total_pickup": 441.0,
+      "total_drive_cost": 5153.700000000001,
+      "total_value": 114396.8923714634,
+      "total_opp_cost": 9400.06,
+      "surge_trips": 4197,
+      "fares_sum": 62421.34216495032,
+      "mult_weighted": 8338.818439709075,
+      "driver_by_type": {
+        "fulltime": {
+          "surplus": 12209.80253904131,
+          "earnings": 14969.262539041309,
+          "drive_cost": 1672.8000000000002,
+          "opp_cost": 1086.6599999999999,
+          "online_epochs": 6037,
+          "trips": 1344,
+          "n_drivers": 128
+        },
+        "parttime": {
+          "surplus": 15073.175133546392,
+          "earnings": 22348.225133546395,
+          "drive_cost": 2451.000000000001,
+          "opp_cost": 4824.050000000001,
+          "online_epochs": 8771,
+          "trips": 2017,
+          "n_drivers": 190
+        },
+        "casual": {
+          "surplus": 4979.26895112504,
+          "earnings": 9498.518951125041,
+          "drive_cost": 1029.9,
+          "opp_cost": 3489.3500000000004,
+          "online_epochs": 3673,
+          "trips": 836,
+          "n_drivers": 82
+        }
+      },
+      "total_welfare": 94178.73237146341,
+      "W_resource_check": 94178.73237146341,
+      "W_components_sum": 94178.73237146341,
+      "consistency_gap": 0.0
+    },
+    {
+      "rider_surplus": 47334.14461326467,
+      "driver_surplus": 31991.775624888767,
+      "platform_profit": 15357.035208296258,
+      "gross_revenue": 61428.14083318503,
+      "n_requests": 5956,
+      "n_matched": 4242,
+      "n_abandon": 1714,
+      "total_wait": 4114.0,
+      "total_pickup": 451.0,
+      "total_drive_cost": 5176.200000000001,
+      "total_value": 114521.88544644971,
+      "total_opp_cost": 8903.130000000001,
+      "surge_trips": 4240,
+      "fares_sum": 61428.14083318503,
+      "mult_weighted": 8304.58845513023,
+      "driver_by_type": {
+        "fulltime": {
+          "surplus": 13702.295400021465,
+          "earnings": 16864.775400021463,
+          "drive_cost": 1925.7000000000003,
+          "opp_cost": 1236.78,
+          "online_epochs": 6871,
+          "trips": 1575,
+          "n_drivers": 145
+        },
+        "parttime": {
+          "surplus": 14237.969451949928,
+          "earnings": 21295.91945194993,
+          "drive_cost": 2367.0,
+          "opp_cost": 4690.950000000001,
+          "online_epochs": 8529,
+          "trips": 1956,
+          "n_drivers": 185
+        },
+        "casual": {
+          "surplus": 4051.510772917377,
+          "earnings": 7910.410772917377,
+          "drive_cost": 883.5000000000001,
+          "opp_cost": 2975.3999999999996,
+          "online_epochs": 3132,
+          "trips": 711,
+          "n_drivers": 70
+        }
+      },
+      "total_welfare": 94682.95544644969,
+      "W_resource_check": 94682.9554464497,
+      "W_components_sum": 94682.95544644969,
+      "consistency_gap": 1.4551915228366852e-11
+    },
+    {
+      "rider_surplus": 47907.16913090966,
+      "driver_surplus": 32299.784594175653,
+      "platform_profit": 15542.414864725215,
+      "gross_revenue": 62169.65945890086,
+      "n_requests": 5776,
+      "n_matched": 4290,
+      "n_abandon": 1486,
+      "total_wait": 3950.0,
+      "total_pickup": 456.0,
+      "total_drive_cost": 5204.400000000001,
+      "total_value": 115606.82858981058,
+      "total_opp_cost": 9123.06,
+      "surge_trips": 4287,
+      "fares_sum": 62169.65945890086,
+      "mult_weighted": 8418.519781170431,
+      "driver_by_type": {
+        "fulltime": {
+          "surplus": 14557.742401021073,
+          "earnings": 17827.802401021072,
+          "drive_cost": 1995.3000000000002,
+          "opp_cost": 1274.7600000000002,
+          "online_epochs": 7082,
+          "trips": 1666,
+          "n_drivers": 150
+        },
+        "parttime": {
+          "surplus": 12704.776309880952,
+          "earnings": 18911.12630988095,
+          "drive_cost": 2103.9000000000005,
+          "opp_cost": 4102.450000000001,
+          "online_epochs": 7459,
+          "trips": 1747,
+          "n_drivers": 162
+        },
+        "casual": {
+          "surplus": 5037.265883273623,
+          "earnings": 9888.315883273624,
+          "drive_cost": 1105.2000000000003,
+          "opp_cost": 3745.85,
+          "online_epochs": 3943,
+          "trips": 877,
+          "n_drivers": 88
+        }
+      },
+      "total_welfare": 95749.36858981052,
+      "W_resource_check": 95749.36858981059,
+      "W_components_sum": 95749.36858981052,
+      "consistency_gap": 7.275957614183426e-11
+    },
+    {
+      "rider_surplus": 47176.284568623545,
+      "driver_surplus": 31847.158710223568,
+      "platform_profit": 15249.352903407857,
+      "gross_revenue": 60997.411613631426,
+      "n_requests": 5863,
+      "n_matched": 4197,
+      "n_abandon": 1666,
+      "total_wait": 3863.0,
+      "total_pickup": 451.0,
+      "total_drive_cost": 5207.4000000000015,
+      "total_value": 113581.89618225498,
+      "total_opp_cost": 8693.5,
+      "surge_trips": 4197,
+      "fares_sum": 60997.411613631426,
+      "mult_weighted": 8185.269278937267,
+      "driver_by_type": {
+        "fulltime": {
+          "surplus": 14326.394937305384,
+          "earnings": 17640.194937305383,
+          "drive_cost": 2024.1000000000004,
+          "opp_cost": 1289.7000000000003,
+          "online_epochs": 7165,
+          "trips": 1613,
+          "n_drivers": 151
+        },
+        "parttime": {
+          "surplus": 13974.4512722365,
+          "earnings": 21018.7012722365,
+          "drive_cost": 2390.7000000000007,
+          "opp_cost": 4653.55,
+          "online_epochs": 8461,
+          "trips": 1945,
+          "n_drivers": 184
+        },
+        "casual": {
+          "surplus": 3546.3125006816863,
+          "earnings": 7089.162500681686,
+          "drive_cost": 792.6,
+          "opp_cost": 2750.2499999999995,
+          "online_epochs": 2895,
+          "trips": 639,
+          "n_drivers": 65
+        }
+      },
+      "total_welfare": 94272.79618225497,
+      "W_resource_check": 94272.79618225497,
+      "W_components_sum": 94272.79618225497,
+      "consistency_gap": 0.0
+    },
+    {
+      "rider_surplus": 47554.49744828704,
+      "driver_surplus": 32220.71079557619,
+      "platform_profit": 15561.416931858726,
+      "gross_revenue": 62245.667727434906,
+      "n_requests": 5897,
+      "n_matched": 4292,
+      "n_abandon": 1605,
+      "total_wait": 4031.0,
+      "total_pickup": 480.0,
+      "total_drive_cost": 5225.700000000001,
+      "total_value": 115443.56517572202,
+      "total_opp_cost": 9237.84,
+      "surge_trips": 4286,
+      "fares_sum": 62245.667727434906,
+      "mult_weighted": 8423.785728813258,
+      "driver_by_type": {
+        "fulltime": {
+          "surplus": 12798.975608333289,
+          "earnings": 15732.015608333288,
+          "drive_cost": 1794.0000000000005,
+          "opp_cost": 1139.04,
+          "online_epochs": 6328,
+          "trips": 1449,
+          "n_drivers": 134
+        },
+        "parttime": {
+          "surplus": 14870.607424744707,
+          "earnings": 22128.607424744707,
+          "drive_cost": 2457.6000000000004,
+          "opp_cost": 4800.4000000000015,
+          "online_epochs": 8728,
+          "trips": 2044,
+          "n_drivers": 189
+        },
+        "casual": {
+          "surplus": 4551.12776249819,
+          "earnings": 8823.62776249819,
+          "drive_cost": 974.1,
+          "opp_cost": 3298.399999999999,
+          "online_epochs": 3472,
+          "trips": 799,
+          "n_drivers": 77
+        }
+      },
+      "total_welfare": 95336.62517572194,
+      "W_resource_check": 95336.62517572203,
+      "W_components_sum": 95336.62517572194,
+      "consistency_gap": 8.731149137020111e-11
+    },
+    {
+      "rider_surplus": 46003.202959790695,
+      "driver_surplus": 31763.472720892652,
+      "platform_profit": 15425.267573630877,
+      "gross_revenue": 61701.07029452351,
+      "n_requests": 5748,
+      "n_matched": 4174,
+      "n_abandon": 1574,
+      "total_wait": 3947.0,
+      "total_pickup": 445.0,
+      "total_drive_cost": 5154.600000000001,
+      "total_value": 113230.07325431425,
+      "total_opp_cost": 9357.73,
+      "surge_trips": 4171,
+      "fares_sum": 61701.07029452351,
+      "mult_weighted": 8281.043509430181,
+      "driver_by_type": {
+        "fulltime": {
+          "surplus": 12513.911526044325,
+          "earnings": 15370.091526044327,
+          "drive_cost": 1740.9,
+          "opp_cost": 1115.28,
+          "online_epochs": 6196,
+          "trips": 1407,
+          "n_drivers": 131
+        },
+        "parttime": {
+          "surplus": 14381.232905307119,
+          "earnings": 21465.532905307122,
+          "drive_cost": 2373.0000000000005,
+          "opp_cost": 4711.3,
+          "online_epochs": 8566,
+          "trips": 1919,
+          "n_drivers": 185
+        },
+        "casual": {
+          "surplus": 4868.328289541206,
+          "earnings": 9440.178289541205,
+          "drive_cost": 1040.7,
+          "opp_cost": 3531.1499999999996,
+          "online_epochs": 3717,
+          "trips": 848,
+          "n_drivers": 84
+        }
+      },
+      "total_welfare": 93191.94325431422,
+      "W_resource_check": 93191.94325431425,
+      "W_components_sum": 93191.94325431422,
+      "consistency_gap": 2.9103830456733704e-11
+    },
+    {
+      "rider_surplus": 47048.693527452735,
+      "driver_surplus": 32619.741190815374,
+      "platform_profit": 15678.640396938457,
+      "gross_revenue": 62714.56158775383,
+      "n_requests": 5970,
+      "n_matched": 4246,
+      "n_abandon": 1724,
+      "total_wait": 4188.0,
+      "total_pickup": 491.0,
+      "total_drive_cost": 5140.5,
+      "total_value": 115626.45511520655,
+      "total_opp_cost": 9275.68,
+      "surge_trips": 4246,
+      "fares_sum": 62714.56158775383,
+      "mult_weighted": 8414.263840719355,
+      "driver_by_type": {
+        "fulltime": {
+          "surplus": 13535.412099057412,
+          "earnings": 16511.592099057412,
+          "drive_cost": 1812.3000000000002,
+          "opp_cost": 1163.88,
+          "online_epochs": 6466,
+          "trips": 1507,
+          "n_drivers": 137
+        },
+        "parttime": {
+          "surplus": 14136.531587091127,
+          "earnings": 20934.08158709113,
+          "drive_cost": 2281.5,
+          "opp_cost": 4516.049999999999,
+          "online_epochs": 8211,
+          "trips": 1890,
+          "n_drivers": 178
+        },
+        "casual": {
+          "surplus": 4947.797504666831,
+          "earnings": 9590.247504666831,
+          "drive_cost": 1046.7,
+          "opp_cost": 3595.7499999999995,
+          "online_epochs": 3785,
+          "trips": 849,
+          "n_drivers": 85
+        }
+      },
+      "total_welfare": 95347.07511520656,
+      "W_resource_check": 95347.07511520656,
+      "W_components_sum": 95347.07511520656,
+      "consistency_gap": 0.0
+    },
+    {
+      "rider_surplus": 48023.994230716475,
+      "driver_surplus": 31891.13809041158,
+      "platform_profit": 15371.319363470528,
+      "gross_revenue": 61485.27745388211,
+      "n_requests": 5907,
+      "n_matched": 4281,
+      "n_abandon": 1626,
+      "total_wait": 3618.0,
+      "total_pickup": 415.0,
+      "total_drive_cost": 5238.6,
+      "total_value": 114574.47168459858,
+      "total_opp_cost": 8984.220000000001,
+      "surge_trips": 4281,
+      "fares_sum": 61485.27745388211,
+      "mult_weighted": 8350.93413113401,
+      "driver_by_type": {
+        "fulltime": {
+          "surplus": 13735.349791345365,
+          "earnings": 16911.569791345366,
+          "drive_cost": 1943.4000000000003,
+          "opp_cost": 1232.8200000000002,
+          "online_epochs": 6849,
+          "trips": 1570,
+          "n_drivers": 145
+        },
+        "parttime": {
+          "surplus": 13655.296408346332,
+          "earnings": 20516.896408346332,
+          "drive_cost": 2330.7000000000003,
+          "opp_cost": 4530.9,
+          "online_epochs": 8238,
+          "trips": 1911,
+          "n_drivers": 179
+        },
+        "casual": {
+          "surplus": 4500.491890719879,
+          "earnings": 8685.49189071988,
+          "drive_cost": 964.5000000000001,
+          "opp_cost": 3220.4999999999995,
+          "online_epochs": 3390,
+          "trips": 800,
+          "n_drivers": 76
+        }
+      },
+      "total_welfare": 95286.45168459858,
+      "W_resource_check": 95286.45168459858,
+      "W_components_sum": 95286.45168459858,
+      "consistency_gap": 0.0
+    },
+    {
+      "rider_surplus": 44261.6554766752,
+      "driver_surplus": 34391.78502368289,
+      "platform_profit": 16404.475007894303,
+      "gross_revenue": 65617.90003157721,
+      "n_requests": 5590,
+      "n_matched": 4230,
+      "n_abandon": 1360,
+      "total_wait": 4000.0,
+      "total_pickup": 467.0,
+      "total_drive_cost": 5191.200000000001,
+      "total_value": 115479.55550825238,
+      "total_opp_cost": 9630.439999999999,
+      "surge_trips": 4230,
+      "fares_sum": 65617.90003157721,
+      "mult_weighted": 8815.799517081516,
+      "driver_by_type": {
+        "fulltime": {
+          "surplus": 11729.187356091177,
+          "earnings": 14242.82735609118,
+          "drive_cost": 1526.7000000000003,
+          "opp_cost": 986.9399999999999,
+          "online_epochs": 5483,
+          "trips": 1227,
+          "n_drivers": 116
+        },
+        "parttime": {
+          "surplus": 17307.382014993582,
+          "earnings": 25052.28201499358,
+          "drive_cost": 2614.5000000000005,
+          "opp_cost": 5130.400000000001,
+          "online_epochs": 9328,
+          "trips": 2152,
+          "n_drivers": 202
+        },
+        "casual": {
+          "surplus": 5355.215652598134,
+          "earnings": 9918.315652598132,
+          "drive_cost": 1050.0,
+          "opp_cost": 3513.1000000000004,
+          "online_epochs": 3698,
+          "trips": 851,
+          "n_drivers": 82
+        }
+      },
+      "total_welfare": 95057.9155082524,
+      "W_resource_check": 95057.91550825238,
+      "W_components_sum": 95057.9155082524,
+      "consistency_gap": 1.4551915228366852e-11
+    },
+    {
+      "rider_surplus": 43693.32859286829,
+      "driver_surplus": 33965.28240048225,
+      "platform_profit": 16090.197466827416,
+      "gross_revenue": 64360.789867309664,
+      "n_requests": 5617,
+      "n_matched": 4151,
+      "n_abandon": 1466,
+      "total_wait": 4076.0,
+      "total_pickup": 480.0,
+      "total_drive_cost": 5141.1,
+      "total_value": 113760.51846017795,
+      "total_opp_cost": 9164.21,
+      "surge_trips": 4151,
+      "fares_sum": 64360.789867309664,
+      "mult_weighted": 8558.408887890204,
+      "driver_by_type": {
+        "fulltime": {
+          "surplus": 14259.70189019958,
+          "earnings": 17273.26189019958,
+          "drive_cost": 1830.6000000000001,
+          "opp_cost": 1182.96,
+          "online_epochs": 6572,
+          "trips": 1486,
+          "n_drivers": 139
+        },
+        "parttime": {
+          "surplus": 14905.42845785434,
+          "earnings": 21926.87845785434,
+          "drive_cost": 2348.1000000000004,
+          "opp_cost": 4673.35,
+          "online_epochs": 8497,
+          "trips": 1884,
+          "n_drivers": 184
+        },
+        "casual": {
+          "surplus": 4800.152052428329,
+          "earnings": 9070.45205242833,
+          "drive_cost": 962.4000000000002,
+          "opp_cost": 3307.8999999999996,
+          "online_epochs": 3482,
+          "trips": 781,
+          "n_drivers": 77
+        }
+      },
+      "total_welfare": 93748.80846017796,
+      "W_resource_check": 93748.80846017794,
+      "W_components_sum": 93748.80846017796,
+      "consistency_gap": 1.4551915228366852e-11
+    },
+    {
+      "rider_surplus": 44778.759721599534,
+      "driver_surplus": 34546.751679649824,
+      "platform_profit": 16355.397226549943,
+      "gross_revenue": 65421.58890619977,
+      "n_requests": 5598,
+      "n_matched": 4200,
+      "n_abandon": 1398,
+      "total_wait": 4124.0,
+      "total_pickup": 489.0,
+      "total_drive_cost": 5185.8,
+      "total_value": 115973.94862779928,
+      "total_opp_cost": 9333.64,
+      "surge_trips": 4200,
+      "fares_sum": 65421.58890619977,
+      "mult_weighted": 8687.640645157098,
+      "driver_by_type": {
+        "fulltime": {
+          "surplus": 13551.764876292003,
+          "earnings": 16422.704876292006,
+          "drive_cost": 1746.3000000000002,
+          "opp_cost": 1124.64,
+          "online_epochs": 6248,
+          "trips": 1396,
+          "n_drivers": 132
+        },
+        "parttime": {
+          "surplus": 15735.095604743821,
+          "earnings": 22915.595604743823,
+          "drive_cost": 2421.9,
+          "opp_cost": 4758.6,
+          "online_epochs": 8652,
+          "trips": 1970,
+          "n_drivers": 188
+        },
+        "casual": {
+          "surplus": 5259.891198613992,
+          "earnings": 9727.891198613994,
+          "drive_cost": 1017.6000000000001,
+          "opp_cost": 3450.3999999999996,
+          "online_epochs": 3632,
+          "trips": 834,
+          "n_drivers": 80
+        }
+      },
+      "total_welfare": 95680.9086277993,
+      "W_resource_check": 95680.90862779928,
+      "W_components_sum": 95680.9086277993,
+      "consistency_gap": 2.9103830456733704e-11
+    },
+    {
+      "rider_surplus": 45278.662855785384,
+      "driver_surplus": 34112.62425212821,
+      "platform_profit": 16108.921417376077,
+      "gross_revenue": 64435.68566950431,
+      "n_requests": 5642,
+      "n_matched": 4241,
+      "n_abandon": 1401,
+      "total_wait": 3779.0,
+      "total_pickup": 435.0,
+      "total_drive_cost": 5251.500000000001,
+      "total_value": 115004.94852528968,
+      "total_opp_cost": 8962.64,
+      "surge_trips": 4241,
+      "fares_sum": 64435.68566950431,
+      "mult_weighted": 8661.785317440934,
+      "driver_by_type": {
+        "fulltime": {
+          "surplus": 14772.65406050285,
+          "earnings": 17991.29406050285,
+          "drive_cost": 1962.6000000000004,
+          "opp_cost": 1256.04,
+          "online_epochs": 6978,
+          "trips": 1570,
+          "n_drivers": 147
+        },
+        "parttime": {
+          "surplus": 14536.148216837815,
+          "earnings": 21413.99821683782,
+          "drive_cost": 2337.6000000000004,
+          "opp_cost": 4540.25,
+          "online_epochs": 8255,
+          "trips": 1883,
+          "n_drivers": 179
+        },
+        "casual": {
+          "surplus": 4803.821974787552,
+          "earnings": 8921.47197478755,
+          "drive_cost": 951.3000000000002,
+          "opp_cost": 3166.3499999999995,
+          "online_epochs": 3333,
+          "trips": 788,
+          "n_drivers": 74
+        }
+      },
+      "total_welfare": 95500.20852528966,
+      "W_resource_check": 95500.20852528968,
+      "W_components_sum": 95500.20852528966,
+      "consistency_gap": 1.4551915228366852e-11
+    },
+    {
+      "rider_surplus": 44526.37852994179,
+      "driver_surplus": 34276.71537930412,
+      "platform_profit": 16275.448459768046,
+      "gross_revenue": 65101.79383907218,
+      "n_requests": 5447,
+      "n_matched": 4231,
+      "n_abandon": 1216,
+      "total_wait": 3874.0,
+      "total_pickup": 485.0,
+      "total_drive_cost": 5217.600000000001,
+      "total_value": 115051.77236901395,
+      "total_opp_cost": 9332.03,
+      "surge_trips": 4231,
+      "fares_sum": 65101.79383907218,
+      "mult_weighted": 8739.81507488475,
+      "driver_by_type": {
+        "fulltime": {
+          "surplus": 13344.252194010456,
+          "earnings": 16202.532194010457,
+          "drive_cost": 1738.5000000000002,
+          "opp_cost": 1119.78,
+          "online_epochs": 6221,
+          "trips": 1398,
+          "n_drivers": 131
+        },
+        "parttime": {
+          "surplus": 15726.305391446882,
+          "earnings": 22965.255391446884,
+          "drive_cost": 2460.0,
+          "opp_cost": 4778.950000000001,
+          "online_epochs": 8689,
+          "trips": 1996,
+          "n_drivers": 188
+        },
+        "casual": {
+          "surplus": 5206.157793846784,
+          "earnings": 9658.557793846783,
+          "drive_cost": 1019.1000000000001,
+          "opp_cost": 3433.3,
+          "online_epochs": 3614,
+          "trips": 837,
+          "n_drivers": 81
+        }
+      },
+      "total_welfare": 95078.54236901396,
+      "W_resource_check": 95078.54236901394,
+      "W_components_sum": 95078.54236901396,
+      "consistency_gap": 1.4551915228366852e-11
+    },
+    {
+      "rider_surplus": 45524.942129173905,
+      "driver_surplus": 34969.52380168667,
+      "platform_profit": 16444.891267228893,
+      "gross_revenue": 65779.56506891557,
+      "n_requests": 5667,
+      "n_matched": 4267,
+      "n_abandon": 1400,
+      "total_wait": 4051.0,
+      "total_pickup": 475.0,
+      "total_drive_cost": 5236.5,
+      "total_value": 116975.90719808948,
+      "total_opp_cost": 9128.65,
+      "surge_trips": 4267,
+      "fares_sum": 65779.56506891557,
+      "mult_weighted": 8789.893253787546,
+      "driver_by_type": {
+        "fulltime": {
+          "surplus": 14521.220433209619,
+          "earnings": 17587.22043320962,
+          "drive_cost": 1875.3000000000002,
+          "opp_cost": 1190.6999999999998,
+          "online_epochs": 6615,
+          "trips": 1515,
+          "n_drivers": 140
+        },
+        "parttime": {
+          "surplus": 15464.24677846142,
+          "earnings": 22543.29677846142,
+          "drive_cost": 2395.8,
+          "opp_cost": 4683.25,
+          "online_epochs": 8515,
+          "trips": 1971,
+          "n_drivers": 184
+        },
+        "casual": {
+          "surplus": 4984.056590015636,
+          "earnings": 9204.156590015635,
+          "drive_cost": 965.4000000000001,
+          "opp_cost": 3254.7,
+          "online_epochs": 3426,
+          "trips": 781,
+          "n_drivers": 76
+        }
+      },
+      "total_welfare": 96939.35719808948,
+      "W_resource_check": 96939.35719808949,
+      "W_components_sum": 96939.35719808948,
+      "consistency_gap": 1.4551915228366852e-11
+    },
+    {
+      "rider_surplus": 45300.20538177313,
+      "driver_surplus": 34814.89606921265,
+      "platform_profit": 16425.345356404217,
+      "gross_revenue": 65701.38142561687,
+      "n_requests": 5676,
+      "n_matched": 4290,
+      "n_abandon": 1386,
+      "total_wait": 4111.0,
+      "total_pickup": 545.0,
+      "total_drive_cost": 5206.800000000001,
+      "total_value": 116756.98680739003,
+      "total_opp_cost": 9254.34,
+      "surge_trips": 4290,
+      "fares_sum": 65701.38142561687,
+      "mult_weighted": 8843.493020001266,
+      "driver_by_type": {
+        "fulltime": {
+          "surplus": 14556.584967078274,
+          "earnings": 17603.62496707827,
+          "drive_cost": 1854.0,
+          "opp_cost": 1193.04,
+          "online_epochs": 6628,
+          "trips": 1529,
+          "n_drivers": 140
+        },
+        "parttime": {
+          "surplus": 14894.85250072081,
+          "earnings": 21692.902500720807,
+          "drive_cost": 2304.0,
+          "opp_cost": 4494.050000000001,
+          "online_epochs": 8171,
+          "trips": 1897,
+          "n_drivers": 177
+        },
+        "casual": {
+          "surplus": 5363.458601413569,
+          "earnings": 9979.50860141357,
+          "drive_cost": 1048.8,
+          "opp_cost": 3567.25,
+          "online_epochs": 3755,
+          "trips": 864,
+          "n_drivers": 83
+        }
+      },
+      "total_welfare": 96540.44680738999,
+      "W_resource_check": 96540.44680739004,
+      "W_components_sum": 96540.44680738999,
+      "consistency_gap": 4.3655745685100555e-11
+    },
+    {
+      "rider_surplus": 44454.38681755191,
+      "driver_surplus": 33760.86328946441,
+      "platform_profit": 16004.971096488136,
+      "gross_revenue": 64019.884385952544,
+      "n_requests": 5558,
+      "n_matched": 4170,
+      "n_abandon": 1388,
+      "total_wait": 3919.0,
+      "total_pickup": 426.0,
+      "total_drive_cost": 5157.000000000001,
+      "total_value": 113960.87120350449,
+      "total_opp_cost": 9097.05,
+      "surge_trips": 4170,
+      "fares_sum": 64019.884385952544,
+      "mult_weighted": 8573.955814347235,
+      "driver_by_type": {
+        "fulltime": {
+          "surplus": 15135.333084664708,
+          "earnings": 18420.63308466471,
+          "drive_cost": 2001.0000000000002,
+          "opp_cost": 1284.3000000000002,
+          "online_epochs": 7135,
+          "trips": 1590,
+          "n_drivers": 151
+        },
+        "parttime": {
+          "surplus": 13227.952839870428,
+          "earnings": 19378.50283987043,
+          "drive_cost": 2058.0,
+          "opp_cost": 4092.55,
+          "online_epochs": 7441,
+          "trips": 1692,
+          "n_drivers": 162
+        },
+        "casual": {
+          "surplus": 5397.577364929271,
+          "earnings": 10215.777364929272,
+          "drive_cost": 1098.0000000000002,
+          "opp_cost": 3720.1999999999994,
+          "online_epochs": 3916,
+          "trips": 888,
+          "n_drivers": 87
+        }
+      },
+      "total_welfare": 94220.22120350446,
+      "W_resource_check": 94220.22120350448,
+      "W_components_sum": 94220.22120350446,
+      "consistency_gap": 1.4551915228366852e-11
+    },
+    {
+      "rider_surplus": 43469.98455769175,
+      "driver_surplus": 33896.17650109067,
+      "platform_profit": 16162.965500363558,
+      "gross_revenue": 64651.86200145423,
+      "n_requests": 5548,
+      "n_matched": 4160,
+      "n_abandon": 1388,
+      "total_wait": 4162.0,
+      "total_pickup": 472.0,
+      "total_drive_cost": 5154.600000000001,
+      "total_value": 113948.646559146,
+      "total_opp_cost": 9438.119999999999,
+      "surge_trips": 4160,
+      "fares_sum": 64651.86200145423,
+      "mult_weighted": 8621.734562548909,
+      "driver_by_type": {
+        "fulltime": {
+          "surplus": 12924.25165401015,
+          "earnings": 15684.97165401015,
+          "drive_cost": 1671.9000000000003,
+          "opp_cost": 1088.8200000000002,
+          "online_epochs": 6049,
+          "trips": 1347,
+          "n_drivers": 128
+        },
+        "parttime": {
+          "surplus": 15839.511200652445,
+          "earnings": 23150.561200652446,
+          "drive_cost": 2460.6000000000004,
+          "opp_cost": 4850.450000000001,
+          "online_epochs": 8819,
+          "trips": 2000,
+          "n_drivers": 190
+        },
+        "casual": {
+          "surplus": 5132.4136464280755,
+          "earnings": 9653.363646428077,
+          "drive_cost": 1022.1000000000001,
+          "opp_cost": 3498.85,
+          "online_epochs": 3683,
+          "trips": 813,
+          "n_drivers": 82
+        }
+      },
+      "total_welfare": 93529.12655914598,
+      "W_resource_check": 93529.126559146,
+      "W_components_sum": 93529.12655914598,
+      "consistency_gap": 1.4551915228366852e-11
+    },
+    {
+      "rider_surplus": 46049.36740157957,
+      "driver_surplus": 34226.47656622935,
+      "platform_profit": 16129.098855409786,
+      "gross_revenue": 64516.39542163914,
+      "n_requests": 5633,
+      "n_matched": 4261,
+      "n_abandon": 1372,
+      "total_wait": 4010.0,
+      "total_pickup": 464.0,
+      "total_drive_cost": 5238.300000000001,
+      "total_value": 116179.76282321871,
+      "total_opp_cost": 8922.52,
+      "surge_trips": 4261,
+      "fares_sum": 64516.39542163914,
+      "mult_weighted": 8652.856684330722,
+      "driver_by_type": {
+        "fulltime": {
+          "surplus": 14507.441982902012,
+          "earnings": 17699.56198290201,
+          "drive_cost": 1954.8000000000004,
+          "opp_cost": 1237.3200000000002,
+          "online_epochs": 6874,
+          "trips": 1556,
+          "n_drivers": 145
+        },
+        "parttime": {
+          "surplus": 15241.458232571586,
+          "earnings": 22341.158232571586,
+          "drive_cost": 2399.4000000000005,
+          "opp_cost": 4700.300000000001,
+          "online_epochs": 8546,
+          "trips": 1954,
+          "n_drivers": 185
+        },
+        "casual": {
+          "surplus": 4477.57635075575,
+          "earnings": 8346.57635075575,
+          "drive_cost": 884.1000000000001,
+          "opp_cost": 2984.9,
+          "online_epochs": 3142,
+          "trips": 751,
+          "n_drivers": 70
+        }
+      },
+      "total_welfare": 96404.9428232187,
+      "W_resource_check": 96404.9428232187,
+      "W_components_sum": 96404.9428232187,
+      "consistency_gap": 0.0
+    },
+    {
+      "rider_surplus": 44696.143027214195,
+      "driver_surplus": 33641.295677166294,
+      "platform_profit": 15997.561892388763,
+      "gross_revenue": 63990.24756955505,
+      "n_requests": 5623,
+      "n_matched": 4177,
+      "n_abandon": 1446,
+      "total_wait": 3777.0,
+      "total_pickup": 393.0,
+      "total_drive_cost": 5189.1,
+      "total_value": 113974.19059676923,
+      "total_opp_cost": 9162.29,
+      "surge_trips": 4177,
+      "fares_sum": 63990.24756955505,
+      "mult_weighted": 8598.326251073682,
+      "driver_by_type": {
+        "fulltime": {
+          "surplus": 14883.591535641175,
+          "earnings": 18132.231535641175,
+          "drive_cost": 1972.8000000000002,
+          "opp_cost": 1275.8400000000001,
+          "online_epochs": 7088,
+          "trips": 1588,
+          "n_drivers": 150
+        },
+        "parttime": {
+          "surplus": 13215.461387819007,
+          "earnings": 19432.161387819007,
+          "drive_cost": 2102.7000000000003,
+          "opp_cost": 4114.0,
+          "online_epochs": 7480,
+          "trips": 1698,
+          "n_drivers": 162
+        },
+        "casual": {
+          "surplus": 5542.242753706113,
+          "earnings": 10428.292753706111,
+          "drive_cost": 1113.6,
+          "opp_cost": 3772.45,
+          "online_epochs": 3971,
+          "trips": 891,
+          "n_drivers": 88
+        }
+      },
+      "total_welfare": 94335.00059676926,
+      "W_resource_check": 94335.00059676921,
+      "W_components_sum": 94335.00059676926,
+      "consistency_gap": 4.3655745685100555e-11
+    },
+    {
+      "rider_surplus": 44469.89981213991,
+      "driver_surplus": 33355.72241162231,
+      "platform_profit": 15766.070803874103,
+      "gross_revenue": 63064.28321549641,
+      "n_requests": 5604,
+      "n_matched": 4195,
+      "n_abandon": 1409,
+      "total_wait": 4067.0,
+      "total_pickup": 478.0,
+      "total_drive_cost": 5175.6,
+      "total_value": 113227.98302763632,
+      "total_opp_cost": 8766.89,
+      "surge_trips": 4195,
+      "fares_sum": 63064.28321549641,
+      "mult_weighted": 8503.509654965348,
+      "driver_by_type": {
+        "fulltime": {
+          "surplus": 15023.420640905073,
+          "earnings": 18317.660640905073,
+          "drive_cost": 2004.9000000000005,
+          "opp_cost": 1289.34,
+          "online_epochs": 7163,
+          "trips": 1640,
+          "n_drivers": 151
+        },
+        "parttime": {
+          "surplus": 14624.213612967616,
+          "earnings": 21663.163612967615,
+          "drive_cost": 2360.1000000000004,
+          "opp_cost": 4678.85,
+          "online_epochs": 8507,
+          "trips": 1911,
+          "n_drivers": 184
+        },
+        "casual": {
+          "surplus": 3708.088157749618,
+          "earnings": 7317.388157749618,
+          "drive_cost": 810.6000000000001,
+          "opp_cost": 2798.7,
+          "online_epochs": 2946,
+          "trips": 644,
+          "n_drivers": 65
+        }
+      },
+      "total_welfare": 93591.69302763631,
+      "W_resource_check": 93591.69302763631,
+      "W_components_sum": 93591.69302763631,
+      "consistency_gap": 0.0
+    },
+    {
+      "rider_surplus": 44157.786870545,
+      "driver_surplus": 34069.38427058124,
+      "platform_profit": 16201.768090193746,
+      "gross_revenue": 64807.07236077498,
+      "n_requests": 5630,
+      "n_matched": 4184,
+      "n_abandon": 1446,
+      "total_wait": 4122.0,
+      "total_pickup": 514.0,
+      "total_drive_cost": 5209.8,
+      "total_value": 114735.65923131997,
+      "total_opp_cost": 9326.119999999999,
+      "surge_trips": 4184,
+      "fares_sum": 64807.07236077498,
+      "mult_weighted": 8627.364461215391,
+      "driver_by_type": {
+        "fulltime": {
+          "surplus": 13418.617852451534,
+          "earnings": 16310.437852451534,
+          "drive_cost": 1749.0000000000002,
+          "opp_cost": 1142.82,
+          "online_epochs": 6349,
+          "trips": 1410,
+          "n_drivers": 134
+        },
+        "parttime": {
+          "surplus": 15818.961556421316,
+          "earnings": 23133.51155642132,
+          "drive_cost": 2476.2,
+          "opp_cost": 4838.35,
+          "online_epochs": 8797,
+          "trips": 2000,
+          "n_drivers": 189
+        },
+        "casual": {
+          "surplus": 4831.804861708383,
+          "earnings": 9161.354861708382,
+          "drive_cost": 984.6,
+          "opp_cost": 3344.9500000000003,
+          "online_epochs": 3521,
+          "trips": 774,
+          "n_drivers": 77
+        }
+      },
+      "total_welfare": 94428.93923132,
+      "W_resource_check": 94428.93923131996,
+      "W_components_sum": 94428.93923132,
+      "consistency_gap": 2.9103830456733704e-11
+    },
+    {
+      "rider_surplus": 43419.82349676907,
+      "driver_surplus": 33167.849870117534,
+      "platform_profit": 15911.396623372515,
+      "gross_revenue": 63645.58649349006,
+      "n_requests": 5543,
+      "n_matched": 4123,
+      "n_abandon": 1420,
+      "total_wait": 4019.0,
+      "total_pickup": 430.0,
+      "total_drive_cost": 5150.1,
+      "total_value": 112692.00999025913,
+      "total_opp_cost": 9416.24,
+      "surge_trips": 4123,
+      "fares_sum": 63645.58649349006,
+      "mult_weighted": 8521.910549458435,
+      "driver_by_type": {
+        "fulltime": {
+          "surplus": 12951.491460243677,
+          "earnings": 15792.131460243676,
+          "drive_cost": 1724.1000000000001,
+          "opp_cost": 1116.54,
+          "online_epochs": 6203,
+          "trips": 1369,
+          "n_drivers": 131
+        },
+        "parttime": {
+          "surplus": 15246.225215874481,
+          "earnings": 22366.275215874484,
+          "drive_cost": 2389.5,
+          "opp_cost": 4730.55,
+          "online_epochs": 8601,
+          "trips": 1942,
+          "n_drivers": 185
+        },
+        "casual": {
+          "surplus": 4970.133193999377,
+          "earnings": 9575.783193999378,
+          "drive_cost": 1036.5,
+          "opp_cost": 3569.149999999999,
+          "online_epochs": 3757,
+          "trips": 812,
+          "n_drivers": 84
+        }
+      },
+      "total_welfare": 92499.06999025913,
+      "W_resource_check": 92499.06999025912,
+      "W_components_sum": 92499.06999025913,
+      "consistency_gap": 1.4551915228366852e-11
+    },
+    {
+      "rider_surplus": 44985.433032404406,
+      "driver_surplus": 34879.89836916297,
+      "platform_profit": 16462.066123054323,
+      "gross_revenue": 65848.26449221729,
+      "n_requests": 5717,
+      "n_matched": 4270,
+      "n_abandon": 1447,
+      "total_wait": 4058.0,
+      "total_pickup": 453.0,
+      "total_drive_cost": 5166.300000000001,
+      "total_value": 116514.89752462173,
+      "total_opp_cost": 9340.0,
+      "surge_trips": 4270,
+      "fares_sum": 65848.26449221729,
+      "mult_weighted": 8844.686642033705,
+      "driver_by_type": {
+        "fulltime": {
+          "surplus": 14371.48956981381,
+          "earnings": 17355.28956981381,
+          "drive_cost": 1818.3000000000004,
+          "opp_cost": 1165.5,
+          "online_epochs": 6475,
+          "trips": 1531,
+          "n_drivers": 137
+        },
+        "parttime": {
+          "surplus": 14847.866835626664,
+          "earnings": 21672.266835626666,
+          "drive_cost": 2277.0,
+          "opp_cost": 4547.400000000001,
+          "online_epochs": 8268,
+          "trips": 1842,
+          "n_drivers": 178
+        },
+        "casual": {
+          "surplus": 5660.541963722497,
+          "earnings": 10358.641963722495,
+          "drive_cost": 1071.0,
+          "opp_cost": 3627.0999999999995,
+          "online_epochs": 3818,
+          "trips": 897,
+          "n_drivers": 85
+        }
+      },
+      "total_welfare": 96327.3975246217,
+      "W_resource_check": 96327.39752462173,
+      "W_components_sum": 96327.3975246217,
+      "consistency_gap": 2.9103830456733704e-11
+    },
+    {
+      "rider_surplus": 44148.336489760426,
+      "driver_surplus": 33622.091015489415,
+      "platform_profit": 15947.443671829806,
+      "gross_revenue": 63789.77468731922,
+      "n_requests": 5488,
+      "n_matched": 4156,
+      "n_abandon": 1332,
+      "total_wait": 4211.0,
+      "total_pickup": 541.0,
+      "total_drive_cost": 5161.5,
+      "total_value": 113833.51117707965,
+      "total_opp_cost": 9058.74,
+      "surge_trips": 4156,
+      "fares_sum": 63789.77468731922,
+      "mult_weighted": 8519.08861432597,
+      "driver_by_type": {
+        "fulltime": {
+          "surplus": 14248.603174877047,
+          "earnings": 17381.143174877045,
+          "drive_cost": 1900.8000000000002,
+          "opp_cost": 1231.74,
+          "online_epochs": 6843,
+          "trips": 1528,
+          "n_drivers": 145
+        },
+        "parttime": {
+          "surplus": 14707.147011043395,
+          "earnings": 21582.6470110434,
+          "drive_cost": 2312.7000000000007,
+          "opp_cost": 4562.8,
+          "online_epochs": 8296,
+          "trips": 1863,
+          "n_drivers": 179
+        },
+        "casual": {
+          "surplus": 4666.34082956898,
+          "earnings": 8878.540829568978,
+          "drive_cost": 948.0000000000001,
+          "opp_cost": 3264.2,
+          "online_epochs": 3436,
+          "trips": 765,
+          "n_drivers": 76
+        }
+      },
+      "total_welfare": 93717.87117707965,
+      "W_resource_check": 93717.87117707965,
+      "W_components_sum": 93717.87117707965,
+      "consistency_gap": 0.0
+    },
+    {
+      "rider_surplus": 39368.46467778281,
+      "driver_surplus": 36720.473702918156,
+      "platform_profit": 17187.414567639385,
+      "gross_revenue": 68749.65827055754,
+      "n_requests": 5109,
+      "n_matched": 4087,
+      "n_abandon": 1022,
+      "total_wait": 3841.0,
+      "total_pickup": 469.0,
+      "total_drive_cost": 5192.1,
+      "total_value": 113495.52294834032,
+      "total_opp_cost": 9649.669999999998,
+      "surge_trips": 4087,
+      "fares_sum": 68749.65827055754,
+      "mult_weighted": 9116.444774475316,
+      "driver_by_type": {
+        "fulltime": {
+          "surplus": 12504.825861012412,
+          "earnings": 15030.045861012415,
+          "drive_cost": 1536.3,
+          "opp_cost": 988.92,
+          "online_epochs": 5494,
+          "trips": 1195,
+          "n_drivers": 116
+        },
+        "parttime": {
+          "surplus": 18458.308206336536,
+          "earnings": 26199.808206336533,
+          "drive_cost": 2610.0,
+          "opp_cost": 5131.5,
+          "online_epochs": 9330,
+          "trips": 2078,
+          "n_drivers": 202
+        },
+        "casual": {
+          "surplus": 5757.339635569209,
+          "earnings": 10332.389635569209,
+          "drive_cost": 1045.8,
+          "opp_cost": 3529.2499999999995,
+          "online_epochs": 3715,
+          "trips": 814,
+          "n_drivers": 82
+        }
+      },
+      "total_welfare": 93276.35294834035,
+      "W_resource_check": 93276.35294834033,
+      "W_components_sum": 93276.35294834035,
+      "consistency_gap": 2.9103830456733704e-11
+    },
+    {
+      "rider_surplus": 40819.78820475975,
+      "driver_surplus": 36910.421952885554,
+      "platform_profit": 17073.690650961853,
+      "gross_revenue": 68294.76260384741,
+      "n_requests": 5063,
+      "n_matched": 4122,
+      "n_abandon": 941,
+      "total_wait": 4082.0,
+      "total_pickup": 546.0,
+      "total_drive_cost": 5181.0,
+      "total_value": 114829.35080860715,
+      "total_opp_cost": 9129.65,
+      "surge_trips": 4122,
+      "fares_sum": 68294.76260384741,
+      "mult_weighted": 9021.412315059328,
+      "driver_by_type": {
+        "fulltime": {
+          "surplus": 15016.164515231852,
+          "earnings": 18040.164515231852,
+          "drive_cost": 1838.7,
+          "opp_cost": 1185.3000000000002,
+          "online_epochs": 6585,
+          "trips": 1467,
+          "n_drivers": 139
+        },
+        "parttime": {
+          "surplus": 16489.612632484408,
+          "earnings": 23539.46263248441,
+          "drive_cost": 2375.4,
+          "opp_cost": 4674.450000000001,
+          "online_epochs": 8499,
+          "trips": 1879,
+          "n_drivers": 184
+        },
+        "casual": {
+          "surplus": 5404.64480516929,
+          "earnings": 9641.444805169287,
+          "drive_cost": 966.9000000000001,
+          "opp_cost": 3269.9,
+          "online_epochs": 3442,
+          "trips": 776,
+          "n_drivers": 77
+        }
+      },
+      "total_welfare": 94803.90080860717,
+      "W_resource_check": 94803.90080860716,
+      "W_components_sum": 94803.90080860717,
+      "consistency_gap": 1.4551915228366852e-11
+    },
+    {
+      "rider_surplus": 40875.06520958622,
+      "driver_surplus": 36917.813966935064,
+      "platform_profit": 17160.551322311687,
+      "gross_revenue": 68642.20528924675,
+      "n_requests": 5121,
+      "n_matched": 4173,
+      "n_abandon": 948,
+      "total_wait": 3882.0,
+      "total_pickup": 500.0,
+      "total_drive_cost": 5232.6,
+      "total_value": 114952.070498833,
+      "total_opp_cost": 9331.24,
+      "surge_trips": 4173,
+      "fares_sum": 68642.20528924675,
+      "mult_weighted": 9165.865608384132,
+      "driver_by_type": {
+        "fulltime": {
+          "surplus": 14497.594365499132,
+          "earnings": 17374.53436549913,
+          "drive_cost": 1750.5000000000002,
+          "opp_cost": 1126.44,
+          "online_epochs": 6258,
+          "trips": 1426,
+          "n_drivers": 132
+        },
+        "parttime": {
+          "surplus": 16748.873126301318,
+          "earnings": 23995.223126301316,
+          "drive_cost": 2466.3000000000006,
+          "opp_cost": 4780.050000000001,
+          "online_epochs": 8691,
+          "trips": 1943,
+          "n_drivers": 188
+        },
+        "casual": {
+          "surplus": 5671.346475134613,
+          "earnings": 10111.896475134614,
+          "drive_cost": 1015.8000000000001,
+          "opp_cost": 3424.75,
+          "online_epochs": 3605,
+          "trips": 804,
+          "n_drivers": 80
+        }
+      },
+      "total_welfare": 94953.43049883297,
+      "W_resource_check": 94953.43049883298,
+      "W_components_sum": 94953.43049883297,
+      "consistency_gap": 1.4551915228366852e-11
+    },
+    {
+      "rider_surplus": 40465.4802602369,
+      "driver_surplus": 36633.44724537797,
+      "platform_profit": 16911.75241512599,
+      "gross_revenue": 67647.00966050396,
+      "n_requests": 5106,
+      "n_matched": 4074,
+      "n_abandon": 1032,
+      "total_wait": 3950.0,
+      "total_pickup": 499.0,
+      "total_drive_cost": 5163.900000000001,
+      "total_value": 113642.48992074087,
+      "total_opp_cost": 8937.91,
+      "surge_trips": 4074,
+      "fares_sum": 67647.00966050396,
+      "mult_weighted": 8939.438432448937,
+      "driver_by_type": {
+        "fulltime": {
+          "surplus": 15679.457851450836,
+          "earnings": 18883.817851450833,
+          "drive_cost": 1949.4,
+          "opp_cost": 1254.96,
+          "online_epochs": 6972,
+          "trips": 1543,
+          "n_drivers": 147
+        },
+        "parttime": {
+          "surplus": 15982.691087472595,
+          "earnings": 22823.291087472597,
+          "drive_cost": 2303.1000000000004,
+          "opp_cost": 4537.500000000001,
+          "online_epochs": 8250,
+          "trips": 1832,
+          "n_drivers": 179
+        },
+        "casual": {
+          "surplus": 4971.298306454533,
+          "earnings": 9028.148306454535,
+          "drive_cost": 911.4000000000001,
+          "opp_cost": 3145.45,
+          "online_epochs": 3311,
+          "trips": 699,
+          "n_drivers": 74
+        }
+      },
+      "total_welfare": 94010.67992074086,
+      "W_resource_check": 94010.67992074088,
+      "W_components_sum": 94010.67992074086,
+      "consistency_gap": 1.4551915228366852e-11
+    },
+    {
+      "rider_surplus": 39561.23467811401,
+      "driver_surplus": 36513.01480015035,
+      "platform_profit": 16961.334933383452,
+      "gross_revenue": 67845.33973353381,
+      "n_requests": 5051,
+      "n_matched": 4061,
+      "n_abandon": 990,
+      "total_wait": 4022.0,
+      "total_pickup": 513.0,
+      "total_drive_cost": 5125.200000000001,
+      "total_value": 113037.37441164782,
+      "total_opp_cost": 9245.79,
+      "surge_trips": 4061,
+      "fares_sum": 67845.33973353381,
+      "mult_weighted": 9002.037693576847,
+      "driver_by_type": {
+        "fulltime": {
+          "surplus": 14023.642396944037,
+          "earnings": 16880.48239694404,
+          "drive_cost": 1736.7000000000003,
+          "opp_cost": 1120.1399999999999,
+          "online_epochs": 6223,
+          "trips": 1349,
+          "n_drivers": 131
+        },
+        "parttime": {
+          "surplus": 16764.56359136657,
+          "earnings": 23908.36359136657,
+          "drive_cost": 2397.3,
+          "opp_cost": 4746.5,
+          "online_epochs": 8630,
+          "trips": 1910,
+          "n_drivers": 188
+        },
+        "casual": {
+          "surplus": 5724.8088118397445,
+          "earnings": 10095.158811839745,
+          "drive_cost": 991.2000000000002,
+          "opp_cost": 3379.15,
+          "online_epochs": 3557,
+          "trips": 802,
+          "n_drivers": 81
+        }
+      },
+      "total_welfare": 93035.58441164781,
+      "W_resource_check": 93035.58441164781,
+      "W_components_sum": 93035.58441164781,
+      "consistency_gap": 0.0
+    },
+    {
+      "rider_surplus": 41233.920905145096,
+      "driver_surplus": 37599.22403366621,
+      "platform_profit": 17298.094677888737,
+      "gross_revenue": 69192.37871155495,
+      "n_requests": 5284,
+      "n_matched": 4186,
+      "n_abandon": 1098,
+      "total_wait": 3992.0,
+      "total_pickup": 512.0,
+      "total_drive_cost": 5193.300000000001,
+      "total_value": 116015.09961670007,
+      "total_opp_cost": 9101.76,
+      "surge_trips": 4186,
+      "fares_sum": 69192.37871155495,
+      "mult_weighted": 9183.216451950188,
+      "driver_by_type": {
+        "fulltime": {
+          "surplus": 15408.17077126375,
+          "earnings": 18440.03077126375,
+          "drive_cost": 1840.8000000000002,
+          "opp_cost": 1191.06,
+          "online_epochs": 6617,
+          "trips": 1479,
+          "n_drivers": 140
+        },
+        "parttime": {
+          "surplus": 16852.382011987156,
+          "earnings": 23929.782011987154,
+          "drive_cost": 2402.4000000000005,
+          "opp_cost": 4675.0,
+          "online_epochs": 8500,
+          "trips": 1949,
+          "n_drivers": 184
+        },
+        "casual": {
+          "surplus": 5338.671250415298,
+          "earnings": 9524.4712504153,
+          "drive_cost": 950.1,
+          "opp_cost": 3235.7,
+          "online_epochs": 3406,
+          "trips": 758,
+          "n_drivers": 76
+        }
+      },
+      "total_welfare": 96131.23961670004,
+      "W_resource_check": 96131.23961670007,
+      "W_components_sum": 96131.23961670004,
+      "consistency_gap": 2.9103830456733704e-11
+    },
+    {
+      "rider_surplus": 42327.988999967914,
+      "driver_surplus": 37417.4384496613,
+      "platform_profit": 17295.549483220435,
+      "gross_revenue": 69182.19793288174,
+      "n_requests": 5255,
+      "n_matched": 4204,
+      "n_abandon": 1051,
+      "total_wait": 3861.0,
+      "total_pickup": 496.0,
+      "total_drive_cost": 5231.400000000001,
+      "total_value": 116915.58693284965,
+      "total_opp_cost": 9237.81,
+      "surge_trips": 4204,
+      "fares_sum": 69182.19793288174,
+      "mult_weighted": 9173.92493780521,
+      "driver_by_type": {
+        "fulltime": {
+          "surplus": 15331.5200478997,
+          "earnings": 18399.3800478997,
+          "drive_cost": 1873.2,
+          "opp_cost": 1194.6599999999999,
+          "online_epochs": 6637,
+          "trips": 1507,
+          "n_drivers": 140
+        },
+        "parttime": {
+          "surplus": 16104.90748414086,
+          "earnings": 22879.95748414086,
+          "drive_cost": 2288.7,
+          "opp_cost": 4486.35,
+          "online_epochs": 8157,
+          "trips": 1839,
+          "n_drivers": 177
+        },
+        "casual": {
+          "surplus": 5981.010917620735,
+          "earnings": 10607.310917620736,
+          "drive_cost": 1069.5,
+          "opp_cost": 3556.7999999999997,
+          "online_epochs": 3744,
+          "trips": 858,
+          "n_drivers": 83
+        }
+      },
+      "total_welfare": 97040.97693284965,
+      "W_resource_check": 97040.97693284966,
+      "W_components_sum": 97040.97693284965,
+      "consistency_gap": 1.4551915228366852e-11
+    },
+    {
+      "rider_surplus": 42359.25924919654,
+      "driver_surplus": 37604.109921692696,
+      "platform_profit": 17328.21997389757,
+      "gross_revenue": 69312.87989559027,
+      "n_requests": 5194,
+      "n_matched": 4249,
+      "n_abandon": 945,
+      "total_wait": 3838.0,
+      "total_pickup": 515.0,
+      "total_drive_cost": 5246.700000000001,
+      "total_value": 117045.33914478682,
+      "total_opp_cost": 9133.849999999999,
+      "surge_trips": 4249,
+      "fares_sum": 69312.87989559027,
+      "mult_weighted": 9311.730434322406,
+      "driver_by_type": {
+        "fulltime": {
+          "surplus": 16563.19435705536,
+          "earnings": 19873.99435705536,
+          "drive_cost": 2022.9,
+          "opp_cost": 1287.9,
+          "online_epochs": 7155,
+          "trips": 1647,
+          "n_drivers": 151
+        },
+        "parttime": {
+          "surplus": 14770.686015244737,
+          "earnings": 20977.586015244735,
+          "drive_cost": 2097.3,
+          "opp_cost": 4109.6,
+          "online_epochs": 7472,
+          "trips": 1706,
+          "n_drivers": 162
+        },
+        "casual": {
+          "surplus": 6270.229549392596,
+          "earnings": 11133.079549392594,
+          "drive_cost": 1126.5000000000002,
+          "opp_cost": 3736.35,
+          "online_epochs": 3933,
+          "trips": 896,
+          "n_drivers": 87
+        }
+      },
+      "total_welfare": 97291.58914478679,
+      "W_resource_check": 97291.58914478682,
+      "W_components_sum": 97291.58914478679,
+      "consistency_gap": 2.9103830456733704e-11
+    },
+    {
+      "rider_surplus": 39062.34872315586,
+      "driver_surplus": 36915.687514765385,
+      "platform_profit": 17165.772504921795,
+      "gross_revenue": 68663.09001968718,
+      "n_requests": 5041,
+      "n_matched": 4064,
+      "n_abandon": 977,
+      "total_wait": 4126.0,
+      "total_pickup": 560.0,
+      "total_drive_cost": 5135.700000000001,
+      "total_value": 113501.83874284304,
+      "total_opp_cost": 9445.929999999998,
+      "surge_trips": 4064,
+      "fares_sum": 68663.09001968718,
+      "mult_weighted": 9040.414104404825,
+      "driver_by_type": {
+        "fulltime": {
+          "surplus": 13908.193581671516,
+          "earnings": 16672.273581671518,
+          "drive_cost": 1674.9000000000003,
+          "opp_cost": 1089.18,
+          "online_epochs": 6051,
+          "trips": 1321,
+          "n_drivers": 128
+        },
+        "parttime": {
+          "surplus": 17261.290023802256,
+          "earnings": 24552.94002380226,
+          "drive_cost": 2442.3,
+          "opp_cost": 4849.35,
+          "online_epochs": 8817,
+          "trips": 1925,
+          "n_drivers": 190
+        },
+        "casual": {
+          "surplus": 5746.2039092916075,
+          "earnings": 10272.103909291607,
+          "drive_cost": 1018.5,
+          "opp_cost": 3507.4,
+          "online_epochs": 3692,
+          "trips": 818,
+          "n_drivers": 82
+        }
+      },
+      "total_welfare": 93143.80874284304,
+      "W_resource_check": 93143.80874284306,
+      "W_components_sum": 93143.80874284304,
+      "consistency_gap": 1.4551915228366852e-11
+    },
+    {
+      "rider_surplus": 42504.34637024123,
+      "driver_surplus": 37622.388795254126,
+      "platform_profit": 17254.239598418044,
+      "gross_revenue": 69016.95839367218,
+      "n_requests": 5307,
+      "n_matched": 4270,
+      "n_abandon": 1037,
+      "total_wait": 4168.0,
+      "total_pickup": 542.0,
+      "total_drive_cost": 5224.800000000001,
+      "total_value": 117356.50476391343,
+      "total_opp_cost": 8915.529999999999,
+      "surge_trips": 4270,
+      "fares_sum": 69016.95839367218,
+      "mult_weighted": 9237.1604721204,
+      "driver_by_type": {
+        "fulltime": {
+          "surplus": 15972.135084403511,
+          "earnings": 19152.31508440351,
+          "drive_cost": 1944.3000000000002,
+          "opp_cost": 1235.88,
+          "online_epochs": 6866,
+          "trips": 1601,
+          "n_drivers": 145
+        },
+        "parttime": {
+          "surplus": 16669.800140176412,
+          "earnings": 23752.950140176414,
+          "drive_cost": 2392.2000000000007,
+          "opp_cost": 4690.95,
+          "online_epochs": 8529,
+          "trips": 1953,
+          "n_drivers": 185
+        },
+        "casual": {
+          "surplus": 4980.453570674201,
+          "earnings": 8857.4535706742,
+          "drive_cost": 888.3000000000001,
+          "opp_cost": 2988.6999999999994,
+          "online_epochs": 3146,
+          "trips": 716,
+          "n_drivers": 70
+        }
+      },
+      "total_welfare": 97380.9747639134,
+      "W_resource_check": 97380.97476391343,
+      "W_components_sum": 97380.9747639134,
+      "consistency_gap": 2.9103830456733704e-11
+    },
+    {
+      "rider_surplus": 41241.51570911944,
+      "driver_surplus": 36884.76332157995,
+      "platform_profit": 17057.41444052665,
+      "gross_revenue": 68229.6577621066,
+      "n_requests": 5108,
+      "n_matched": 4163,
+      "n_abandon": 945,
+      "total_wait": 3952.0,
+      "total_pickup": 532.0,
+      "total_drive_cost": 5168.1,
+      "total_value": 115003.97347122605,
+      "total_opp_cost": 9119.380000000001,
+      "surge_trips": 4163,
+      "fares_sum": 68229.6577621066,
+      "mult_weighted": 9098.472606811494,
+      "driver_by_type": {
+        "fulltime": {
+          "surplus": 16243.678525769745,
+          "earnings": 19497.658525769744,
+          "drive_cost": 1982.1000000000004,
+          "opp_cost": 1271.8799999999999,
+          "online_epochs": 7066,
+          "trips": 1586,
+          "n_drivers": 150
+        },
+        "parttime": {
+          "surplus": 14397.222736916405,
+          "earnings": 20578.272736916406,
+          "drive_cost": 2077.5,
+          "opp_cost": 4103.55,
+          "online_epochs": 7461,
+          "trips": 1692,
+          "n_drivers": 162
+        },
+        "casual": {
+          "surplus": 6243.862058893799,
+          "earnings": 11096.312058893798,
+          "drive_cost": 1108.5,
+          "opp_cost": 3743.95,
+          "online_epochs": 3941,
+          "trips": 885,
+          "n_drivers": 88
+        }
+      },
+      "total_welfare": 95183.69347122606,
+      "W_resource_check": 95183.69347122604,
+      "W_components_sum": 95183.69347122606,
+      "consistency_gap": 1.4551915228366852e-11
+    },
+    {
+      "rider_surplus": 41786.14263924911,
+      "driver_surplus": 36672.97357192768,
+      "platform_profit": 16866.497857309223,
+      "gross_revenue": 67465.99142923689,
+      "n_requests": 5100,
+      "n_matched": 4163,
+      "n_abandon": 937,
+      "total_wait": 3912.0,
+      "total_pickup": 499.0,
+      "total_drive_cost": 5193.3,
+      "total_value": 114728.93406848602,
+      "total_opp_cost": 8733.22,
+      "surge_trips": 4163,
+      "fares_sum": 67465.99142923689,
+      "mult_weighted": 8993.102100026319,
+      "driver_by_type": {
+        "fulltime": {
+          "surplus": 15975.530991197294,
+          "earnings": 19259.15099119729,
+          "drive_cost": 1995.9,
+          "opp_cost": 1287.72,
+          "online_epochs": 7154,
+          "trips": 1595,
+          "n_drivers": 151
+        },
+        "parttime": {
+          "surplus": 16164.450101511826,
+          "earnings": 23214.650101511827,
+          "drive_cost": 2373.0000000000005,
+          "opp_cost": 4677.200000000001,
+          "online_epochs": 8504,
+          "trips": 1900,
+          "n_drivers": 184
+        },
+        "casual": {
+          "surplus": 4532.992479218553,
+          "earnings": 8125.692479218553,
+          "drive_cost": 824.4000000000001,
+          "opp_cost": 2768.2999999999997,
+          "online_epochs": 2914,
+          "trips": 668,
+          "n_drivers": 65
+        }
+      },
+      "total_welfare": 95325.61406848601,
+      "W_resource_check": 95325.61406848601,
+      "W_components_sum": 95325.61406848601,
+      "consistency_gap": 0.0
+    },
+    {
+      "rider_surplus": 41721.27039000522,
+      "driver_surplus": 37308.05107294231,
+      "platform_profit": 17273.370357647436,
+      "gross_revenue": 69093.48143058975,
+      "n_requests": 5283,
+      "n_matched": 4226,
+      "n_abandon": 1057,
+      "total_wait": 3934.0,
+      "total_pickup": 510.0,
+      "total_drive_cost": 5251.200000000001,
+      "total_value": 116322.35182059495,
+      "total_opp_cost": 9260.859999999999,
+      "surge_trips": 4226,
+      "fares_sum": 69093.48143058975,
+      "mult_weighted": 9250.905429628525,
+      "driver_by_type": {
+        "fulltime": {
+          "surplus": 14601.038143989363,
+          "earnings": 17518.89814398936,
+          "drive_cost": 1776.3000000000002,
+          "opp_cost": 1141.56,
+          "online_epochs": 6342,
+          "trips": 1424,
+          "n_drivers": 134
+        },
+        "parttime": {
+          "surplus": 17246.88110041947,
+          "earnings": 24545.58110041947,
+          "drive_cost": 2487.3,
+          "opp_cost": 4811.4,
+          "online_epochs": 8748,
+          "trips": 2007,
+          "n_drivers": 189
+        },
+        "casual": {
+          "surplus": 5460.131828533482,
+          "earnings": 9755.631828533484,
+          "drive_cost": 987.6000000000001,
+          "opp_cost": 3307.8999999999996,
+          "online_epochs": 3482,
+          "trips": 795,
+          "n_drivers": 77
+        }
+      },
+      "total_welfare": 96302.69182059496,
+      "W_resource_check": 96302.69182059495,
+      "W_components_sum": 96302.69182059496,
+      "consistency_gap": 1.4551915228366852e-11
+    },
+    {
+      "rider_surplus": 41113.238860250305,
+      "driver_surplus": 36489.223747842385,
+      "platform_profit": 17019.994582614123,
+      "gross_revenue": 68079.97833045649,
+      "n_requests": 4999,
+      "n_matched": 4124,
+      "n_abandon": 875,
+      "total_wait": 3812.0,
+      "total_pickup": 498.0,
+      "total_drive_cost": 5205.900000000001,
+      "total_value": 114530.0171907068,
+      "total_opp_cost": 9364.86,
+      "surge_trips": 4124,
+      "fares_sum": 68079.97833045649,
+      "mult_weighted": 9100.600658223277,
+      "driver_by_type": {
+        "fulltime": {
+          "surplus": 14224.657948335851,
+          "earnings": 17099.31794833585,
+          "drive_cost": 1758.3000000000002,
+          "opp_cost": 1116.3600000000001,
+          "online_epochs": 6202,
+          "trips": 1407,
+          "n_drivers": 131
+        },
+        "parttime": {
+          "surplus": 16353.847155574365,
+          "earnings": 23454.447155574366,
+          "drive_cost": 2393.7000000000003,
+          "opp_cost": 4706.9,
+          "online_epochs": 8558,
+          "trips": 1876,
+          "n_drivers": 185
+        },
+        "casual": {
+          "surplus": 5910.718643932165,
+          "earnings": 10506.218643932167,
+          "drive_cost": 1053.9,
+          "opp_cost": 3541.6,
+          "online_epochs": 3728,
+          "trips": 841,
+          "n_drivers": 84
+        }
+      },
+      "total_welfare": 94622.45719070682,
+      "W_resource_check": 94622.4571907068,
+      "W_components_sum": 94622.45719070682,
+      "consistency_gap": 1.4551915228366852e-11
+    },
+    {
+      "rider_surplus": 41211.97974090481,
+      "driver_surplus": 37491.0855088731,
+      "platform_profit": 17335.218502957698,
+      "gross_revenue": 69340.87401183079,
+      "n_requests": 5110,
+      "n_matched": 4217,
+      "n_abandon": 893,
+      "total_wait": 3984.0,
+      "total_pickup": 502.0,
+      "total_drive_cost": 5176.200000000001,
+      "total_value": 116130.45375273564,
+      "total_opp_cost": 9338.37,
+      "surge_trips": 4217,
+      "fares_sum": 69340.87401183079,
+      "mult_weighted": 9293.875989167926,
+      "driver_by_type": {
+        "fulltime": {
+          "surplus": 15022.08773927458,
+          "earnings": 17991.907739274582,
+          "drive_cost": 1806.3000000000002,
+          "opp_cost": 1163.52,
+          "online_epochs": 6464,
+          "trips": 1471,
+          "n_drivers": 137
+        },
+        "parttime": {
+          "surplus": 16226.005969886772,
+          "earnings": 23048.75596988677,
+          "drive_cost": 2290.2000000000003,
+          "opp_cost": 4532.55,
+          "online_epochs": 8241,
+          "trips": 1870,
+          "n_drivers": 178
+        },
+        "casual": {
+          "surplus": 6242.991799711748,
+          "earnings": 10964.991799711748,
+          "drive_cost": 1079.7000000000003,
+          "opp_cost": 3642.3,
+          "online_epochs": 3834,
+          "trips": 876,
+          "n_drivers": 85
+        }
+      },
+      "total_welfare": 96038.2837527356,
+      "W_resource_check": 96038.28375273565,
+      "W_components_sum": 96038.2837527356,
+      "consistency_gap": 4.3655745685100555e-11
+    },
+    {
+      "rider_surplus": 42808.47213395581,
+      "driver_surplus": 37656.946632576364,
+      "platform_profit": 17330.072210858787,
+      "gross_revenue": 69320.28884343515,
+      "n_requests": 5302,
+      "n_matched": 4239,
+      "n_abandon": 1063,
+      "total_wait": 3825.0,
+      "total_pickup": 486.0,
+      "total_drive_cost": 5275.500000000001,
+      "total_value": 117483.76097739096,
+      "total_opp_cost": 9057.77,
+      "surge_trips": 4239,
+      "fares_sum": 69320.28884343515,
+      "mult_weighted": 9223.045887210947,
+      "driver_by_type": {
+        "fulltime": {
+          "surplus": 15751.502556654996,
+          "earnings": 18917.222556654997,
+          "drive_cost": 1935.6000000000004,
+          "opp_cost": 1230.12,
+          "online_epochs": 6834,
+          "trips": 1555,
+          "n_drivers": 145
+        },
+        "parttime": {
+          "surplus": 16372.044221406924,
+          "earnings": 23290.944221406924,
+          "drive_cost": 2358.3,
+          "opp_cost": 4560.6,
+          "online_epochs": 8292,
+          "trips": 1903,
+          "n_drivers": 179
+        },
+        "casual": {
+          "surplus": 5533.399854514442,
+          "earnings": 9782.04985451444,
+          "drive_cost": 981.6,
+          "opp_cost": 3267.0499999999993,
+          "online_epochs": 3439,
+          "trips": 781,
+          "n_drivers": 76
+        }
+      },
+      "total_welfare": 97795.49097739096,
+      "W_resource_check": 97795.49097739096,
+      "W_components_sum": 97795.49097739096,
+      "consistency_gap": 0.0
+    }
+  ],
+  "surge_agg": {
+    "total_welfare": {
+      "mean": 94893.90901936182,
+      "std": 1424.3415093783894,
+      "sem": 205.58598846439276
+    },
+    "rider_surplus": {
+      "mean": 44197.11934429574,
+      "std": 2557.8852826769166,
+      "sem": 369.198939127425
+    },
+    "driver_surplus": {
+      "mean": 34428.08142296622,
+      "std": 2115.343799065779,
+      "sem": 305.3235779548083
+    },
+    "platform_profit": {
+      "mean": 16268.708252099852,
+      "std": 715.7689352766934,
+      "sem": 103.31234686489269
+    },
+    "gross_revenue": {
+      "mean": 65074.83300839941,
+      "std": 2863.0757411067734,
+      "sem": 413.24938745957076
+    },
+    "n_requests": {
+      "mean": 5538.708333333333,
+      "std": 307.69893812755134,
+      "sem": 44.41251618932595
+    },
+    "n_matched": {
+      "mean": 4200.6875,
+      "std": 63.799271739323835,
+      "sem": 9.208631678200176
+    },
+    "n_abandon": {
+      "mean": 1338.0208333333333,
+      "std": 276.00304420024327,
+      "sem": 39.83760796654166
+    },
+    "total_pickup": {
+      "mean": 481.4166666666667,
+      "std": 37.793860434266605,
+      "sem": 5.455073873859743
+    },
+    "total_wait": {
+      "mean": 3988.5416666666665,
+      "std": 137.77548161169074,
+      "sem": 19.886177849059997
+    },
+    "total_drive_cost": {
+      "mean": 5191.950000000001,
+      "std": 41.94566394043909,
+      "sem": 6.0543350918375225
+    },
+    "total_opp_cost": {
+      "mean": 9186.093333333332,
+      "std": 217.6963227763724,
+      "sem": 31.42175763913257
+    },
+    "surge_trips": {
+      "mean": 4200.291666666667,
+      "std": 63.479250532965104,
+      "sem": 9.162440595790775
+    },
+    "driver_by_type": {
+      "fulltime": {
+        "surplus": {
+          "mean": 14113.086327071584,
+          "sem": 172.52870437822645
+        },
+        "earnings": {
+          "mean": 17130.908827071584,
+          "sem": 196.86477551011453
+        },
+        "opp_cost": {
+          "mean": 1180.035,
+          "sem": 11.603145552053022
+        },
+        "online_epochs": {
+          "mean": 6555.75,
+          "sem": 64.46191973362787
+        },
+        "trips": {
+          "mean": 1483.2708333333333,
+          "sem": 16.27720689091411
+        },
+        "n_drivers": {
+          "mean": 138.5625,
+          "sem": 1.3644116006386955
+        }
+      },
+      "parttime": {
+        "surplus": {
+          "mean": 15232.675655044746,
+          "sem": 187.84661452318588
+        },
+        "earnings": {
+          "mean": 22218.981905044744,
+          "sem": 228.84879748281548
+        },
+        "opp_cost": {
+          "mean": 4629.00625,
+          "sem": 36.1262969602332
+        },
+        "online_epochs": {
+          "mean": 8416.375,
+          "sem": 65.68417629133309
+        },
+        "trips": {
+          "mean": 1911.9375,
+          "sem": 15.124319521941246
+        },
+        "n_drivers": {
+          "mean": 182.25,
+          "sem": 1.3995630017061331
+        }
+      },
+      "casual": {
+        "surplus": {
+          "mean": 5082.319440849888,
+          "sem": 87.99515253821235
+        },
+        "earnings": {
+          "mean": 9456.23402418322,
+          "sem": 127.87052634414182
+        },
+        "opp_cost": {
+          "mean": 3377.0520833333335,
+          "sem": 37.36900717385233
+        },
+        "online_epochs": {
+          "mean": 3554.7916666666665,
+          "sem": 39.335797025107716
+        },
+        "trips": {
+          "mean": 805.4791666666666,
+          "sem": 9.21896699568309
+        },
+        "n_drivers": {
+          "mean": 79.1875,
+          "sem": 0.8724792718381533
+        }
+      }
+    },
+    "n_seeds": 48
+  },
+  "surge_mean_mult": 2.0742704636517235,
+  "matched_uniform_summaries": [
+    {
+      "rider_surplus": 42941.1923751173,
+      "driver_surplus": 31389.448745071684,
+      "platform_profit": 15380.922915023893,
+      "gross_revenue": 61523.691660095574,
+      "n_requests": 5807,
+      "n_matched": 3978,
+      "n_abandon": 1829,
+      "total_wait": 4143.0,
+      "total_pickup": 466.0,
+      "total_drive_cost": 5057.1,
+      "total_value": 110265.08403521292,
+      "total_opp_cost": 9696.22,
+      "surge_trips": 3978,
+      "fares_sum": 61523.691660095574,
+      "mult_weighted": 8251.447904406032,
+      "driver_by_type": {
+        "fulltime": {
+          "surplus": 11231.64543022158,
+          "earnings": 13717.565430221579,
+          "drive_cost": 1497.9000000000003,
+          "opp_cost": 988.02,
+          "online_epochs": 5489,
+          "trips": 1184,
+          "n_drivers": 116
+        },
+        "parttime": {
+          "surplus": 15521.091260529522,
+          "earnings": 23261.491260529525,
+          "drive_cost": 2560.5000000000005,
+          "opp_cost": 5179.900000000001,
+          "online_epochs": 9418,
+          "trips": 2014,
+          "n_drivers": 202
+        },
+        "casual": {
+          "surplus": 4636.712054320586,
+          "earnings": 9163.712054320584,
+          "drive_cost": 998.7000000000002,
+          "opp_cost": 3528.2999999999997,
+          "online_epochs": 3714,
+          "trips": 780,
+          "n_drivers": 82
+        }
+      },
+      "total_welfare": 89711.56403521288,
+      "W_resource_check": 89711.56403521291,
+      "W_components_sum": 89711.56403521288,
+      "consistency_gap": 2.9103830456733704e-11
+    },
+    {
+      "rider_surplus": 43179.30711161241,
+      "driver_surplus": 32495.680174221576,
+      "platform_profit": 15601.106724740523,
+      "gross_revenue": 62404.42689896209,
+      "n_requests": 5997,
+      "n_matched": 4063,
+      "n_abandon": 1934,
+      "total_wait": 4268.0,
+      "total_pickup": 509.0,
+      "total_drive_cost": 5113.8,
+      "total_value": 111558.93401057454,
+      "total_opp_cost": 9193.84,
+      "surge_trips": 4063,
+      "fares_sum": 62404.42689896209,
+      "mult_weighted": 8427.760893816476,
+      "driver_by_type": {
+        "fulltime": {
+          "surplus": 13674.38312206438,
+          "earnings": 16674.02312206438,
+          "drive_cost": 1815.6000000000001,
+          "opp_cost": 1184.04,
+          "online_epochs": 6578,
+          "trips": 1450,
+          "n_drivers": 139
+        },
+        "parttime": {
+          "surplus": 14344.684846791915,
+          "earnings": 21374.734846791915,
+          "drive_cost": 2342.4,
+          "opp_cost": 4687.65,
+          "online_epochs": 8523,
+          "trips": 1854,
+          "n_drivers": 184
+        },
+        "casual": {
+          "surplus": 4476.612205365282,
+          "earnings": 8754.56220536528,
+          "drive_cost": 955.8000000000002,
+          "opp_cost": 3322.149999999999,
+          "online_epochs": 3497,
+          "trips": 759,
+          "n_drivers": 77
+        }
+      },
+      "total_welfare": 91276.09401057451,
+      "W_resource_check": 91276.09401057454,
+      "W_components_sum": 91276.09401057451,
+      "consistency_gap": 2.9103830456733704e-11
+    },
+    {
+      "rider_surplus": 45153.326208817634,
+      "driver_surplus": 33327.03662492265,
+      "platform_profit": 15956.325541640885,
+      "gross_revenue": 63825.30216656354,
+      "n_requests": 5906,
+      "n_matched": 4190,
+      "n_abandon": 1716,
+      "total_wait": 4039.0,
+      "total_pickup": 507.0,
+      "total_drive_cost": 5189.1,
+      "total_value": 114633.2283753812,
+      "total_opp_cost": 9352.84,
+      "surge_trips": 4190,
+      "fares_sum": 63825.30216656354,
+      "mult_weighted": 8691.193242700316,
+      "driver_by_type": {
+        "fulltime": {
+          "surplus": 13357.72001153209,
+          "earnings": 16242.16001153209,
+          "drive_cost": 1759.8000000000002,
+          "opp_cost": 1124.6399999999999,
+          "online_epochs": 6248,
+          "trips": 1406,
+          "n_drivers": 132
+        },
+        "parttime": {
+          "surplus": 15114.452708468962,
+          "earnings": 22326.202708468965,
+          "drive_cost": 2427.3,
+          "opp_cost": 4784.450000000001,
+          "online_epochs": 8699,
+          "trips": 1972,
+          "n_drivers": 188
+        },
+        "casual": {
+          "surplus": 4854.863904921598,
+          "earnings": 9300.613904921598,
+          "drive_cost": 1002.0000000000001,
+          "opp_cost": 3443.75,
+          "online_epochs": 3625,
+          "trips": 812,
+          "n_drivers": 80
+        }
+      },
+      "total_welfare": 94436.68837538116,
+      "W_resource_check": 94436.68837538119,
+      "W_components_sum": 94436.68837538116,
+      "consistency_gap": 2.9103830456733704e-11
+    },
+    {
+      "rider_surplus": 43834.554276834315,
+      "driver_surplus": 33055.662254459094,
+      "platform_profit": 15714.050751486364,
+      "gross_revenue": 62856.203005945456,
+      "n_requests": 6025,
+      "n_matched": 4078,
+      "n_abandon": 1947,
+      "total_wait": 4095.0,
+      "total_pickup": 463.0,
+      "total_drive_cost": 5116.500000000001,
+      "total_value": 112423.75728277976,
+      "total_opp_cost": 8969.990000000002,
+      "surge_trips": 4078,
+      "fares_sum": 62856.203005945456,
+      "mult_weighted": 8458.87495077126,
+      "driver_by_type": {
+        "fulltime": {
+          "surplus": 14479.765305822131,
+          "earnings": 17659.40530582213,
+          "drive_cost": 1925.4,
+          "opp_cost": 1254.24,
+          "online_epochs": 6968,
+          "trips": 1531,
+          "n_drivers": 147
+        },
+        "parttime": {
+          "surplus": 14261.058864450792,
+          "earnings": 21100.308864450795,
+          "drive_cost": 2273.7000000000007,
+          "opp_cost": 4565.55,
+          "online_epochs": 8301,
+          "trips": 1824,
+          "n_drivers": 179
+        },
+        "casual": {
+          "surplus": 4314.838084186163,
+          "earnings": 8382.438084186162,
+          "drive_cost": 917.4000000000001,
+          "opp_cost": 3150.2,
+          "online_epochs": 3316,
+          "trips": 723,
+          "n_drivers": 74
+        }
+      },
+      "total_welfare": 92604.26728277977,
+      "W_resource_check": 92604.26728277975,
+      "W_components_sum": 92604.26728277977,
+      "consistency_gap": 1.4551915228366852e-11
+    },
+    {
+      "rider_surplus": 44896.881826785844,
+      "driver_surplus": 33505.435504001056,
+      "platform_profit": 16007.14516800035,
+      "gross_revenue": 64028.5806720014,
+      "n_requests": 5961,
+      "n_matched": 4140,
+      "n_abandon": 1821,
+      "total_wait": 4058.0,
+      "total_pickup": 493.0,
+      "total_drive_cost": 5167.200000000001,
+      "total_value": 114606.66249878726,
+      "total_opp_cost": 9348.8,
+      "surge_trips": 4140,
+      "fares_sum": 64028.5806720014,
+      "mult_weighted": 8587.479719517702,
+      "driver_by_type": {
+        "fulltime": {
+          "surplus": 13264.0369402957,
+          "earnings": 16115.836940295703,
+          "drive_cost": 1733.1000000000001,
+          "opp_cost": 1118.6999999999998,
+          "online_epochs": 6215,
+          "trips": 1404,
+          "n_drivers": 131
+        },
+        "parttime": {
+          "surplus": 15263.797265466657,
+          "earnings": 22444.747265466656,
+          "drive_cost": 2417.4,
+          "opp_cost": 4763.550000000001,
+          "online_epochs": 8661,
+          "trips": 1927,
+          "n_drivers": 188
+        },
+        "casual": {
+          "surplus": 4977.601298238694,
+          "earnings": 9460.851298238695,
+          "drive_cost": 1016.7000000000002,
+          "opp_cost": 3466.55,
+          "online_epochs": 3649,
+          "trips": 809,
+          "n_drivers": 81
+        }
+      },
+      "total_welfare": 94409.46249878725,
+      "W_resource_check": 94409.46249878727,
+      "W_components_sum": 94409.46249878725,
+      "consistency_gap": 1.4551915228366852e-11
+    },
+    {
+      "rider_surplus": 44017.661678563076,
+      "driver_surplus": 32973.893124622206,
+      "platform_profit": 15752.32104154074,
+      "gross_revenue": 63009.28416616296,
+      "n_requests": 6046,
+      "n_matched": 4109,
+      "n_abandon": 1937,
+      "total_wait": 4168.0,
+      "total_pickup": 522.0,
+      "total_drive_cost": 5119.500000000001,
+      "total_value": 112862.14584472604,
+      "total_opp_cost": 9163.57,
+      "surge_trips": 4109,
+      "fares_sum": 63009.28416616296,
+      "mult_weighted": 8523.17733514448,
+      "driver_by_type": {
+        "fulltime": {
+          "surplus": 13506.552467170299,
+          "earnings": 16491.0724671703,
+          "drive_cost": 1795.8000000000002,
+          "opp_cost": 1188.7199999999998,
+          "online_epochs": 6604,
+          "trips": 1454,
+          "n_drivers": 140
+        },
+        "parttime": {
+          "surplus": 14717.56838258179,
+          "earnings": 21787.618382581793,
+          "drive_cost": 2367.0,
+          "opp_cost": 4703.05,
+          "online_epochs": 8551,
+          "trips": 1871,
+          "n_drivers": 184
+        },
+        "casual": {
+          "surplus": 4749.772274870121,
+          "earnings": 8978.272274870122,
+          "drive_cost": 956.7000000000002,
+          "opp_cost": 3271.7999999999993,
+          "online_epochs": 3444,
+          "trips": 784,
+          "n_drivers": 76
+        }
+      },
+      "total_welfare": 92743.87584472602,
+      "W_resource_check": 92743.87584472605,
+      "W_components_sum": 92743.87584472602,
+      "consistency_gap": 2.9103830456733704e-11
+    },
+    {
+      "rider_surplus": 43765.147960032984,
+      "driver_surplus": 32089.90832890106,
+      "platform_profit": 15516.37277630035,
+      "gross_revenue": 62065.4911052014,
+      "n_requests": 5879,
+      "n_matched": 4064,
+      "n_abandon": 1815,
+      "total_wait": 3935.0,
+      "total_pickup": 425.0,
+      "total_drive_cost": 5136.6,
+      "total_value": 111339.63906523443,
+      "total_opp_cost": 9322.61,
+      "surge_trips": 4064,
+      "fares_sum": 62065.4911052014,
+      "mult_weighted": 8429.835164280128,
+      "driver_by_type": {
+        "fulltime": {
+          "surplus": 13196.407705464553,
+          "earnings": 16206.067705464553,
+          "drive_cost": 1814.1000000000004,
+          "opp_cost": 1195.56,
+          "online_epochs": 6642,
+          "trips": 1426,
+          "n_drivers": 140
+        },
+        "parttime": {
+          "surplus": 13901.157424739911,
+          "earnings": 20674.35742473991,
+          "drive_cost": 2253.3,
+          "opp_cost": 4519.9000000000015,
+          "online_epochs": 8218,
+          "trips": 1809,
+          "n_drivers": 177
+        },
+        "casual": {
+          "surplus": 4992.343198696597,
+          "earnings": 9668.6931986966,
+          "drive_cost": 1069.2000000000003,
+          "opp_cost": 3607.15,
+          "online_epochs": 3797,
+          "trips": 829,
+          "n_drivers": 83
+        }
+      },
+      "total_welfare": 91371.4290652344,
+      "W_resource_check": 91371.42906523442,
+      "W_components_sum": 91371.4290652344,
+      "consistency_gap": 1.4551915228366852e-11
+    },
+    {
+      "rider_surplus": 44382.09593780634,
+      "driver_surplus": 33263.31621550655,
+      "platform_profit": 15845.352071835521,
+      "gross_revenue": 63381.408287342085,
+      "n_requests": 5987,
+      "n_matched": 4084,
+      "n_abandon": 1903,
+      "total_wait": 4231.0,
+      "total_pickup": 551.0,
+      "total_drive_cost": 5124.000000000001,
+      "total_value": 113686.90422514844,
+      "total_opp_cost": 9148.74,
+      "surge_trips": 4084,
+      "fares_sum": 63381.408287342085,
+      "mult_weighted": 8471.320573553174,
+      "driver_by_type": {
+        "fulltime": {
+          "surplus": 14959.574298981765,
+          "earnings": 18223.814298981764,
+          "drive_cost": 1976.7000000000003,
+          "opp_cost": 1287.54,
+          "online_epochs": 7153,
+          "trips": 1573,
+          "n_drivers": 151
+        },
+        "parttime": {
+          "surplus": 12973.89582256494,
+          "earnings": 19143.545822564938,
+          "drive_cost": 2056.2,
+          "opp_cost": 4113.450000000001,
+          "online_epochs": 7479,
+          "trips": 1641,
+          "n_drivers": 162
+        },
+        "casual": {
+          "surplus": 5329.846093959844,
+          "earnings": 10168.696093959845,
+          "drive_cost": 1091.1000000000001,
+          "opp_cost": 3747.75,
+          "online_epochs": 3945,
+          "trips": 870,
+          "n_drivers": 87
+        }
+      },
+      "total_welfare": 93490.76422514842,
+      "W_resource_check": 93490.76422514844,
+      "W_components_sum": 93490.76422514842,
+      "consistency_gap": 1.4551915228366852e-11
+    },
+    {
+      "rider_surplus": 44005.917773633344,
+      "driver_surplus": 32813.950758136794,
+      "platform_profit": 15794.843586045597,
+      "gross_revenue": 63179.37434418239,
+      "n_requests": 5934,
+      "n_matched": 4115,
+      "n_abandon": 1819,
+      "total_wait": 4386.0,
+      "total_pickup": 578.0,
+      "total_drive_cost": 5112.900000000001,
+      "total_value": 113325.69211781569,
+      "total_opp_cost": 9457.68,
+      "surge_trips": 4115,
+      "fares_sum": 63179.37434418239,
+      "mult_weighted": 8535.622957926395,
+      "driver_by_type": {
+        "fulltime": {
+          "surplus": 12533.678463020473,
+          "earnings": 15286.958463020472,
+          "drive_cost": 1661.4,
+          "opp_cost": 1091.88,
+          "online_epochs": 6066,
+          "trips": 1324,
+          "n_drivers": 128
+        },
+        "parttime": {
+          "surplus": 15369.234788706468,
+          "earnings": 22665.03478870647,
+          "drive_cost": 2439.3,
+          "opp_cost": 4856.500000000001,
+          "online_epochs": 8830,
+          "trips": 1971,
+          "n_drivers": 190
+        },
+        "casual": {
+          "surplus": 4911.037506409848,
+          "earnings": 9432.537506409848,
+          "drive_cost": 1012.2000000000003,
+          "opp_cost": 3509.3,
+          "online_epochs": 3694,
+          "trips": 820,
+          "n_drivers": 82
+        }
+      },
+      "total_welfare": 92614.71211781572,
+      "W_resource_check": 92614.71211781571,
+      "W_components_sum": 92614.71211781572,
+      "consistency_gap": 1.4551915228366852e-11
+    },
+    {
+      "rider_surplus": 43801.605163984445,
+      "driver_surplus": 33475.80992726957,
+      "platform_profit": 15858.419975756522,
+      "gross_revenue": 63433.67990302609,
+      "n_requests": 5975,
+      "n_matched": 4142,
+      "n_abandon": 1833,
+      "total_wait": 4330.0,
+      "total_pickup": 572.0,
+      "total_drive_cost": 5146.500000000001,
+      "total_value": 113297.28506701054,
+      "total_opp_cost": 8952.95,
+      "surge_trips": 4142,
+      "fares_sum": 63433.67990302609,
+      "mult_weighted": 8591.628260445006,
+      "driver_by_type": {
+        "fulltime": {
+          "surplus": 14340.755976557699,
+          "earnings": 17490.4559765577,
+          "drive_cost": 1910.4000000000003,
+          "opp_cost": 1239.3,
+          "online_epochs": 6885,
+          "trips": 1522,
+          "n_drivers": 145
+        },
+        "parttime": {
+          "surplus": 15035.59449484563,
+          "earnings": 22122.09449484563,
+          "drive_cost": 2379.6000000000004,
+          "opp_cost": 4706.9,
+          "online_epochs": 8558,
+          "trips": 1924,
+          "n_drivers": 185
+        },
+        "casual": {
+          "surplus": 4099.459455866237,
+          "earnings": 7962.709455866236,
+          "drive_cost": 856.5000000000001,
+          "opp_cost": 3006.75,
+          "online_epochs": 3165,
+          "trips": 696,
+          "n_drivers": 70
+        }
+      },
+      "total_welfare": 93135.83506701054,
+      "W_resource_check": 93135.83506701054,
+      "W_components_sum": 93135.83506701054,
+      "consistency_gap": 0.0
+    },
+    {
+      "rider_surplus": 43160.26842410582,
+      "driver_surplus": 32323.94143034639,
+      "platform_profit": 15531.203810115463,
+      "gross_revenue": 62124.81524046185,
+      "n_requests": 5802,
+      "n_matched": 4033,
+      "n_abandon": 1769,
+      "total_wait": 4125.0,
+      "total_pickup": 537.0,
+      "total_drive_cost": 5097.0,
+      "total_value": 111060.08366456768,
+      "total_opp_cost": 9172.67,
+      "surge_trips": 4033,
+      "fares_sum": 62124.81524046185,
+      "mult_weighted": 8365.532779906907,
+      "driver_by_type": {
+        "fulltime": {
+          "surplus": 14371.867006852477,
+          "earnings": 17583.48700685248,
+          "drive_cost": 1933.8000000000002,
+          "opp_cost": 1277.8200000000002,
+          "online_epochs": 7099,
+          "trips": 1519,
+          "n_drivers": 150
+        },
+        "parttime": {
+          "surplus": 12651.837614222106,
+          "earnings": 18822.137614222105,
+          "drive_cost": 2057.4,
+          "opp_cost": 4112.900000000001,
+          "online_epochs": 7478,
+          "trips": 1626,
+          "n_drivers": 162
+        },
+        "casual": {
+          "surplus": 5300.236809271806,
+          "earnings": 10187.986809271806,
+          "drive_cost": 1105.8000000000002,
+          "opp_cost": 3781.95,
+          "online_epochs": 3981,
+          "trips": 888,
+          "n_drivers": 88
+        }
+      },
+      "total_welfare": 91015.41366456768,
+      "W_resource_check": 91015.41366456768,
+      "W_components_sum": 91015.41366456768,
+      "consistency_gap": 0.0
+    },
+    {
+      "rider_surplus": 42753.08261805389,
+      "driver_surplus": 32329.75789455652,
+      "platform_profit": 15393.575964852173,
+      "gross_revenue": 61574.30385940869,
+      "n_requests": 5877,
+      "n_matched": 4000,
+      "n_abandon": 1877,
+      "total_wait": 4349.0,
+      "total_pickup": 562.0,
+      "total_drive_cost": 5059.8,
+      "total_value": 110415.98647746262,
+      "total_opp_cost": 8791.169999999998,
+      "surge_trips": 4000,
+      "fares_sum": 61574.30385940869,
+      "mult_weighted": 8297.081854606382,
+      "driver_by_type": {
+        "fulltime": {
+          "surplus": 14293.16913314041,
+          "earnings": 17488.589133140413,
+          "drive_cost": 1911.3000000000002,
+          "opp_cost": 1284.12,
+          "online_epochs": 7134,
+          "trips": 1512,
+          "n_drivers": 151
+        },
+        "parttime": {
+          "surplus": 14257.110579848593,
+          "earnings": 21294.460579848597,
+          "drive_cost": 2344.2000000000003,
+          "opp_cost": 4693.1500000000015,
+          "online_epochs": 8533,
+          "trips": 1840,
+          "n_drivers": 184
+        },
+        "casual": {
+          "surplus": 3779.4781815675074,
+          "earnings": 7397.678181567507,
+          "drive_cost": 804.3000000000002,
+          "opp_cost": 2813.9,
+          "online_epochs": 2962,
+          "trips": 648,
+          "n_drivers": 65
+        }
+      },
+      "total_welfare": 90476.4164774626,
+      "W_resource_check": 90476.41647746261,
+      "W_components_sum": 90476.4164774626,
+      "consistency_gap": 1.4551915228366852e-11
+    },
+    {
+      "rider_surplus": 43765.601766219355,
+      "driver_surplus": 32668.184855861495,
+      "platform_profit": 15699.738285287163,
+      "gross_revenue": 62798.95314114865,
+      "n_requests": 5867,
+      "n_matched": 4112,
+      "n_abandon": 1755,
+      "total_wait": 4204.0,
+      "total_pickup": 565.0,
+      "total_drive_cost": 5131.800000000001,
+      "total_value": 112450.15490736804,
+      "total_opp_cost": 9299.23,
+      "surge_trips": 4112,
+      "fares_sum": 62798.95314114865,
+      "mult_weighted": 8529.400146535438,
+      "driver_by_type": {
+        "fulltime": {
+          "surplus": 12988.978966869858,
+          "earnings": 15879.058966869856,
+          "drive_cost": 1746.0000000000002,
+          "opp_cost": 1144.08,
+          "online_epochs": 6356,
+          "trips": 1389,
+          "n_drivers": 134
+        },
+        "parttime": {
+          "surplus": 15069.190242269764,
+          "earnings": 22311.890242269765,
+          "drive_cost": 2419.2000000000003,
+          "opp_cost": 4823.5,
+          "online_epochs": 8770,
+          "trips": 1946,
+          "n_drivers": 189
+        },
+        "casual": {
+          "surplus": 4610.015646721875,
+          "earnings": 8908.265646721873,
+          "drive_cost": 966.6,
+          "opp_cost": 3331.6499999999996,
+          "online_epochs": 3507,
+          "trips": 777,
+          "n_drivers": 77
+        }
+      },
+      "total_welfare": 92133.52490736802,
+      "W_resource_check": 92133.52490736803,
+      "W_components_sum": 92133.52490736802,
+      "consistency_gap": 1.4551915228366852e-11
+    },
+    {
+      "rider_surplus": 43052.71810552139,
+      "driver_surplus": 32082.13479691765,
+      "platform_profit": 15546.968265639216,
+      "gross_revenue": 62187.873062556864,
+      "n_requests": 5769,
+      "n_matched": 4049,
+      "n_abandon": 1720,
+      "total_wait": 4020.0,
+      "total_pickup": 521.0,
+      "total_drive_cost": 5099.400000000001,
+      "total_value": 110868.5911680783,
+      "total_opp_cost": 9459.369999999999,
+      "surge_trips": 4049,
+      "fares_sum": 62187.873062556864,
+      "mult_weighted": 8398.721107325344,
+      "driver_by_type": {
+        "fulltime": {
+          "surplus": 12356.17109463182,
+          "earnings": 15162.19109463182,
+          "drive_cost": 1694.7000000000003,
+          "opp_cost": 1111.3200000000002,
+          "online_epochs": 6174,
+          "trips": 1325,
+          "n_drivers": 131
+        },
+        "parttime": {
+          "surplus": 14608.039873623591,
+          "earnings": 21662.539873623595,
+          "drive_cost": 2342.1000000000004,
+          "opp_cost": 4712.4,
+          "online_epochs": 8568,
+          "trips": 1873,
+          "n_drivers": 185
+        },
+        "casual": {
+          "surplus": 5117.923828662233,
+          "earnings": 9816.173828662235,
+          "drive_cost": 1062.6000000000001,
+          "opp_cost": 3635.6499999999996,
+          "online_epochs": 3827,
+          "trips": 851,
+          "n_drivers": 84
+        }
+      },
+      "total_welfare": 90681.82116807826,
+      "W_resource_check": 90681.82116807831,
+      "W_components_sum": 90681.82116807826,
+      "consistency_gap": 5.820766091346741e-11
+    },
+    {
+      "rider_surplus": 44320.946216396806,
+      "driver_surplus": 33019.57690589006,
+      "platform_profit": 15839.958968630022,
+      "gross_revenue": 63359.83587452009,
+      "n_requests": 6038,
+      "n_matched": 4136,
+      "n_abandon": 1902,
+      "total_wait": 4265.0,
+      "total_pickup": 566.0,
+      "total_drive_cost": 5118.900000000001,
+      "total_value": 113651.78209091685,
+      "total_opp_cost": 9381.400000000001,
+      "surge_trips": 4136,
+      "fares_sum": 63359.83587452009,
+      "mult_weighted": 8579.182637663092,
+      "driver_by_type": {
+        "fulltime": {
+          "surplus": 13590.555488549799,
+          "earnings": 16546.4554885498,
+          "drive_cost": 1790.4,
+          "opp_cost": 1165.5,
+          "online_epochs": 6475,
+          "trips": 1468,
+          "n_drivers": 137
+        },
+        "parttime": {
+          "surplus": 14270.968679390691,
+          "earnings": 21086.61867939069,
+          "drive_cost": 2267.7,
+          "opp_cost": 4547.950000000001,
+          "online_epochs": 8269,
+          "trips": 1804,
+          "n_drivers": 178
+        },
+        "casual": {
+          "surplus": 5158.052737949575,
+          "earnings": 9886.802737949574,
+          "drive_cost": 1060.8000000000002,
+          "opp_cost": 3667.95,
+          "online_epochs": 3861,
+          "trips": 864,
+          "n_drivers": 85
+        }
+      },
+      "total_welfare": 93180.48209091688,
+      "W_resource_check": 93180.48209091686,
+      "W_components_sum": 93180.48209091688,
+      "consistency_gap": 1.4551915228366852e-11
+    },
+    {
+      "rider_surplus": 44519.32906430185,
+      "driver_surplus": 33107.97845206925,
+      "platform_profit": 15782.812817356413,
+      "gross_revenue": 63131.25126942565,
+      "n_requests": 5807,
+      "n_matched": 4111,
+      "n_abandon": 1696,
+      "total_wait": 3997.0,
+      "total_pickup": 479.0,
+      "total_drive_cost": 5151.000000000001,
+      "total_value": 113246.38033372755,
+      "total_opp_cost": 9089.46,
+      "surge_trips": 4111,
+      "fares_sum": 63131.25126942565,
+      "mult_weighted": 8527.325876071785,
+      "driver_by_type": {
+        "fulltime": {
+          "surplus": 14122.995456866829,
+          "earnings": 17250.255456866827,
+          "drive_cost": 1892.1000000000004,
+          "opp_cost": 1235.16,
+          "online_epochs": 6862,
+          "trips": 1486,
+          "n_drivers": 145
+        },
+        "parttime": {
+          "surplus": 14266.123981909288,
+          "earnings": 21142.623981909288,
+          "drive_cost": 2301.6000000000004,
+          "opp_cost": 4574.900000000001,
+          "online_epochs": 8318,
+          "trips": 1840,
+          "n_drivers": 179
+        },
+        "casual": {
+          "surplus": 4718.859013293134,
+          "earnings": 8955.559013293132,
+          "drive_cost": 957.3000000000001,
+          "opp_cost": 3279.3999999999996,
+          "online_epochs": 3452,
+          "trips": 785,
+          "n_drivers": 76
+        }
+      },
+      "total_welfare": 93410.12033372752,
+      "W_resource_check": 93410.12033372754,
+      "W_components_sum": 93410.12033372752,
+      "consistency_gap": 1.4551915228366852e-11
+    }
+  ],
+  "matched_uniform_agg": {
+    "total_welfare": {
+      "mean": 92293.27944779948,
+      "std": 1408.5409478918411,
+      "sem": 352.1352369729603
+    },
+    "rider_surplus": {
+      "mean": 43846.852281736676,
+      "std": 702.7128606552433,
+      "sem": 175.67821516381082
+    },
+    "driver_surplus": {
+      "mean": 32745.1072495471,
+      "std": 589.0330177594893,
+      "sem": 147.25825443987233
+    },
+    "platform_profit": {
+      "mean": 15701.319916515698,
+      "std": 188.9849234157623,
+      "sem": 47.246230853940574
+    },
+    "gross_revenue": {
+      "mean": 62805.279666062794,
+      "std": 755.9396936630492,
+      "sem": 188.9849234157623
+    },
+    "n_requests": {
+      "mean": 5917.3125,
+      "std": 91.22406023997543,
+      "sem": 22.806015059993857
+    },
+    "n_matched": {
+      "mean": 4087.75,
+      "std": 55.56317725496506,
+      "sem": 13.890794313741265
+    },
+    "n_abandon": {
+      "mean": 1829.5625,
+      "std": 82.26296756945578,
+      "sem": 20.565741892363945
+    },
+    "total_pickup": {
+      "mean": 519.75,
+      "std": 45.546313425640356,
+      "sem": 11.386578356410089
+    },
+    "total_wait": {
+      "mean": 4163.3125,
+      "std": 134.8652259356231,
+      "sem": 33.716306483905775
+    },
+    "total_drive_cost": {
+      "mean": 5121.31875,
+      "std": 34.356216686358366,
+      "sem": 8.589054171589591
+    },
+    "total_opp_cost": {
+      "mean": 9237.533749999999,
+      "std": 224.89876095330837,
+      "sem": 56.22469023832709
+    },
+    "surge_trips": {
+      "mean": 4087.75,
+      "std": 55.56317725496506,
+      "sem": 13.890794313741265
+    },
+    "driver_by_type": {
+      "fulltime": {
+        "surplus": {
+          "mean": 13516.766054252617,
+          "sem": 236.51552853368915
+        },
+        "earnings": {
+          "mean": 16501.087304252615,
+          "sem": 286.73862557121544
+        },
+        "opp_cost": {
+          "mean": 1180.665,
+          "sem": 20.618962025281487
+        },
+        "online_epochs": {
+          "mean": 6559.25,
+          "sem": 114.5497890293416
+        },
+        "trips": {
+          "mean": 1435.8125,
+          "sem": 24.537423586228446
+        },
+        "n_drivers": {
+          "mean": 138.5625,
+          "sem": 2.4151755457247135
+        }
+      },
+      "parttime": {
+        "surplus": {
+          "mean": 14476.612926900663,
+          "sem": 201.7724178662084
+        },
+        "earnings": {
+          "mean": 21451.275426900662,
+          "sem": 296.3278225270332
+        },
+        "opp_cost": {
+          "mean": 4646.606250000001,
+          "sem": 65.00077209076697
+        },
+        "online_epochs": {
+          "mean": 8448.375,
+          "sem": 118.18322198321272
+        },
+        "trips": {
+          "mean": 1858.5,
+          "sem": 27.034083425680752
+        },
+        "n_drivers": {
+          "mean": 182.25,
+          "sem": 2.477397828367499
+        }
+      },
+      "casual": {
+        "surplus": {
+          "mean": 4751.728268393819,
+          "sem": 107.06098909255248
+        },
+        "earnings": {
+          "mean": 9151.597018393819,
+          "sem": 192.80496084733653
+        },
+        "opp_cost": {
+          "mean": 3410.2625,
+          "sem": 66.84531623145585
+        },
+        "online_epochs": {
+          "mean": 3589.75,
+          "sem": 70.36349076995351
+        },
+        "trips": {
+          "mean": 793.4375,
+          "sem": 16.209299992596844
+        },
+        "n_drivers": {
+          "mean": 79.1875,
+          "sem": 1.5443951081248606
+        }
+      }
+    },
+    "n_seeds": 16
+  },
+  "surge_obj_per_train_seed": [
+    94435.65088933731,
+    94850.028101848,
+    95396.04806690016
+  ],
+  "uniform_obj": 93210.68899803098,
+  "elapsed_s": 542.6064529418945
+}
