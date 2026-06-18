@@ -41,11 +41,11 @@ def run(cfg, mode, m_high, seeds, dispatch=2):
 
 
 def by_type_percap(summaries):
+    """Return per-type per-capita surplus: {type: [per-seed values]}."""
     bt = {}
     for t in summaries[0]["driver_by_type"]:
-        v = np.mean([s["driver_by_type"][t]["surplus"] / max(1, s["driver_by_type"][t]["n_drivers"])
-                     for s in summaries])
-        bt[t] = float(v)
+        bt[t] = np.array([s["driver_by_type"][t]["surplus"] / max(1, s["driver_by_type"][t]["n_drivers"])
+                          for s in summaries])
     return bt
 
 
@@ -53,22 +53,30 @@ def main():
     cfg = SimConfig(rebalance_enabled=False)
     seeds = range(100, 116)
     m_high = 2.0
+    seeds = list(seeds)
     uni = run(cfg, "uniform", m_high, seeds)
     sur = run(cfg, "surge", m_high, seeds)
-    bu, bs = by_type_percap(uni), by_type_percap(sur)
+    bu, bs = by_type_percap(uni), by_type_percap(sur)   # {type: per-seed array}
+    n = len(seeds)
     gr = np.mean([u["gross_revenue"] for u in uni])
-    print(f"RQ3 targeted: uniform m={m_high} vs peak-targeting surge (base off-peak)")
-    print(f"surge avg mult (trip-weighted) = "
-          f"{np.mean([s['mult_weighted']/max(1,s['n_matched']) for s in sur]):.2f} (< {m_high})")
-    print(f"{'type':10s} {'uniform $/drv':>13s} {'surge $/drv':>12s} {'Δ $/drv':>9s} {'Δ %':>7s}")
-    res = {}
+    avg_mult = float(np.mean([s["mult_weighted"] / max(1, s["n_matched"]) for s in sur]))
+    rider_pct = float(np.mean([(s["rider_surplus"] - u["rider_surplus"]) / u["gross_revenue"] * 100
+                               for u, s in zip(uni, sur)]))
+    print(f"RQ3 targeted: uniform m={m_high} vs peak-targeting surge (base off-peak); seeds={n}")
+    print(f"surge avg mult (trip-weighted) = {avg_mult:.2f} (< {m_high}); rider Δ = {rider_pct:+.2f}% of GR")
+    print(f"{'type':10s} {'Δ $/drv':>9s} {'sem':>6s} {'Δ %':>7s}")
+    res = {"avg_mult": avg_mult, "rider_pct_GR": rider_pct, "n_seeds": n, "by_type": {}}
     for t in bu:
-        d = bs[t] - bu[t]
-        res[t] = dict(uniform=bu[t], surge=bs[t], delta=d, pct=100 * d / bu[t])
-        print(f"{t:10s} {bu[t]:13.2f} {bs[t]:12.2f} {d:9.2f} {100*d/bu[t]:6.1f}%")
-    # rider/total check
-    ru = np.mean([u["rider_surplus"] for u in uni]); rs = np.mean([s["rider_surplus"] for s in sur])
-    print(f"rider surplus Δ = {(rs-ru)/gr*100:+.2f}% of GR (riders gain from the lower off-peak price)")
+        d = bs[t] - bu[t]                       # per-seed paired delta
+        mean_d = float(d.mean()); sem_d = float(d.std(ddof=1) / np.sqrt(n))
+        res["by_type"][t] = dict(uniform=float(bu[t].mean()), surge=float(bs[t].mean()),
+                                 delta=mean_d, delta_sem=sem_d, pct=100 * mean_d / float(bu[t].mean()))
+        print(f"{t:10s} {mean_d:9.2f} {sem_d:6.2f} {100*mean_d/float(bu[t].mean()):6.1f}%")
+    # pairwise significance of the full-time vs casual ordering
+    fc = (bs["fulltime"] - bu["fulltime"]) - (bs["casual"] - bu["casual"])
+    print(f"full-time vs casual loss difference: {fc.mean():.2f} +/- {fc.std(ddof=1)/np.sqrt(n):.2f} "
+          f"(={fc.mean()/(fc.std(ddof=1)/np.sqrt(n)):.2f} s.e.m.)")
+    res["fulltime_minus_casual"] = dict(mean=float(fc.mean()), sem=float(fc.std(ddof=1) / np.sqrt(n)))
     os.makedirs(os.path.join(os.path.dirname(__file__), "..", "results", "data"), exist_ok=True)
     with open(os.path.join(os.path.dirname(__file__), "..", "results", "data", "rq3_exposure.json"), "w") as f:
         json.dump(res, f, indent=2)
