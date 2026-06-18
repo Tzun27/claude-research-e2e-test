@@ -97,7 +97,8 @@ class SimConfig:
 
     # ----- Misc -----
     seed: int = 0
-    rebalance_cost_per_cell: float = 0.30  # platform pays to incentivize a reposition (= drive cost).
+    # The platform's repositioning incentive is paid as a transfer to relocating drivers
+    # (see drivers.reposition / env.apply), so there is no separate per-cell rebalance cost.
     rebalance_enabled: bool = True
 
     def n_zones(self) -> int:
