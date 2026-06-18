@@ -94,7 +94,7 @@ def main():
     surge_per_seed = []; thetas = []
     for ts in train_seeds:
         ars = ARSConfig(n_iters=args.iters, n_dirs=16, top_dirs=8, step_size=0.08,
-                        noise_std=0.08, eval_seeds=3, seed=ts)
+                        noise_std=0.08, eval_seeds=2, seed=ts)
         policy, state = train_ars(cfg, args.objective, ars, env_kwargs=env_kwargs,
                                   hidden=0, weights=weights, n_workers=4, verbose=False)
         sums = run_policy_seeds(mk, policy, eval_seeds)

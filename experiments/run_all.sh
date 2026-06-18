@@ -6,7 +6,7 @@ cd "$(dirname "$0")/.."
 export PYTHONPATH=src
 DATA=results/data
 mkdir -p "$DATA"
-ITERS=${ITERS:-60}
+ITERS=${ITERS:-50}
 EVAL=${EVAL:-"100-115"}
 CORE_SEEDS=${CORE_SEEDS:-"0,1,2"}     # 3 training seeds on the core cells (RQ1-3)
 AUX_SEEDS=${AUX_SEEDS:-"0,1"}         # 2 training seeds on auxiliary sweeps
@@ -29,8 +29,6 @@ for w in 30 100 300 800; do
 done
 
 echo "===== SENSITIVITY (scope conditions): welfare_weighted price ====="
-$RC --objective welfare_weighted --condition price --seeds $AUX_SEEDS --cfg '{"n_drivers":300}'        --out $DATA/sens_ndrivers_300.json
-$RC --objective welfare_weighted --condition price --seeds $AUX_SEEDS --cfg '{"n_drivers":550}'        --out $DATA/sens_ndrivers_550.json
-$RC --objective welfare_weighted --condition price --seeds $AUX_SEEDS --cfg '{"wtp_log_sigma":1.8}'    --out $DATA/sens_moreelastic.json
-$RC --objective welfare_weighted --condition price --seeds $AUX_SEEDS --cfg '{"surge_max":3.0}'        --out $DATA/sens_surgecap3.json
+$RC --objective welfare_weighted --condition price --seeds $AUX_SEEDS --cfg '{"n_drivers":300}'     --out $DATA/sens_ndrivers_300.json
+$RC --objective welfare_weighted --condition price --seeds $AUX_SEEDS --cfg '{"wtp_log_sigma":1.8}' --out $DATA/sens_moreelastic.json
 echo "===== DONE ====="
