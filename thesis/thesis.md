@@ -160,7 +160,7 @@ We deliberately do *not* tune any parameter to force the welfare-weighted platfo
 
 ## Chapter 5 — Experiments and results
 
-All controllers are trained with ARS (two independent training seeds each) and evaluated on 16 held-out market seeds disjoint from training; reported figures are means with standard errors over the evaluation seeds. The uniform counterfactual's multiplier is grid-searched per objective on the same evaluation seeds.
+All controllers are trained with ARS (three independent training seeds for the four core price-isolation cells; two for the auxiliary fairness, three-way, and sensitivity sweeps) and evaluated on 16 held-out market seeds disjoint from training; reported figures are means with standard errors over the evaluation seeds. The uniform counterfactual's multiplier (and, in the three-way condition, dispatch radius) is grid-searched per objective on the same evaluation seeds.
 
 ### 5.0 Simulator validation
 
@@ -172,7 +172,7 @@ Four checks establish that the simulator behaves as an economic market and that 
 
 **The wild-goose chase is a real force.** The supply–demand imbalance concentrates almost entirely at demand peaks: the correlation between per-epoch abandonment and demand is $0.962$, with $\sim\!177$ abandonments per peak epoch versus $\approx\!0$ per trough epoch. A dispatch-radius sweep confirms the intensive-margin chase: widening the radius lengthens mean pickups and, beyond radius $\approx2$, *lowers* welfare because drivers are tied up serving distant riders. The congestion-delay term makes low prices costly, sustaining an interior platform-optimal price (§4.4).
 
-**Objectives genuinely differ, and the controller is a fair instrument.** The grid-searched optimal uniform multiplier rises with the platform's emphasis on its own revenue — welfare-weighted $\approx0.9$, welfare $\approx2.0$, profit $\approx3.4$ — so the four objectives genuinely price differently. As a capacity check, the ARS controller recovers each objective's optimum: for the profit objective it reaches the profit-maximizing price level (learned mean surge $\approx3.0$, objective within $\sim0.1\%$ of the grid-searched uniform optimum), and for the welfare-weighted objective it slightly *exceeds* the optimal uniform via spatial variation — confirming the compact policy is expressive enough to find the objective-specific optimum rather than being an artificially weak baseline.
+**Objectives genuinely differ, and the controller is a fair instrument.** The grid-searched optimal uniform multiplier rises with the platform's emphasis on its own revenue — the two rider-weighted objectives (welfare-weighted and throughput) optimize near base ($\approx0.9$), the social planner (welfare) at $\approx2.0$, and profit at the ceiling ($\approx3.5$) — so the objectives genuinely price differently. As a capacity check, the ARS controller recovers each objective's optimum: for the profit objective it reaches the profit-maximizing price level (learned mean surge $\approx3.0$, objective within $\sim0.1\%$ of the grid-searched uniform optimum), and for the welfare-weighted objective it slightly *exceeds* the optimal uniform via spatial variation — confirming the compact policy is expressive enough to find the objective-specific optimum rather than being an artificially weak baseline.
 
 ### 5.1 RQ1 — Does learned surge reproduce the Castillo incidence structure?
 
